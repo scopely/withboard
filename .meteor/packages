@@ -6,3 +6,6 @@
 meteor-platform
 autopublish
 insecure
+iron:router
+ian:bootstrap-3
+

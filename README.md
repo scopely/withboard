@@ -19,7 +19,7 @@ application.
 
 Flexibility
 -----------
-The essence of Withboard is a state store (Mongo-backed for this implementation)
+The essence of Withboard is a data store (Mongo-backed for this implementation)
 which any display component can subscribe to, and which a simple job or process
 can push to. External services can also fetch and manage the state, allowing
 deeper integration with internal tools and apps.
@@ -36,6 +36,10 @@ SSL yourself on the instance.
 
 SSL is _required_ for production Chromecast support. If you don't want SSL
 hassle, deploy on Heroku for free.
+
+As this is a Meteor app, you can also easily deploy to Meteor's free hosting:
+
+    $ meteor deploy my-withboard.meteor.com
 
 Running locally
 ---------------
