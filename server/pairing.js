@@ -24,7 +24,7 @@ Meteor.methods({
       throw new Meteor.Error(401, 'Pairing has not been authorized yet');
     }
 
-    var id = Accounts.createUser({username: 'display-' + code, profile: {type: 'tv', ownerId: pairingSubs[code].adminId}});
+    var id = Accounts.createUser({username: 'display-' + code, profile: {type: 'display', ownerId: pairingSubs[code].adminId}});
     console.log('Display user', id, 'created from', code);
 
     pairingSubs[code].stop();
@@ -33,10 +33,7 @@ Meteor.methods({
       pairingSubs[code].returnTo.stop();
       delete pairingSubs[code].returnTo;
     }
-
-    setTimeout(function () {
-      delete pairingSubs[code];
-    }, 5000);
+    delete pairingSubs[code];
 
     var token = Accounts._generateStampedLoginToken();
     Accounts._insertLoginToken(id, token);

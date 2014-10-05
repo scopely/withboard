@@ -20,11 +20,14 @@ if (Meteor.isClient) {
   });
 
   Template.DisplayUnassigned.rendered = function () {
-    console.log('User ID:', Meteor.userId());
+    Tracker.autorun(function () {
+      var user = Meteor.user();
 
-    if (!Meteor.userId()) {
-      Router.go('/display/pairing');
-    }
+      if (!Meteor.userId()) return Router.go('/display/pairing');
+      if (!user) return;
+      if (user.profile.type != 'display') return;
+      if (user.profile.role) Router.go('/display/' + user.profile.role);
+    });
   };
 
   Template.DisplayPairing.rendered = function () {
@@ -39,7 +42,18 @@ if (Meteor.isClient) {
       Meteor.subscribe('pairing', code, function () {
         console.log('Finalizing pairing');
 
-        Accounts.callLoginMethod({methodName: 'confirmPairing', methodArguments: [code]});
+        Accounts.callLoginMethod({
+          methodName: 'confirmPairing',
+          methodArguments: [code],
+          userCallback: function (err) {
+            if (err) {
+              console.log('Login error:', err);
+            } else {
+              console.log('Login looks good!');
+              Router.go('/display');
+            }
+          },
+        });
       });
     });
   };
