@@ -1,13 +1,42 @@
 <template name="Control">
-  <h1>Welcome to Withboard Control!</h1>
+  <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="/control">Withboard</a>
+      </div>
+      <div class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+          <li><a href="/control">Home</a></li>
+          <li><a href="/control/displays">Displays <span class="badge">{{displays.length}}</span></a></li>
+          <li><a href="/control/slides">Slides <span class="badge">17</span></a></li>
+          <li><a href="/control/settings">Settings</a></li>
+          <li><a href="/control/states">States</a></li>
+          <li><a href="/control/users">Users</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="/display/">Open Local Display</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
 
-  <p>This will be awesome in a little bit.</p>
+  <div class="container" style="margin-top: 50px;">
+    <h1>Welcome to Withboard Control!</h1>
 
-  <p>{{> loginButtons}}</p>
+    <p>This will be awesome in a little bit.</p>
 
-  <p>
-    TV ID:
-    <input type="text" id="tvid">
-    <button id="pair">Pair</button>
-  </p>
+    <p>{{> loginButtons}}</p>
+
+    <p>
+      TV ID:
+      <input type="text" id="tvid">
+      <button id="pair">Pair</button>
+    </p>
+  </div>
 </template>
