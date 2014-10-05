@@ -7,7 +7,7 @@
       <ul>
         <li class="left" style="background-color: #00557f;">
           <img src="http://i.imgur.com/gbkYtnS.png">
-          <h1>Rooms</h1>
+          <h1>{{label}}</h1>
         </li>
         <li class="left" style="background-color: #5f94ae;">
           <hgroup>
@@ -26,16 +26,25 @@
     </header>
 
     <div id="body">
-      <p>{{> loginButtons}}</p>
       {{> yield}}
     </div>
   </div>
 </template>
 
 <template name="DisplayUnassigned">
-  <p>This display is unassigned.</p>
+  <div class="container">
+    <div class="jumbotron" style="margin: 100px 50px;">
+      <h1>This display is unassigned.</h1>
+      <h3>Add a role to this display in the control panel to have content show up here.</h3>
+    </div>
+  </div>
 </template>
 
 <template name="DisplayPairing">
-  <p>TV ID {{code}}</p>
+  <div class="container">
+    <div class="jumbotron" style="margin: 100px 50px;">
+      <h1>Display ID: {{code}}</h1>
+      <h3>Please enter this code in the control panel to activate this display.</h3>
+    </div>
+  </div>
 </template>

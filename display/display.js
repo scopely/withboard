@@ -17,6 +17,15 @@ if (Meteor.isClient) {
       timeDep.depend();
       return time.format(timeFormat);
     },
+    label: function () {
+      var user = Meteor.user();
+
+      if (!user)
+        return 'Inactive';
+      if (user.profile.type != 'display')
+        return user.profile.name.split(' ')[0];
+      return user.profile.label || user.profile.role || user.username.slice(8);
+    }
   });
 
   Template.DisplayUnassigned.rendered = function () {
