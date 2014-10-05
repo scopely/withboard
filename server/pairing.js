@@ -27,13 +27,12 @@ Meteor.methods({
     var id = Accounts.createUser({username: 'display-' + code, profile: {type: 'display', ownerId: pairingSubs[code].adminId}});
     console.log('Display user', id, 'created from', code);
 
-    pairingSubs[code].stop();
     if (pairingSubs[code].returnTo) {
       pairingSubs[code].returnTo.ready();
       pairingSubs[code].returnTo.stop();
       delete pairingSubs[code].returnTo;
     }
-    delete pairingSubs[code];
+    pairingSubs[code].stop();
 
     var token = Accounts._generateStampedLoginToken();
     Accounts._insertLoginToken(id, token);
@@ -56,15 +55,14 @@ Meteor.publish('pairing', function (code) {
   check(code, String);
   console.log('Got pairing subscription from', code);
 
+  if (pairingSubs[code] === undefined) {
+    return this.error(new Meteor.Error(400, 'Unknown or expired pairing code'));
+  }
   pairingSubs[code] = this;
 
   this.onStop(function () {
     console.log(code, 'stopped caring about pairing');
-
-    if (pairingSubs[code] == this) {
-      console.log('Removing pairing subscription for', code);
-      delete pairingSubs[code];
-    }
+    delete pairingSubs[code];
   });
 });
 
