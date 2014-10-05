@@ -32,7 +32,7 @@ if (Meteor.isClient) {
     Tracker.autorun(function () {
       var user = Meteor.user();
 
-      if (!Meteor.userId()) return Router.go('/display/pairing');
+      if (!Meteor.userId()) return Router.go('displayPairing');
       if (!user) return;
       if (user.profile.type != 'display') return;
       if (user.profile.role) Router.go('/display/' + user.profile.role);
@@ -41,28 +41,38 @@ if (Meteor.isClient) {
 
   Template.DisplayPairing.rendered = function () {
     if (Meteor.userId()) {
-      Router.go('/display');
+      Router.go('display');
     }
 
     Meteor.call('getPairingCode', function (err, code) {
       Session.set('pairingCode', code);
 
       console.log('Waiting for pairing to begin for', code);
-      Meteor.subscribe('pairing', code, function () {
-        console.log('Finalizing pairing');
+      Meteor.subscribe('pairing', code, {
+        onReady: function () {
+          console.log('Finalizing pairing');
 
-        Accounts.callLoginMethod({
-          methodName: 'confirmPairing',
-          methodArguments: [code],
-          userCallback: function (err) {
-            if (err) {
-              console.log('Login error:', err);
-            } else {
-              console.log('Login looks good!');
-              Router.go('/display');
+          Accounts.callLoginMethod({
+            methodName: 'confirmPairing',
+            methodArguments: [code],
+            userCallback: function (err) {
+              if (err) {
+                console.log('Login error:', err);
+              } else {
+                console.log('Login looks good!');
+                Router.go('display');
+              }
             }
-          },
-        });
+          });
+        },
+        onError: function (err) {
+          console.log('Pairing subscription error:', err);
+
+          if (err.error == 400) {
+            // probably just an old code that the server doesn't acknowledge
+            Router.go('display');
+          }
+        },
       });
     });
   };
