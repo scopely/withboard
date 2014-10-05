@@ -65,3 +65,7 @@
 #body {
   clear: both;
 }
+
+#display {
+  font-family: Lato;
+}
