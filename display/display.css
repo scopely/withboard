@@ -1,1 +1,67 @@
-/* CSS declarations go here */
+#display {
+  overflow: hidden;
+}
+
+#anglebar ul {
+  padding: 10px 0;
+  margin: 0 -50px;
+  color: white;
+}
+#anglebar li {
+  list-style: none;
+  position: relative;
+  display: inline-block;
+  height: 100px;
+  padding: 0 5px;
+  margin: 0 50px;
+  top: 0;
+  background: #666; /* just a default */
+}
+
+#anglebar li::before, #anglebar li::after {
+  content: '';
+  z-index: -1;
+  position: absolute;
+  display: block;
+  top: 0;
+  width: 100px;
+  height: 100px;
+  background: inherit;
+  transform: skewX(-45deg);
+}
+#anglebar li::before { right: 100%; transform-origin: bottom; }
+#anglebar li::after  { left:  100%; transform-origin: top;    }
+
+#anglebar li.left  { float: left;  }
+#anglebar li.right { float: right; }
+
+#anglebar h1, #anglebar hgroup {
+  margin: 0;
+  padding: 0;
+  display: inline-block;
+}
+#anglebar h1 {
+  line-height: 100px;
+  font-size: 4em;
+  white-space: nowrap;
+}
+#anglebar hgroup {
+  margin: 10px 0;
+}
+#anglebar h2, #anglebar h3 {
+  font-size: 2.5em;
+  white-space: nowrap;
+  margin: 0;
+  text-align: center;
+}
+
+#anglebar img {
+  height: 100px;
+  display: inline-block;
+  vertical-align: top;
+}
+
+
+#body {
+  clear: both;
+}

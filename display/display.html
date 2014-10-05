@@ -1,5 +1,32 @@
-<template name="Display">
-  <h1>Welcome to Withboard Display!</h1>
 
-  <p>This will be awesome in a little bit.</p>
+<template name="Display">
+  <script src="//www.gstatic.com/cast/sdk/libs/receiver/2.0.0/cast_receiver.js"></script>
+
+  <div id="display">
+    <header id="anglebar">
+      <ul>
+        <li class="left" style="background-color: #00557f;">
+          <img src="http://i.imgur.com/gbkYtnS.png">
+          <h1>Rooms</h1>
+        </li>
+        <li class="left" style="background-color: #5f94ae;">
+          <hgroup>
+            <h2>{{clock 'h:mm a'}}</h2>
+            <h3>{{clock 'ddd MMM Do'}}</h3>
+          </hgroup>
+        </li>
+        <li class="right" style="background-color: #ff9000;">
+          <hgroup>
+            <h2>Rap God</h2>
+            <h3>Eminem</h3>
+          </hgroup>
+          <img src="http://i.imgur.com/7Hm4Gf2.png">
+        </li>
+      </ul>
+    </header>
+
+    <div id="body">
+
+    </div>
+  </div>
 </template>
