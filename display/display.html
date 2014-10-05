@@ -26,7 +26,16 @@
     </header>
 
     <div id="body">
-
+      <p>{{> loginButtons}}</p>
+      {{> yield}}
     </div>
   </div>
+</template>
+
+<template name="DisplayUnassigned">
+  <p>This display is unassigned.</p>
+</template>
+
+<template name="DisplayPairing">
+  <p>TV ID {{code}}</p>
 </template>
