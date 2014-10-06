@@ -37,6 +37,12 @@ if (Meteor.isClient) {
       if (user.profile.type != 'display') return;
       if (user.profile.role) Router.go('/display/' + user.profile.role);
     });
+    
+    // Support chromecast receivers
+    if (window.cast && cast.receiver) {
+      window.castReceiverManager = cast.receiver.CastReceiverManager.getInstance();
+      window.castReceiverManager.start();
+    }
   };
 
   Template.DisplayPairing.rendered = function () {
