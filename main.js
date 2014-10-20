@@ -1,3 +1,6 @@
+State = new Meteor.Collection('state');
+Config = new Meteor.Collection('config');
+
 Router.map(function () {
   this.route('control', { path: '/control', template: 'Control' });
 

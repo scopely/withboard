@@ -5,7 +5,7 @@ Distributed under the Apache 2.0 License. See `LICENSE.md` for details.
 
 Overview
 --------
-A digital dynamic signage application, intended for dashboards, infoboards,
+A dynamic digital signage application, intended for dashboards, infoboards,
 display boards, or anything else that could go on TVs around an office or
 campus. Withboard has first-class Chromecast support. Chromecasts were chosen
 because of simplicity and the inexpensive setup costs of $35 per TV (or free if
