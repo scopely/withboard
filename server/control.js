@@ -4,3 +4,19 @@ Meteor.publish('displays', function () {
   else
     return [];
 });
+
+Meteor.methods({
+  updateDisplay: function (_id, fields) {
+    if (!this.userId) return null;
+
+    var display = Meteor.users.findOne(_id);
+    if (!display || !display.profile || display.profile.type != 'display') return false;
+
+    var obj = {};
+    Object.keys(fields).forEach(function (key) {
+      obj['profile.' + key] = fields[key];
+    });
+
+    Meteor.users.update({ _id: _id }, { $set: obj });
+  },
+});

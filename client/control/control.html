@@ -49,9 +49,47 @@
 </template>
 
 <template name="Displays">
-  <ul>
+  <h1>Registered Displays</h1>
+  <ul class="cards">
     {{#each displays}}
-    <li>{{_id}}</li>
+    <li class="col-md-4">
+      <div class="well">
+        {{> DisplayCard}}
+      </div>
+    </li>
     {{/each}}
   </ul>
+</template>
+
+<template name="DisplayCard">
+  <form class="form-horizontal">
+    <legend>Display {{_id}}</legend>
+    <div class="form-group">
+      <label for="inputName" class="col-lg-3 control-label">Name</label>
+      <div class="col-lg-9">
+        <input type="text" class="form-control" id="inputName" name="name" value="{{profile.name}}" placeholder="Diplay name">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputTitle" class="col-lg-3 control-label">Title</label>
+      <div class="col-lg-9">
+        <input type="text" class="form-control" id="inputTitle" name="title" value="{{profile.title}}" placeholder="Display header label">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="select" class="col-lg-3 control-label">Role</label>
+      <div class="col-lg-9">
+        <select class="form-control" id="selectRole" name="role">
+          {{#each roles}}
+          <option>{{role}}</option>
+          {{/each}}
+        </select>
+      </div>
+    </div>
+    <div style="text-align: right;">
+      <input type="hidden" name="_id" value="{{_id}}">
+      <button class="btn btn-default btn-remove">Remove</button>
+      <button type="submit" class="btn btn-primary btn-apply">Apply</button>
+    </div>
+  </form>
 </template>

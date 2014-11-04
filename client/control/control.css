@@ -1,1 +1,8 @@
-/* CSS declarations go here */
+.cards {
+  margin: 0;
+  padding: 0;
+}
+.cards>li {
+  list-style: none;
+  display: inline-block;
+}

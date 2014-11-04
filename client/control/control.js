@@ -20,6 +20,25 @@ Template.ControlHome.events({
   },
 });
 
+Template.DisplayCard.events({
+  'submit form': function (event) {
+    Meteor.call('updateDisplay', event.target._id.value, {
+      name:  event.target.name.value,
+      title: event.target.title.value,
+      role:  event.target.role.value,
+    });
+    return false;
+  },
+});
+
+Template.DisplayCard.helpers({
+  roles: function () {
+    return Roles.map(function (role) {
+      return { role: role };
+    });
+  },
+});
+
 Template.ControlLayout.rendered = function () {
   Meteor.subscribe('displays');
 
