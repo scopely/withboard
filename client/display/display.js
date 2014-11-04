@@ -1,5 +1,5 @@
 Router.map(function () {
-  this.route('display', { path: '/display', template: 'DisplayUnassigned', layoutTemplate: 'Display' });
+  this.route('displayDefault', { path: '/display',         template: 'DisplayDefault', layoutTemplate: 'Display' });
   this.route('displayPairing', { path: '/display/pairing', template: 'DisplayPairing', layoutTemplate: 'Display' });
 });
 
@@ -27,7 +27,7 @@ Template.Display.helpers({
   }
 });
 
-Template.DisplayUnassigned.rendered = function () {
+Template.DisplayDefault.rendered = function () {
   Tracker.autorun(function () {
     var user = Meteor.user();
 
@@ -46,7 +46,7 @@ Template.DisplayUnassigned.rendered = function () {
 
 Template.DisplayPairing.rendered = function () {
   if (Meteor.userId()) {
-    Router.go('display');
+    Router.go('displayDefault');
   }
 
   Meteor.call('getPairingCode', function (err, code) {
@@ -65,7 +65,7 @@ Template.DisplayPairing.rendered = function () {
               console.log('Login error:', err);
             } else {
               console.log('Login looks good!');
-              Router.go('display');
+              Router.go('displayDefault');
             }
           }
         });
