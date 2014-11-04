@@ -1,6 +1,11 @@
 Router.map(function () {
   this.route('displayDefault', { path: '/display',         template: 'DisplayDefault', layoutTemplate: 'Display' });
   this.route('displayPairing', { path: '/display/pairing', template: 'DisplayPairing', layoutTemplate: 'Display' });
+
+  this.route('displayRooms',   { path: '/display/rooms',   template: 'DisplayRooms',   layoutTemplate: 'Display', data: function () {
+    return State.findOne({key: 'calendars'});
+  } });
+
   this.route('displayRoles',   { path: '/display/:role',   template: 'DisplayDefault', layoutTemplate: 'Display' });
 });
 
@@ -24,7 +29,7 @@ Template.Display.helpers({
       return 'Inactive';
     if (user.profile.type != 'display')
       return user.profile.name.split(' ')[0];
-    return user.profile.label || user.profile.role || user.username.slice(8);
+    return user.profile.title || user.profile.role || user.username.slice(8);
   }
 });
 
@@ -46,6 +51,10 @@ Template.DisplayDefault.rendered = function () {
     window.castReceiverManager.start();
   }
 };
+
+Template.Display.rendered = function () {
+  Meteor.subscribe('state');
+}
 
 Template.DisplayPairing.rendered = function () {
   if (Meteor.userId()) {
