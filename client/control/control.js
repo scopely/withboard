@@ -3,6 +3,12 @@ Router.map(function () {
   this.route('displays', { path: '/control/displays', template: 'Displays', layoutTemplate: 'ControlLayout', data: function () {
     return { displays: Meteor.users.find({'profile.type': 'display'}) };
   }});
+  this.route('settings', { path: '/control/settings', template: 'Configs', layoutTemplate: 'ControlLayout', data: function () {
+    return { configs: Config.find() };
+  }});
+  this.route('states', { path: '/control/states', template: 'States', layoutTemplate: 'ControlLayout', data: function () {
+    return { states: State.find() };
+  }});
 
   this.route('index',   { path: '/', action: function () {
     this.redirect('/control');
@@ -39,8 +45,56 @@ Template.DisplayCard.helpers({
   },
 });
 
+Template.States.events({
+  'submit .form-update': function (event) {
+    State.update(event.target._id.value, {
+      $set: { value: JSON.parse(event.target.value.value) }
+    });
+    return false;
+  },
+
+  'submit .form-create': function (event) {
+    State.insert({
+      key: event.target.key.value,
+      value: JSON.parse(event.target.value.value),
+    });
+
+    event.target.key.value = '';
+    event.target.value.value = '';
+    return false;
+  },
+});
+
+Template.Configs.events({
+  'submit .form-update': function (event) {
+    Config.update(event.target._id.value, {
+      $set: { value: JSON.parse(event.target.value.value) }
+    });
+    return false;
+  },
+
+  'submit .form-create': function (event) {
+    Config.insert({
+      key: event.target.key.value,
+      value: JSON.parse(event.target.value.value),
+    });
+
+    event.target.key.value = '';
+    event.target.value.value = '';
+    return false;
+  },
+});
+
+Template.KeyValueCard.helpers({
+  json: function (data) {
+    return JSON.stringify(data);
+  },
+});
+
 Template.ControlLayout.rendered = function () {
   Meteor.subscribe('displays');
+  Meteor.subscribe('config');
+  Meteor.subscribe('state');
 
   var session = null;
 

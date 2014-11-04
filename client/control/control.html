@@ -88,8 +88,75 @@
     </div>
     <div style="text-align: right;">
       <input type="hidden" name="_id" value="{{_id}}">
-      <button class="btn btn-default btn-remove">Remove</button>
-      <button type="submit" class="btn btn-primary btn-apply">Apply</button>
+      <button class="btn btn-default btn-delete">Remove</button>
+      <button type="submit" class="btn btn-primary btn-save">Apply</button>
+    </div>
+  </form>
+</template>
+
+
+<template name="States">
+  <h1>States</h1>
+  <ul class="cards">
+    {{#each states}}
+    <li class="col-md-4">
+      {{> KeyValueCard}}
+    </li>
+    {{/each}}
+    <li class="col-md-4">
+      <div class="well">
+        <form role="form" class="form-create">
+          <legend>Add state</legend>
+          <div class="form-group">
+            <input type="text" class="form-control" name="key" placeholder="Key">
+          </div>
+          <div class="form-group">
+            <textarea class="form-control" name="value" placeholder="Value"></textarea>
+          </div>
+          <div style="text-align: right;">
+            <button type="submit" class="btn btn-primary btn-create">Create</button>
+          </div>
+        </form>
+      </div>
+    </li>
+  </ul>
+</template>
+
+<template name="Configs">
+  <h1>System Configuration</h1>
+  <ul class="cards">
+    {{#each configs}}
+    <li class="col-md-4">
+      {{> KeyValueCard}}
+    </li>
+    {{/each}}
+    <li class="col-md-4">
+      <form role="form" class="form-create well">
+        <legend>Add settings</legend>
+        <div class="form-group">
+          <input type="text" class="form-control" name="key" placeholder="Key">
+        </div>
+        <div class="form-group">
+          <textarea class="form-control" name="value" placeholder="Value"></textarea>
+        </div>
+        <div style="text-align: right;">
+          <button type="submit" class="btn btn-primary btn-create">Create</button>
+        </div>
+      </form>
+    </li>
+  </ul>
+</template>
+
+<template name="KeyValueCard">
+  <form role="form" class="form-update well">
+    <legend>{{key}}</legend>
+    <div class="form-group">
+      <textarea class="form-control" name="value">{{json value}}</textarea>
+    </div>
+    <div style="text-align: right;">
+      <input type="hidden" name="_id" value="{{_id}}">
+      <button class="btn btn-default btn-delete">Delete</button>
+      <button type="submit" class="btn btn-primary btn-save">Apply</button>
     </div>
   </form>
 </template>
