@@ -6,7 +6,7 @@
 meteor-platform
 insecure
 iron:router
-ian:bootstrap-3
+html5cat:bootstrap-material-design
 mrt:moment
 accounts-google
 ian:accounts-ui-bootstrap-3

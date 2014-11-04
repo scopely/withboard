@@ -2,7 +2,7 @@
   <script src="//www.gstatic.com/cv/js/sender/v1/cast_sender.js"></script>
 </head>
 
-<template name="Control">
+<template name="ControlLayout">
   <div class="navbar navbar-default navbar-fixed-top" role="navigation">
     <div class="container">
       <div class="navbar-header">
@@ -32,14 +32,26 @@
   </div>
 
   <div class="container" style="margin-top: 50px;">
-    <h1>Welcome to Withboard Control!</h1>
-
-    <p>This will be awesome in a little bit.</p>
-
-    <p>
-      TV ID:
-      <input type="text" id="tvid">
-      <button id="pair">Pair</button>
-    </p>
+    {{> yield}}
   </div>
+</template>
+
+<template name="ControlHome">
+  <h1>Welcome to Withboard Control!</h1>
+
+  <p>This will be awesome in a little bit.</p>
+
+  <p>
+    TV ID:
+    <input type="text" id="tvid">
+    <button id="pair">Pair</button>
+  </p>
+</template>
+
+<template name="Displays">
+  <ul>
+    {{#each displays}}
+    <li>{{_id}}</li>
+    {{/each}}
+  </ul>
 </template>

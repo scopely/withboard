@@ -1,12 +1,15 @@
 Router.map(function () {
-  this.route('control', { path: '/control', template: 'Control' });
+  this.route('control', { path: '/control', template: 'ControlHome', layoutTemplate: 'ControlLayout' });
+  this.route('displays', { path: '/control/displays', template: 'Displays', layoutTemplate: 'ControlLayout', data: function () {
+    return { displays: Meteor.users.find({type: 'display'}) };
+  }});
 
   this.route('index',   { path: '/', action: function () {
     this.redirect('/control');
   }});
 });
 
-Template.Control.events({
+Template.ControlHome.events({
   'click #pair': function () {
     var code = $('#tvid').val();
     console.log('Attempting to pair to display', code);
@@ -17,7 +20,7 @@ Template.Control.events({
   },
 });
 
-Template.Control.rendered = function () {
+Template.ControlLayout.rendered = function () {
   Meteor.subscribe('displays');
 
   var session = null;
