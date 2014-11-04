@@ -1,6 +1,7 @@
 Router.map(function () {
   this.route('displayDefault', { path: '/display',         template: 'DisplayDefault', layoutTemplate: 'Display' });
   this.route('displayPairing', { path: '/display/pairing', template: 'DisplayPairing', layoutTemplate: 'Display' });
+  this.route('displayRoles',   { path: '/display/:role',   template: 'DisplayDefault', layoutTemplate: 'Display' });
 });
 
 var timeDep = new Deps.Dependency();
@@ -34,7 +35,9 @@ Template.DisplayDefault.rendered = function () {
     if (!Meteor.userId()) return Router.go('displayPairing');
     if (!user) return;
     if (user.profile.type != 'display') return;
-    if (user.profile.role) Router.go('/display/' + user.profile.role);
+
+    if (user.profile.role)
+      Router.go('/display' + (user.profile.role == 'default' ? '' : '/' + user.profile.role));
   });
 
   // Support chromecast receivers
