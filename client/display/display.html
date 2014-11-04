@@ -28,25 +28,23 @@
     </header>
 
     <div id="body">
-      {{> yield}}
+      <div class="container" style="padding-top: 25px;">
+        {{> yield}}
+      </div>
     </div>
   </div>
 </template>
 
 <template name="DisplayDefault">
-  <div class="container">
-    <div class="jumbotron" style="margin: 100px 50px;">
-      <h1>This display is not assigned yet.</h1>
-      <h3>Add a role to this display in the control panel to have content show up here.</h3>
-    </div>
+  <div class="jumbotron" style="margin: 100px 50px;">
+    <h1>This display is not assigned yet.</h1>
+    <h3>Add a role to this display in the control panel to have content show up here.</h3>
   </div>
 </template>
 
 <template name="DisplayPairing">
-  <div class="container">
-    <div class="jumbotron" style="margin: 100px 50px;">
-      <h1>Display ID: {{code}}</h1>
-      <h3>Please enter this code in the control panel to activate this display.</h3>
-    </div>
+  <div class="jumbotron" style="margin: 100px 50px;">
+    <h1>Display ID: {{code}}</h1>
+    <h3>Please enter this code in the control panel to activate this display.</h3>
   </div>
 </template>
