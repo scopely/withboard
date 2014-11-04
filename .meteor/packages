@@ -9,5 +9,5 @@ iron:router
 ian:bootstrap-3
 mrt:moment
 accounts-google
-accounts-ui
+ian:accounts-ui-bootstrap-3
 accounts-password

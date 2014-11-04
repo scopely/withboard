@@ -2,7 +2,7 @@ Meteor.methods({
   setupProvider: function () {
     console.log('Provider connected');
     Config.upsert({key: 'has-provider'}, {key: 'has-provider', value: true});
-    State.upsert({key: 'has-provider'}, {key: 'has-provider', value: true});
+    State.upsert({ key: 'has-provider'}, {key: 'has-provider', value: true});
     return 'cool';
   },
 
