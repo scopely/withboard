@@ -1,7 +1,10 @@
 Router.map(function () {
   this.route('control', { path: '/control', template: 'ControlHome', layoutTemplate: 'ControlLayout' });
   this.route('displays', { path: '/control/displays', template: 'Displays', layoutTemplate: 'ControlLayout', data: function () {
-    return { displays: Meteor.users.find({'profile.type': 'display'}) };
+    return {
+      displays: Meteor.users.find({'profile.type': 'display'}),
+      users: Meteor.users.find({'profile.type': {$ne: 'display'}}),
+    };
   }});
   this.route('settings', { path: '/control/settings', template: 'Configs', layoutTemplate: 'ControlLayout', data: function () {
     return { configs: Config.find() };
