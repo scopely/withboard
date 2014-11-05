@@ -27,9 +27,13 @@ Template.Display.helpers({
 
     if (!user)
       return 'Inactive';
-    if (user.profile.type != 'display')
+    if (user.profile.type != 'display' && user.profile.name)
       return user.profile.name.split(' ')[0];
-    return user.profile.title || user.profile.role || user.username.slice(8);
+    if (user.profile.title || user.profile.role)
+      return user.profile.title || user.profile.role;
+    if (user.username)
+      return user.username.slice(8);
+    return Config.findOne({key: 'org'}).value;
   }
 });
 
@@ -54,6 +58,7 @@ Template.DisplayDefault.rendered = function () {
 
 Template.Display.rendered = function () {
   Meteor.subscribe('state');
+  Meteor.subscribe('config');
 }
 
 Template.DisplayPairing.rendered = function () {
