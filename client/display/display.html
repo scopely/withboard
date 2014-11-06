@@ -28,7 +28,7 @@
     </header>
 
     <div id="body">
-      <div class="container" style="padding-top: 25px;">
+      <div class="container-fluid" style="padding-top: 25px;">
         {{> yield}}
       </div>
     </div>
@@ -50,7 +50,16 @@
 </template>
 
 <template name="DisplayRooms">
-  <div class="jumbotron" style="margin: 100px 50px;">
-    <h1>Room list goes here</h1>
-  </div>
+  {{#each values cals.value}}
+    <h3 style="width: 150px; float: left; clear: both; margin-top: 0;">
+      {{summary}}
+    </h3>
+    <ul style="float: left;">
+      {{#each items}}
+        <li style="list-style: none;">
+          {{summary}} - {{creator.displayName}} ({{format start.dateTime}} {{format end.dateTime}})
+        </li>
+      {{/each}}
+    </ul>
+  {{/each}}
 </template>

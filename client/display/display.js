@@ -3,7 +3,7 @@ Router.map(function () {
   this.route('displayPairing', { path: '/display/pairing', template: 'DisplayPairing', layoutTemplate: 'Display' });
 
   this.route('displayRooms',   { path: '/display/rooms',   template: 'DisplayRooms',   layoutTemplate: 'Display', data: function () {
-    return State.findOne({key: 'calendars'});
+    return { cals: State.findOne({key: 'calendars'}) };
   } });
 
   this.route('displayRoles',   { path: '/display/:role',   template: 'DisplayDefault', layoutTemplate: 'Display' });
@@ -100,5 +100,17 @@ Template.DisplayPairing.rendered = function () {
 Template.DisplayPairing.helpers({
   code: function () {
     return Session.get('pairingCode');
+  },
+});
+
+Template.DisplayRooms.helpers({
+  values: function (cals) {
+    return Object.keys(cals).map(function (calId) {
+      return cals[calId];
+    });
+  },
+
+  format: function (string) {
+    return moment(string).fromNow();
   },
 });
