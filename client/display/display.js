@@ -37,7 +37,10 @@ Template.Display.helpers({
   }
 });
 
-Template.DisplayDefault.rendered = function () {
+Template.Display.rendered = function () {
+  Meteor.subscribe('state');
+  Meteor.subscribe('config');
+
   Tracker.autorun(function () {
     var user = Meteor.user();
 
@@ -54,11 +57,6 @@ Template.DisplayDefault.rendered = function () {
     window.castReceiverManager = cast.receiver.CastReceiverManager.getInstance();
     window.castReceiverManager.start();
   }
-};
-
-Template.Display.rendered = function () {
-  Meteor.subscribe('state');
-  Meteor.subscribe('config');
 }
 
 Template.DisplayPairing.rendered = function () {

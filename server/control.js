@@ -9,10 +9,12 @@ Meteor.publish('displays', function () {
 
 Meteor.methods({
   updateDisplay: function (_id, fields) {
-    if (!this.userId) return null;
+    var user = Meteor.users.findOne(this.userId);
+    if (!user || user.profile.type == 'display') return null;
+    console.log('DISPLAY UPDATE:', _id, fields);
 
     var display = Meteor.users.findOne(_id);
-    if (!display || !display.profile || display.profile.type != 'display') return false;
+    if (!display || !display.profile) return false;
 
     var obj = {};
     Object.keys(fields).forEach(function (key) {
