@@ -50,16 +50,39 @@
 </template>
 
 <template name="DisplayRooms">
-  {{#each values cals.value}}
-    <h3 style="width: 150px; float: left; clear: both; margin-top: 0;">
-      {{summary}}
-    </h3>
-    <ul style="float: left;">
-      {{#each items}}
-        <li style="list-style: none;">
-          {{summary}} - {{creator.displayName}} ({{format start.dateTime}} {{format end.dateTime}})
-        </li>
+  <div class="row">
+    <div class="col-md-6">
+      {{#each values cals.value}}
+        {{#if isImportant id}}
+          {{> DisplayRoom }}
+        {{/if}}
       {{/each}}
-    </ul>
-  {{/each}}
+    </div>
+    <div class="col-md-6">
+      {{#each values cals.value}}
+        {{#unless isImportant id}}
+          {{> DisplayRoom }}
+        {{/unless}}
+      {{/each}}
+    </div>
+  </div>
+</template>
+
+<template name="DisplayRoom">
+  <h2 class="cal-{{scheduleState items}}">
+    {{summary}}
+  </h2>
+  <ul style="padding-left: 25px;">
+    {{#each upcoming items}}
+      {{#unless hasPassed end}}
+        <li style="list-style: none;" class="cal-{{getState start end}}">
+          <span style="font-size: 175%;">{{summary}}</span>
+          <em style="display: inline-block; line-height: 0.8;">
+            by {{firstName creator}}
+            <br>{{explain start end}}
+          </em>
+        </li>
+      {{/unless}}
+    {{/each}}
+  </ul>
 </template>

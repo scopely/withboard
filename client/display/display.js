@@ -105,12 +105,70 @@ Template.DisplayPairing.helpers({
 
 Template.DisplayRooms.helpers({
   values: function (cals) {
-    return Object.keys(cals).map(function (calId) {
+    if (!cals) return [];
+    return _.sortBy(Object.keys(cals).map(function (calId) {
+      cals[calId].id = calId;
       return cals[calId];
+    }), 'summary');
+  },
+
+  isImportant: function (calId) {
+    return Config.findOne({key: 'important-cals'}).value.indexOf(calId) > -1;
+  },
+  isntImportant: function (calId) {
+    return Config.findOne({key: 'important-cals'}).value.indexOf(calId) == -1;
+  },
+});
+
+Template.DisplayRoom.helpers({
+  firstName: function (user) {
+    return (user && user.displayName) ? user.displayName.split(' ')[0] : 'n/a';
+  },
+
+  upcoming: function (events) {
+    return _.sortBy(events, function (event) {
+      return +moment(event.start.dateTime);
+    }).map(function (event) {
+      return event;
     });
   },
 
-  format: function (string) {
-    return moment(string).fromNow();
+  format: function (date) {
+    return moment(date.dateTime).fromNow();
   },
+
+  getState: function (startTime, endTime) {
+    var start = moment(startTime.dateTime),
+        end   = moment(  endTime.dateTime);
+
+    if (start.isAfter())
+      return 'future';
+    if (end.isBefore())
+      return 'past';
+    return 'present';
+  },
+
+  explain: function (startTime, endTime) {
+    var start = moment(startTime.dateTime),
+        end   = moment(  endTime.dateTime);
+
+    if (start.isAfter())
+      return 'starts ' + start.fromNow();
+    if (end.isBefore())
+      return 'ended';
+    return 'ends ' + end.fromNow();
+  },
+
+  hasPassed: function (date) {
+    return moment(date.dateTime).isBefore();
+  },
+
+  scheduleState: function (items) {
+    var relevant = items.filter(function (item) {
+      return moment(item.end.dateTime).isAfter();
+    });
+
+    return relevant.length ? 'booked' : 'empty';
+  },
+
 });
