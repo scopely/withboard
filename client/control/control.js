@@ -94,6 +94,12 @@ Template.KeyValueCard.helpers({
   },
 });
 
+Template.ControlLayout.helpers({
+  collSize: function (coll) {
+    return window[coll].find().count();
+  },
+});
+
 Template.ControlLayout.rendered = function () {
   Meteor.subscribe('displays');
   Meteor.subscribe('config');
