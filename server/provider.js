@@ -18,6 +18,8 @@ Meteor.methods({
 
   setConfig: function (key, value) {
     if (!this.userId) throw new Meteor.Error(401, 'Not enough privledges');
+    if (!Meteor.users.findOne(this.userId).provider)
+      throw new Meteor.Error(401, 'Not provider');
 
     console.log('Provider set config', key, 'to', value);
     return Config.upsert({key: key}, {key: key, value: value, source: 'provider'});
@@ -25,6 +27,8 @@ Meteor.methods({
 
   setState: function (key, value) {
     if (!this.userId) throw new Meteor.Error(401, 'Not enough privledges');
+    if (!Meteor.users.findOne(this.userId).provider)
+      throw new Meteor.Error(401, 'Not provider');
 
     console.log('Provider set state', key, 'to', value);
     return State.upsert({key: key}, {key: key, value: value, source: 'provider'});

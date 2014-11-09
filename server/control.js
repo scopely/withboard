@@ -24,3 +24,14 @@ Meteor.methods({
     Meteor.users.update({ _id: _id }, { $set: obj });
   },
 });
+
+var isAdmin = function (userId, doc) {
+  if (!userId) return false;
+  var user = Meteor.users.findOne(userId);
+  return !user.provider && user.profile && user.profile.type != 'display';
+}
+
+Meteor.startup(function () {
+  Config.allow({ insert: isAdmin, update: isAdmin, remove: isAdmin });
+  State.allow( { insert: isAdmin, update: isAdmin, remove: isAdmin });
+});
