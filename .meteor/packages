@@ -8,7 +8,5 @@ insecure
 iron:router
 html5cat:bootstrap-material-design
 accounts-google
-accounts-password
 npvn:accounts-ui-bootstrap-3
 mrt:moment
-

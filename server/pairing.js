@@ -24,7 +24,7 @@ Meteor.methods({
       throw new Meteor.Error(401, 'Pairing has not been authorized yet');
     }
 
-    var id = Accounts.createUser({username: 'display-' + code, profile: {type: 'display', ownerId: pairingSubs[code].adminId}});
+    var id = Meteor.users.insert({username: 'display-' + code, profile: {type: 'display', ownerId: pairingSubs[code].adminId}});
     console.log('Display user', id, 'created from', code);
 
     if (pairingSubs[code].returnTo) {
