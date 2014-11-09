@@ -22,6 +22,7 @@ Template.Display.helpers({
     timeDep.depend();
     return time.format(timeFormat);
   },
+
   label: function () {
     var user = Meteor.user();
 
@@ -34,7 +35,18 @@ Template.Display.helpers({
     if (user.username)
       return user.username.slice(8);
     return Config.findOne({key: 'org'}).value;
-  }
+  },
+
+  clan: function () {
+    var clan = State.findOne({ key: 'daily-clan' });
+    var clans = Config.findOne({ key: 'clans' });
+    console.log(clan, clans);
+    if (!clan || !clans) return {};
+
+    return clans.value.filter(function (c) {
+      return c.key == clan.value;
+    })[0];
+  },
 });
 
 Template.Display.rendered = function () {
