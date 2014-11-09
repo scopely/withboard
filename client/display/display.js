@@ -4,7 +4,10 @@ Router.map(function () {
 
   this.route('displayRooms',   { path: '/display/rooms',   template: 'DisplayRooms',   layoutTemplate: 'Display', data: function () {
     return { cals: State.findOne({key: 'calendars'}) };
-  } });
+  }});
+  this.route('displayRecruiting', { path: '/display/recruiting', template: 'DisplayRecruiting', layoutTemplate: 'Display', data: function () {
+    return State.findOne({key: 'recruiting-list'});
+  }});
 
   this.route('displayRoles',   { path: '/display/:role',   template: 'DisplayDefault', layoutTemplate: 'Display' });
 });
@@ -183,4 +186,39 @@ Template.DisplayRoom.helpers({
     return relevant.length ? 'booked' : 'empty';
   },
 
+});
+
+Template.DisplayRecruiting.rendered = function () {
+  Session.set('position-highlight', 0);
+  setInterval(function () {
+    var next = Session.get('position-highlight');
+    var list = State.findOne({ key: 'recruiting-list' }).value;
+
+    do {
+      next++;
+
+      if (next >= list.length)
+        next = 0;
+    } while (!list[next].description);
+
+    Session.set('position-highlight', next);
+  }, 30 * 1000);
+};
+
+Template.DisplayRecruiting.helpers({
+  withClass: function (list) {
+    return list.map(function (position, idx) {
+      var active = Session.get('position-highlight') == idx;
+      position.cssClass = active ? 'active' : '';
+      return position;
+    });
+  },
+
+  activePosition: function () {
+    return Template.currentData().value[Session.get('position-highlight')];
+  },
+
+  formatted: function (text) {
+    return text.split('<').join('&lt;').split('\n').join('<br>');
+  }
 });

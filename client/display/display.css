@@ -106,3 +106,16 @@
   font-style: italic;
   font-weight: 400;
 }
+
+.positions {
+  font-size: 200%;
+}
+.positions li {
+  margin-bottom: 15px;
+  list-style: none;
+}
+.positions .active {
+  font-weight: 800;
+  list-style: disc;
+  text-decoration: underline;
+}
