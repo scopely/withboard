@@ -21,7 +21,7 @@ Meteor.methods({
     if (!Meteor.users.findOne(this.userId).provider)
       throw new Meteor.Error(401, 'Not provider');
 
-    console.log('Provider set config', key, 'to', value);
+    console.log('Provider set config', key, 'to', JSON.stringify(value).substr(0, 256));
     return Config.upsert({key: key}, {key: key, value: value, source: 'provider'});
   },
 
@@ -30,7 +30,7 @@ Meteor.methods({
     if (!Meteor.users.findOne(this.userId).provider)
       throw new Meteor.Error(401, 'Not provider');
 
-    console.log('Provider set state', key, 'to', value);
+    console.log('Provider set state', key, 'to', JSON.stringify(value).substr(0, 256));
     return State.upsert({key: key}, {key: key, value: value, source: 'provider'});
   },
 });
