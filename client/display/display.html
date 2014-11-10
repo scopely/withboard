@@ -30,12 +30,14 @@
           </li>
         {{/with}}
         {{#unless music.track}}
-          <li class="right" style="background-color: {{clan.color}};">
-            <hgroup>
-              <h2>{{clan.name}}, step on up!</h2>
-              <h3 style="font-size: 200%;">Play some music on the Sonos</h3>
-            </hgroup>
-          </li>
+          {{#if clan}}
+            <li class="right" style="background-color: {{clan.color}};">
+              <hgroup>
+                <h2>{{clan.name}}, step on up!</h2>
+                <h3 style="font-size: 200%;">Play some music on the Sonos</h3>
+              </hgroup>
+            </li>
+          {{/if}}
         {{/unless}}
       </ul>
     </header>
