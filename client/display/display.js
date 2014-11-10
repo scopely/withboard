@@ -56,6 +56,11 @@ Template.Display.helpers({
     var state = State.findOne({ key: 'announce' });
     return state ? state.value : null;
   },
+
+  music: function () {
+    var state = State.findOne({ key: 'now-playing' });
+    return state ? state.value : null;
+  },
 });
 
 Template.Display.rendered = function () {
