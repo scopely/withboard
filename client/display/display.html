@@ -20,24 +20,26 @@
             <h3>{{clock 'ddd MMM Do'}}</h3>
           </hgroup>
         </li>
-        {{#with music}}
-          <li class="right" style="background-color: {{clan.color}};">
-            <hgroup>
-              <h2>{{track}}</h2>
-              <h3>{{artist}}</h3>
-            </hgroup>
-            <img src="http://i.imgur.com/7Hm4Gf2.png">
-          </li>
-        {{/with}}
-        {{#unless music.track}}
-          {{#if clan}}
+        {{#if music.track}}
+          {{#with music}}
             <li class="right" style="background-color: {{clan.color}};">
               <hgroup>
-                <h2>{{clan.name}}, step on up!</h2>
+                <h2>{{track}}</h2>
+                <h3>{{artist}}</h3>
+              </hgroup>
+              <!--img src="http://i.imgur.com/7Hm4Gf2.png"-->
+            </li>
+          {{/with}}
+        {{/if}}
+        {{#unless music.track}}
+          {{#with clan}}
+            <li class="right" style="background-color: {{color}};">
+              <hgroup>
+                <h2>{{name}}, step on up!</h2>
                 <h3 style="font-size: 200%;">Play some music on the Sonos</h3>
               </hgroup>
             </li>
-          {{/if}}
+          {{/with}}
         {{/unless}}
       </ul>
     </header>
