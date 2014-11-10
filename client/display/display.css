@@ -137,8 +137,8 @@
   stroke-width: 3px;
 }
 .graph .area {
-    fill: lightsteelblue;
-    stroke-width: 0;
+  fill: #cdf;
+  stroke-width: 0;
 }
 
 .app {
