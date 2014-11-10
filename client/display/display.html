@@ -98,10 +98,33 @@
         {{/each}}
       </ul>
     </div>
-    <div class="col-md-8">
+    <div class="col-md-8" style="font-size: 150%;">
       {{#with activePosition}}
-        <p style="font-size: 150%;">{{{formatted description}}}</p>
+        {{{formatted description}}}
       {{/with}}
     </div>
+  </div>
+</template>
+
+<template name="DisplayNewrelic">
+  {{#each value}}
+    <div class="app">
+      <h2>{{name}}</h2>
+      {{#each metrics}}
+        <div class="metric">
+          <div class="glimpse">
+            <h1>{{latest data}}</h1>
+            <h3>{{name}}</h3>
+          </div>
+          {{> Graph data=data }}
+        </div>
+      {{/each}}
+    </div>
+  {{/each}}
+</template>
+
+<template name="Graph">
+  <div class="graph">
+
   </div>
 </template>

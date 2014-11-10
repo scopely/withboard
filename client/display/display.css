@@ -119,3 +119,53 @@
   list-style: disc;
   text-decoration: underline;
 }
+
+.graph .axis path,
+.graph .axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.graph .x.axis path {
+  display: none;
+}
+
+.graph .line {
+  fill: none;
+  stroke: black;
+  stroke-width: 3px;
+}
+.graph .area {
+    fill: lightsteelblue;
+    stroke-width: 0;
+}
+
+.app {
+  margin-left: 40px;
+  position: relative;
+}
+.app h2 {
+  text-align: center;
+  transform: rotate(-90deg) translate(-70px,0px);
+  transform-origin: 20px 20px;
+  display: block;
+  width: 110px;
+  height: 40px;
+  overflow: hidden;
+  margin: 0;
+  position: absolute;
+  left: -40px;
+}
+.graph { width: 290px; height: 110px; }
+.metric { width: 290px; height: 110px; position: relative; display: inline-block; }
+.metric .glimpse { position: absolute; bottom: 0; left: 0; right: 0; margin: 15px; }
+.glimpse h1, .glimpse h3 { margin: 0; display: block; }
+.glimpse h1 {
+  font-size: 300%;
+  text-shadow: 1px 1px 5px rgba(255,255,255,0.5),
+               -1px 1px 5px rgba(255,255,255,0.5),
+               1px -1px 5px rgba(255,255,255,0.5),
+               -1px -1px 5px rgba(255,255,255,0.5);
+}
+.glimpse h3 { font-size: 150%; }

@@ -8,6 +8,9 @@ Router.map(function () {
   this.route('displayRecruiting', { path: '/display/recruiting', template: 'DisplayRecruiting', layoutTemplate: 'Display', data: function () {
     return State.findOne({key: 'recruiting-list'});
   }});
+  this.route('displayNewrelic', { path: '/display/newrelic', template: 'DisplayNewrelic', layoutTemplate: 'Display', data: function () {
+    return State.findOne({key: 'newrelic'});
+  }});
 
   this.route('displayRoles',   { path: '/display/:role',   template: 'DisplayDefault', layoutTemplate: 'Display' });
 });
@@ -43,7 +46,6 @@ Template.Display.helpers({
   clan: function () {
     var clan = State.findOne({ key: 'daily-clan' });
     var clans = Config.findOne({ key: 'clans' });
-    console.log(clan, clans);
     if (!clan || !clans) return {};
 
     return clans.value.filter(function (c) {
@@ -129,9 +131,6 @@ Template.DisplayRooms.helpers({
 
   isImportant: function (calId) {
     return Config.findOne({key: 'important-cals'}).value.indexOf(calId) > -1;
-  },
-  isntImportant: function (calId) {
-    return Config.findOne({key: 'important-cals'}).value.indexOf(calId) == -1;
   },
 });
 
@@ -222,3 +221,54 @@ Template.DisplayRecruiting.helpers({
     return text.split('<').join('&lt;').split('\n').join('<br>');
   }
 });
+
+Template.DisplayNewrelic.helpers({
+  latest: function (data) {
+    return data[data.length - 1].pretty;
+  },
+});
+
+Template.Graph.rendered = function () {
+  this.node = this.find('.graph');
+  var self = this;
+
+  var width = 280;
+  var height = 100;
+  var margin = 5;
+
+  var x = d3.time.scale().range([0, width]);
+  var y = d3.scale.linear().range([height, 0]);
+
+  var valueline = d3.svg.line()
+    .x(function(d) { return x(d.x); })
+    .y(function(d) { return y(d.y); });
+
+  var area = d3.svg.area()
+    .x(function(d) { return x(d.x); })
+    .y0(height)
+    .y1(function(d) { return y(d.y); });
+
+  var svg = d3.select(self.node)
+    .append("svg")
+      .attr("width", width + (2*margin))
+      .attr("height", height + (2*margin))
+    .append("g")
+      .attr("transform",
+            "translate(" + margin + "," + margin + ")");
+
+  svg.append("path").attr("class", "line");
+  svg.append("path").attr("class", "area");
+
+  this.autorun(function (computation) {
+    var data = Template.currentData().data;
+    var metric = Template.currentData().name;
+    var min = (metric == 'Apdex') ? 0.8 : 0;
+
+  	x.domain(d3.extent(data,    function (d) { return d.x; }));
+    y.domain([min, d3.max(data, function (d) { return d.y; })]);
+
+    var svg = d3.select(self.node).transition();
+    svg.select(".line").duration(1500).attr("d", valueline(data));
+    svg.select(".area").duration(1500).attr("d",      area(data));
+  });
+};
