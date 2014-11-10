@@ -25,7 +25,6 @@ Meteor.setInterval(function () {
 
 Template.Display.helpers({
   clock: function (timeFormat) {
-    timeDep.depend();
     return time.format(timeFormat);
   },
 
@@ -52,13 +51,18 @@ Template.Display.helpers({
       return c.key == clan.value;
     })[0];
   },
+
+  announce: function () {
+    var state = State.findOne({ key: 'announce' });
+    return state ? state.value : null;
+  },
 });
 
 Template.Display.rendered = function () {
   Meteor.subscribe('state');
   Meteor.subscribe('config');
 
-  Tracker.autorun(function () {
+  this.autorun(function () {
     var user = Meteor.user();
 
     if (!Meteor.userId()) return Router.go('displayPairing');
@@ -67,6 +71,19 @@ Template.Display.rendered = function () {
 
     if (user.profile.role)
       Router.go('/display' + (user.profile.role == 'default' ? '' : '/' + user.profile.role));
+  });
+
+  var self = this;
+  this.autorun(function () {
+    var state = State.findOne({ key: 'announce' });
+
+    if (state && state.value.active && state.value.expires)
+      timeDep.depend();
+
+    self.find('.sliding').style.left
+        = (state && state.value.active && (state.value.expires ? moment(state.value.expires).isAfter() : true))
+        ? (self.find('.primary').clientWidth + 50) + 'px'
+        : '-1000px';
   });
 
   // Support chromecast receivers

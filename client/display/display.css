@@ -16,6 +16,7 @@
   margin: 0 50px;
   top: 0;
   background: #666; /* just a default */
+  -webkit-transition: left 2s ease;
 }
 
 #anglebar li::before, #anglebar li::after {
@@ -34,6 +35,8 @@
 
 #anglebar li.left  { float: left;  }
 #anglebar li.right { float: right; }
+#anglebar li.primary { z-index: 10; }
+#anglebar li.sliding { position: absolute; top: 10px; z-index: 5; }
 
 #anglebar h1, #anglebar hgroup {
   margin: 0;
