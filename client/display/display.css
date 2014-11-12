@@ -160,12 +160,12 @@
   position: absolute;
   left: -40px;
 }
-.graph { width: 290px; height: 110px; }
-.metric { width: 290px; height: 110px; position: relative; display: inline-block; }
+.graph { width: 290px; height: 130px; }
+.metric { width: 290px; height: 130px; position: relative; display: inline-block; }
 .metric .glimpse { position: absolute; bottom: 0; left: 0; right: 0; margin: 15px; }
 .glimpse h1, .glimpse h3 { margin: 0; display: block; }
 .glimpse h1 {
-  font-size: 300%;
+  font-size: 400%;
   text-shadow: 1px 1px 5px rgba(255,255,255,0.5),
                -1px 1px 5px rgba(255,255,255,0.5),
                1px -1px 5px rgba(255,255,255,0.5),

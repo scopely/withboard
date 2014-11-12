@@ -255,7 +255,7 @@ Template.Graph.rendered = function () {
   var self = this;
 
   var width = 280;
-  var height = 100;
+  var height = 120;
   var margin = 5;
 
   var x = d3.time.scale().range([0, width]);
