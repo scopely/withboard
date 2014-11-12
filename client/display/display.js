@@ -59,8 +59,15 @@ Template.Display.helpers({
 
   music: function () {
     var state = State.findOne({ key: 'now-playing' });
-    return state ? state.value : null;
+    return (state && state.value) ? state.value[0] : null;
   },
+
+  trimmed: function (string) {
+    if (string.length < 25)
+      return string;
+    else
+      return string.substr(0, 22) + '...';
+  }
 });
 
 Template.Display.rendered = function () {
