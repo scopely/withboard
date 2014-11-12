@@ -137,7 +137,7 @@
 .graph .line {
   fill: none;
   stroke: black;
-  stroke-width: 3px;
+  stroke-width: 2px;
 }
 .graph .area {
   fill: #cdf;

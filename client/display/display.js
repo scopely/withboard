@@ -278,8 +278,8 @@ Template.Graph.rendered = function () {
       .attr("transform",
             "translate(" + margin + "," + margin + ")");
 
-  svg.append("path").attr("class", "line");
   svg.append("path").attr("class", "area");
+  svg.append("path").attr("class", "line");
 
   this.autorun(function (computation) {
     var data = Template.currentData().data;
