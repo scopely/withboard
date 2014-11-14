@@ -115,7 +115,7 @@
         {{/each}}
       </ul>
     </div>
-    <div class="col-md-8" style="font-size: 150%;">
+    <div class="col-md-8" style="font-size: 120%;">
       {{#with activePosition}}
         {{{formatted description}}}
       {{/with}}
@@ -134,6 +134,25 @@
             <h1>{{latest data}}</h1>
           </div>
           {{> Graph data=data name=name }}
+        </div>
+      {{/each}}
+    </div>
+  {{/each}}
+</template>
+
+<template name="DisplayMetrics">
+  {{#each value}}
+    <div class="app">
+      <h2>{{header}}</h2>
+      {{#each graphs}}
+        <div class="metric">
+          <div class="glimpse">
+            <h3>{{label}}</h3>
+            <h1>{{latest metric divisor suffix}}</h1>
+          </div>
+          {{#with getMetric metric}}
+            {{> Graph data=points }}
+          {{/with}}
         </div>
       {{/each}}
     </div>

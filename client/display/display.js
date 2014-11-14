@@ -11,6 +11,9 @@ Router.map(function () {
   this.route('displayNewrelic', { path: '/display/newrelic', template: 'DisplayNewrelic', layoutTemplate: 'Display', data: function () {
     return State.findOne({key: 'newrelic'});
   }});
+  this.route('displayMetrics', { path: '/display/metrics', template: 'DisplayMetrics', layoutTemplate: 'Display', data: function () {
+    return Config.findOne({key: 'metric-layout'});
+  }});
 
   this.route('displayRoles',   { path: '/display/:role',   template: 'DisplayDefault', layoutTemplate: 'Display' });
 });
@@ -254,6 +257,33 @@ Template.DisplayRecruiting.helpers({
 Template.DisplayNewrelic.helpers({
   latest: function (data) {
     return data[data.length - 1].pretty;
+  },
+});
+
+Template.DisplayMetrics.helpers({
+  getMetric: function (name) {
+    var state = State.findOne({key: 'metrics'});
+    return state ? state.value.filter(function (s) { return s.id == name; })[0] : null;
+  },
+
+  latest: function (metric, divisor, suffix) {
+    if (!suffix)
+      suffix = '';
+
+    var state = State.findOne({key: 'metrics'});
+    if (!state) return '???';
+
+    var metric = state.value.filter(function (s) { return s.id == metric; })[0];
+    if (!metric) return 'n/a';
+
+    var value = metric.points[metric.points.length - 1].y / (divisor || 1);
+    value = Math.round(value * 10) / 10;
+
+    if (value >= 1000) {
+      return Math.floor(value/1000) + ',' + (value - Math.floor(value/1000)*1000) + suffix;
+    } else {
+      return value + suffix;
+    }
   },
 });
 
