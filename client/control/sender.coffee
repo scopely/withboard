@@ -1,7 +1,7 @@
+applicationID = '8ED67160'
 session = null
 
 initializeCastApi = ->
-  applicationID = '8ED67160'
   sessionRequest = new chrome.cast.SessionRequest applicationID
   apiConfig = new chrome.cast.ApiConfig sessionRequest, sessionListener, receiverListener
 
