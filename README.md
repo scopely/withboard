@@ -17,6 +17,30 @@ NodeJS-based and uses MongoDB for data storage. The Meteor feature-set appeals
 to Withboard's design, and the end result [should be] a very straightforward
 application.
 
+Initial setup
+-------------
+Withboard isn't polished enough to be usable out of the box yet. This will be
+improved going forward, but if you're still interested in messing with it as is,
+setup steps are below. Be warned that you will need to build your own data sources.
+Check back later if you'd like to just use prebuilt providers :)
+
+### Deployment
+You'll need to install the [Meteor](http://meteor.com) platform if you haven't already.
+
+1. Deploy your clone to meteor.com under a unique name. I took "withboard", sorry!
+  * `meteor deploy xyz.meteor.com`
+2. Gain access to the [Cast SDK Console](https://cast.google.com/publish/)
+3. Create a new Cast application.
+  * Your URL will be `https://xyz.meteor.com/display` with your unique subdomain.
+  * You can list a Chrome sender app URL: `https://xyz.meteor.com/control`
+4. Copy your new 8-character app ID from the Cast SDK Console
+5. Drop your app ID into the top of `client/control/sender.coffee`
+6. Deploy your app again
+
+You'll now be able to cast your Withboard instance from the meteor app.
+Pairing a device should work without issue. Now you just have to build out the
+views and get your data in the system!
+
 Flexibility
 -----------
 The essence of Withboard is a data store (Mongo-backed for this implementation)

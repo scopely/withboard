@@ -1,0 +1,37 @@
+<template name="DisplayRooms">
+  <div class="row">
+    <div class="col-md-6">
+      {{#each values cals.value}}
+        {{#if isImportant id}}
+          {{> DisplayRoom }}
+        {{/if}}
+      {{/each}}
+    </div>
+    <div class="col-md-6">
+      {{#each values cals.value}}
+        {{#unless isImportant id}}
+          {{> DisplayRoom }}
+        {{/unless}}
+      {{/each}}
+    </div>
+  </div>
+</template>
+
+<template name="DisplayRoom">
+  <h2 class="cal-{{scheduleState items}}">
+    {{summary}}
+  </h2>
+  <ul style="padding-left: 25px;">
+    {{#each upcoming items}}
+      {{#unless hasPassed end}}
+        <li style="list-style: none;" class="cal-{{getState start end}}">
+          <span style="font-size: 150%;">{{summary}}</span>
+          <em style="display: inline-block; line-height: 0.8;">
+            by {{firstName creator}}
+            <br>{{explain start end}}
+          </em>
+        </li>
+      {{/unless}}
+    {{/each}}
+  </ul>
+</template>
