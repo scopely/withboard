@@ -4,6 +4,11 @@ Router.map ->
     template: 'DisplayDefault'
     layoutTemplate: 'Display'
 
+  @route 'displayDefaultttt',
+    path: '/displaydefault'
+    template: 'DisplayDefault'
+    layoutTemplate: 'Display'
+
   @route 'displayPairing',
     path: '/display/pairing'
     template: 'DisplayPairing'
@@ -40,6 +45,14 @@ Router.map ->
     data: ->
       Config.findOne
         key: 'metric-layout'
+
+  @route 'displayTitan',
+    path: '/display/titan'
+    template: 'DisplayTitan'
+    layoutTemplate: 'Display'
+    data: ->
+      apps: Config.findOne key: 'titan-apps'
+      url: Config.findOne key: 'titan-url'
 
   @route 'displayRoles',
     path: '/display/:role'
