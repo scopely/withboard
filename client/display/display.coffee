@@ -1,4 +1,4 @@
-timeDep = new Deps.Dependency()
+timeDep = new Tracker.Dependency()
 time = moment()
 
 Meteor.setInterval ->
@@ -8,6 +8,7 @@ Meteor.setInterval ->
 
 Template.Display.helpers
   clock: (timeFormat) ->
+    timeDep.depend()
     time.format timeFormat
 
   label: () ->
