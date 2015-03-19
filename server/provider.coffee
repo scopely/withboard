@@ -1,7 +1,10 @@
-assertProvider = ->
-  if not @userId
+assertProvider = (userId) ->
+  if not userId
+    console.log 'Provider attempt with no user id'
     throw new Meteor.Error 401, 'Not enough privledges'
-  if not Meteor.users.findOne(@userId).provider
+
+  if not Meteor.users.findOne(userId).provider
+    console.log 'Provider attempt from non-provider'
     throw new Meteor.Error 401, 'Not provider'
 
 Meteor.methods
@@ -22,7 +25,7 @@ Meteor.methods
     true
 
   setConfig: (key, value) ->
-    assertProvider()
+    assertProvider @userId
 
     console.log 'Provider set config', key, 'to', JSON.stringify(value).substr(0, 256)
     Config.upsert {key: key},
@@ -31,7 +34,7 @@ Meteor.methods
       source: 'provider'
 
   setState: (key, value) ->
-    assertProvider()
+    assertProvider @userId
 
     console.log 'Provider set state', key, 'to', JSON.stringify(value).substr(0, 256)
     State.upsert {key: key},
