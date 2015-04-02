@@ -16,6 +16,8 @@ Template.Display.helpers
 
     if !user
       'Inactive'
+    else if Session.get 'label'
+      Session.get 'label'
     else if user.profile.type != 'display' and user.profile.name
       user.profile.name.split(' ')[0]
     else if user.profile.title or user.profile.role
