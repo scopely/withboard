@@ -20,10 +20,7 @@ Template.DisplayMetrics.helpers
     value = metric.points[metric.points.length - 1].y / (divisor or 1)
     value = Math.round(value * 10) / 10
 
-    if value >= 1000
-      Math.floor(value/1000) + ',' + (value - Math.floor(value/1000)*1000) + suffix;
-    else
-      value + suffix
+    value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + suffix
 
 Template.Graph.rendered = ->
   @node = @find '.graph'
