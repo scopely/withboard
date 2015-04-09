@@ -1,3 +1,5 @@
+numberFormat = Intl.NumberFormat()
+
 Template.DisplayNewrelic.helpers
   latest: (data) ->
     data[data.length - 1].pretty
@@ -20,7 +22,7 @@ Template.DisplayMetrics.helpers
     value = metric.points[metric.points.length - 1].y / (divisor or 1)
     value = Math.round(value * 10) / 10
 
-    value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + suffix
+    numberFormat.format(value) + suffix
 
 Template.Graph.rendered = ->
   @node = @find '.graph'
