@@ -51,7 +51,6 @@ Router.map ->
     template: 'DisplayTitan'
     layoutTemplate: 'Display'
     data: ->
-      apps: Config.findOne key: 'titan-apps'
       url: Config.findOne key: 'titan-url'
 
   @route 'displayRoles',
