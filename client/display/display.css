@@ -4,7 +4,7 @@
   font-family: Lato;
 }
 
-.DisplayMetrics h2 {
+.DisplayMetrics h2, .DisplayNewrelic h2 {
   font-size: 1.3em;
 }
 
