@@ -4,9 +4,8 @@
   font-family: Lato;
 }
 
-.DisplayMetrics h2, .DisplayNewrelic h2 {
-  font-size: 1.3em;
-}
+.DisplayMetrics h2 { font-size: 1.5em; }
+.DisplayNewrelic h2 { font-size: 1.5em; }
 
 #anglebar ul {
   padding: 10px 0;
