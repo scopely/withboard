@@ -1,0 +1,35 @@
+<template name="ControlLayout">
+  <nav>
+    <div class="nav-wrapper container">
+      <a href="/control" class="brand-logo center">Withboard</a>
+      <a href="#" data-activates="mobile-demo" class="button-collapse">
+        <i class="mdi-navigation-menu"></i>
+      </a>
+
+      <ul class="left hide-on-med-and-down">
+        <li class="{{isActiveRoute regex='displays'}}"><a href="/control/displays">Displays</a></li>
+        <li class="{{isActiveRoute regex='settings'}}"><a href="/control/settings">Settings</a></li>
+        <li class="{{isActiveRoute regex='states'}}"><a href="/control/states">States</a></li>
+      </ul>
+      <ul class="right hide-on-med-and-down">
+        <li><a href="/display" target="_blank">Open local display</a></li>
+        <li><a href="/logout">Logout</a></li>
+      </ul>
+
+      <ul class="side-nav" id="mobile-demo">
+        <li class="{{isActiveRoute regex='vehicles'}}"><a href="/control/displays">Displays</a></li>
+        <!--li><a href="/control/slides">Slides</a></li-->
+        <li class="{{isActiveRoute regex='vehicles'}}"><a href="/control/settings">Settings</a></li>
+        <li class="{{isActiveRoute regex='vehicles'}}"><a href="/control/states">States</a></li>
+        <!--li><a href="/control/users">Users</a></li-->
+        <li><hr></li>
+        <li><a href="/display" target="_blank">Open local display</a></li>
+        <li><a href="/logout">Logout</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="container" style="margin: 50px auto;">
+    {{> yield}}
+  </div>
+</template>

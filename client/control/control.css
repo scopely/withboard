@@ -1,8 +1,27 @@
-.cards {
-  margin: 0;
-  padding: 0;
+.materialize-textarea {
+  padding: 0 !important;
 }
-.cards>li {
-  list-style: none;
-  display: inline-block;
+
+.config-item .collapsible-header {
+  word-wrap: break-word;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+}
+
+.container .collapsible-body {
+  margin: 0;
+  padding: 1em;
+}
+
+textarea.materialize-textarea {
+  font-family: mono;
+  font-size: 80%;
+}
+
+.collapsible button {
+  display: block;
+  margin-bottom: 10px;
+  width: 100%;
 }

@@ -1,5 +1,11 @@
-#display {
+.Display {
   overflow: hidden;
+  clear: both;
+  font-family: Lato;
+}
+
+.DisplayMetrics h2 {
+  font-size: 1.3em;
 }
 
 #anglebar ul {
@@ -56,19 +62,12 @@
   white-space: nowrap;
   margin: 0;
   text-align: center;
+  height: 38px;
+  line-height: 2.7rem;
 }
 
 #anglebar img {
   height: 100px;
   display: inline-block;
   vertical-align: top;
-}
-
-
-#body {
-  clear: both;
-}
-
-#display {
-  font-family: Lato;
 }

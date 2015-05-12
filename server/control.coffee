@@ -4,6 +4,7 @@ Meteor.publish 'displays', ->
       'profile.type': 'display'
     , fields:
       profile: 1
+      username: 1
   else if @userId
     Meter.user()
   else
@@ -23,6 +24,12 @@ Meteor.methods
       obj["profile.#{key}"] = fields[key]
 
     Meteor.users.update _id, $set: obj
+
+  deleteDisplay: (_id) ->
+    user = Meteor.users.findOne @userId
+    return null if not user or user.profile.type == 'display'
+    console.log 'DISPLAY DELETE:', _id, fields
+    Meteor.users.remove _id
 
 isAdmin = (userId, doc) ->
   if userId

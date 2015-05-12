@@ -1,4 +1,4 @@
-Template.DisplayPairing.rendered = ->
+Template.DisplayPairing.onRendered ->
   return Router.go 'displayDefault' if Meteor.userId()
 
   Meteor.call 'getPairingCode', (err, code) ->
@@ -27,5 +27,4 @@ Template.DisplayPairing.rendered = ->
           Router.go 'display'
 
 Template.DisplayPairing.helpers
-  code: ->
-    Session.get 'pairingCode'
+  code: -> Session.get 'pairingCode'

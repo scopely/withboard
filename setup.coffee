@@ -1,0 +1,1 @@
+Router.onBeforeAction 'bodyClass'

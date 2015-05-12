@@ -4,50 +4,48 @@
 </head>
 
 <template name="Display">
-  <div id="display">
-    <header id="anglebar">
-      <ul>
-        <li class="primary left" style="background-color: #00557f;">
-          <img src="http://i.imgur.com/gbkYtnS.png">
-          <h1>{{label}}</h1>
-        </li>
-        <li class="sliding left" style="background-color: rgb(255, 144, 0); left: -1000px;">
-          <h1>{{announce.text}}</h1>
-        </li>
-        <li class="left" style="background-color: #5f94ae;">
-          <hgroup>
-            <h2>{{clock 'h:mm a'}}</h2>
-            <h3>{{clock 'ddd MMM Do'}}</h3>
-          </hgroup>
-        </li>
-        {{#if music.title}}
-          {{#with music}}
-            <li class="right" style="background-color: {{clan.color}};">
-              <hgroup>
-                <h2>{{trimmed title}}</h2>
-                <h3>{{trimmed artist}}</h3>
-              </hgroup>
-              <img src="{{albumArtURL}}">
-            </li>
-          {{/with}}
-        {{/if}}
-        {{#unless music.title}}
-          {{#with clan}}
-            <li class="right" style="background-color: {{color}};">
-              <hgroup>
-                <h2>{{name}}, step on up!</h2>
-                <h3 style="font-size: 200%;">Play some music on the Sonos</h3>
-              </hgroup>
-            </li>
-          {{/with}}
-        {{/unless}}
-      </ul>
-    </header>
+  <header id="anglebar">
+    <ul>
+      <li class="primary left" style="background-color: #00557f;">
+        <img src="http://i.imgur.com/gbkYtnS.png">
+        <h1>{{label}}</h1>
+      </li>
+      <li class="sliding left" style="background-color: rgb(255, 144, 0); left: -1000px;">
+        <h1>{{announce.text}}</h1>
+      </li>
+      <li class="left" style="background-color: #5f94ae;">
+        <hgroup>
+          <h2>{{clock 'h:mm a'}}</h2>
+          <h3>{{clock 'ddd MMM Do'}}</h3>
+        </hgroup>
+      </li>
+      {{#if music.title}}
+        {{#with music}}
+          <li class="right" style="background-color: {{clan.color}};">
+            <hgroup>
+              <h2>{{trimmed title}}</h2>
+              <h3>{{trimmed artist}}</h3>
+            </hgroup>
+            <img src="{{albumArtURL}}">
+          </li>
+        {{/with}}
+      {{/if}}
+      {{#unless music.title}}
+        {{#with clan}}
+          <li class="right" style="background-color: {{color}};">
+            <hgroup>
+              <h2>{{name}}, step on up!</h2>
+              <h3 style="font-size: 200%;">Play some music on the Sonos</h3>
+            </hgroup>
+          </li>
+        {{/with}}
+      {{/unless}}
+    </ul>
+  </header>
 
-    <div id="body">
-      <div class="container-fluid" style="padding-top: 25px;">
-        {{> yield}}
-      </div>
+  <div id="body">
+    <div class="container-fluid" style="padding-top: 25px;">
+      {{> yield}}
     </div>
   </div>
 </template>

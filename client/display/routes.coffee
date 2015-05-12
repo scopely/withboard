@@ -4,11 +4,6 @@ Router.map ->
     template: 'DisplayDefault'
     layoutTemplate: 'Display'
 
-  @route 'displayDefaultttt',
-    path: '/displaydefault'
-    template: 'DisplayDefault'
-    layoutTemplate: 'Display'
-
   @route 'displayPairing',
     path: '/display/pairing'
     template: 'DisplayPairing'

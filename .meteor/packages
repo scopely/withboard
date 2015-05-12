@@ -1,15 +1,14 @@
-# Meteor packages used by this project, one per line.
-#
-# 'meteor add' and 'meteor remove' will edit this file for you,
-# but you can also edit it by hand.
-
 meteor-platform
 iron:router
-html5cat:bootstrap-material-design
 accounts-google
-npvn:accounts-ui-bootstrap-3
-mrt:moment
-d3
-twbs:bootstrap
 coffeescript
+
+materialize:materialize
+zimme:iron-router-active
+momentjs:moment
+d3
+
 meteorhacks:kadira
+gandev:server-eval
+service-configuration
+andrei:iron-router-body-class

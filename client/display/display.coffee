@@ -61,8 +61,8 @@ Template.Display.rendered = ->
     if not Meteor.userId()
       Router.go 'displayPairing'
     else if user and user.profile.role
-      slash = if user.profile.role == 'default' then '' else '/'
-      Router.go '/display' + slash + user.profile.role
+      Router.go '/display' +
+        if user.profile.role == 'default' then '' else "/#{user.profile.role}"
 
   self = @
   @autorun ->
@@ -72,7 +72,7 @@ Template.Display.rendered = ->
       timeDep.depend()
 
     active = state and state.value.active
-    if active && state.value.expires
+    if active and state.value.expires
       active = moment(state.value.expires).isAfter()
 
     self.find('.sliding').style.left = if active

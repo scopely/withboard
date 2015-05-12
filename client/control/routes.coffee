@@ -17,14 +17,14 @@ Router.map ->
     template: 'Configs'
     layoutTemplate: 'ControlLayout'
     data: ->
-      configs: Config.find()
+      configs: Config.find {}, sort: key: 1
 
   @route 'states',
     path: '/control/states'
     template: 'States'
     layoutTemplate: 'ControlLayout'
     data: ->
-      states: State.find()
+      states: State.find {}, sort: key: 1
 
   @route 'index',
     path: '/',

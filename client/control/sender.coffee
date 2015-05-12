@@ -20,7 +20,7 @@ sessionListener = (e) ->
   console.log 'cast: new session ID:', e.sessionId
   session = e
 
-  if session.media.length != 0
+  if session.media.length isnt 0
     console.log 'cast: found', session.media.length, 'existing media sessions.'
   session.addUpdateListener sessionUpdateListener.bind @
 
@@ -36,7 +36,7 @@ receiverListener = (e) ->
   else
     console.log 'cast: receiver list empty'
 
-launchApp = () ->
+launchApp = ->
   console.log 'cast: launching app...'
   chrome.cast.requestSession onRequestSessionSuccess, ->
     console.log 'cast: launch error'
@@ -45,17 +45,17 @@ onRequestSessionSuccess = (e) ->
   console.log 'cast: session success:', e.sessionId
   session = e
   session.addUpdateListener sessionUpdateListener.bind @
-  if session.media.length != 0
+  if session.media.length isnt 0
     onMediaDiscovered 'onRequestSession', session.media[0]
 
   session.addMediaListener onMediaDiscovered.bind @, 'addMediaListener'
   session.addUpdateListener sessionUpdateListener.bind @
 
-stopApp = () ->
+stopApp = ->
   session.stop onStopAppSuccess, onError
 
 
-Template.ControlLayout.rendered = ->
+Template.ControlLayout.onRendered ->
   Meteor.subscribe 'displays'
   Meteor.subscribe 'config'
   Meteor.subscribe 'state'

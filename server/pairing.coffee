@@ -12,13 +12,13 @@ Meteor.methods
 
   confirmPairing: (code) ->
     check code, String
-    console.log code, 'wants to finish pairing -', @userId
+    console.log code, 'wants to finish pairing'
 
     if pairingSubs[code] is undefined
       throw new Meteor.Error 400, 'Unknown or expired pairing session'
-    else if pairingSubs[code] is false
+    if pairingSubs[code] is false
       throw new Meteor.Error 400, 'Display is not ready to pair'
-    else if not pairingSubs[code].adminId
+    if not pairingSubs[code].adminId
       throw new Meteor.Error 401, 'Pairing has not been authorized yet'
 
     id = Meteor.users.insert
@@ -72,3 +72,4 @@ Meteor.publish 'pair', (code) ->
     sub.ready()
     pairingSubs[code].adminId = @userId
     pairingSubs[code].returnTo = @
+  return
