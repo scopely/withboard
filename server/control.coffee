@@ -5,6 +5,7 @@ Meteor.publish 'displays', ->
     , fields:
       profile: 1
       username: 1
+      online: 1
   else if @userId
     Meter.user()
   else

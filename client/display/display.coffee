@@ -52,8 +52,7 @@ Template.Display.helpers
       string.substr(0, 22) + '...'
 
 Template.Display.rendered = ->
-  Meteor.subscribe 'state'
-  Meteor.subscribe 'config'
+  @subscribe 'display'
 
   @autorun ->
     user = Meteor.user()
