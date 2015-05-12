@@ -29,7 +29,8 @@ Meteor.methods
   deleteDisplay: (_id) ->
     user = Meteor.users.findOne @userId
     return null if not user or user.profile.type == 'display'
-    console.log 'DISPLAY DELETE:', _id, fields
+    
+    console.log 'DISPLAY DELETE:', _id
     Meteor.users.remove _id
 
 isAdmin = (userId, doc) ->
