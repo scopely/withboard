@@ -2,7 +2,7 @@ loginHook = (route)->
   return @next() if route.url.slice(0, 8) isnt '/control'
 
   if Meteor.loggingIn()
-    @render 'loading'
+    @render 'Loading'
   else unless Meteor.userId()
     @layout false
     @render 'Login'
