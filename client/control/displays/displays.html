@@ -8,14 +8,6 @@
             {{#if profile.name}}
               <span class="card-title">{{profile.name}}</span>
               <p>Title: {{profile.title}}</p>
-              <p>
-                <select id="role" class="browser-default" style="color: #000;">
-                  <option>(unassigned)</option>
-                  {{#each roles}}
-                    <option {{optionAttrs ../profile.role}}>{{role}}</option>
-                  {{/each}}
-                </select>
-              </p>
             {{/if}}
             {{#unless profile.name}}
               <span class="card-title">New Display</span>
@@ -24,9 +16,14 @@
               </p>
             {{/unless}}
           </div>
-          <div class="card-action">
-            <a class="modal-trigger white-text" href="#edit">Edit</a>
-            <a class="modal-trigger white-text" href="#delete">Delete</a>
+          <div class="card-action {{displayColor}}">
+            <select class="browser-default" style="height: auto; margin-right: 20px; color: #000; display: inline-block; width: 100px;">
+              {{#each roles}}
+                <option {{optionAttrs ../profile.role}}>{{role}}</option>
+              {{/each}}
+            </select>
+            <a class="modal-trigger" href="#edit">Edit</a>
+            <a class="modal-trigger" href="#delete">X</a>
           </div>
         </div>
       </div>
