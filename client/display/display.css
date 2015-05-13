@@ -2,6 +2,7 @@
   overflow: hidden;
   clear: both;
   font-family: Lato;
+  background: #fff;
 }
 
 .DisplayMetrics h2 { font-size: 1.5em; }

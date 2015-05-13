@@ -1,6 +1,6 @@
 Template.DisplayRooms.helpers
   values: (cals) ->
-    if cals
+    if !cals
       []
     else
       _.sortBy Object.keys(cals).map((calId) ->

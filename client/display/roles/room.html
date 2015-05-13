@@ -1,13 +1,13 @@
 <template name="DisplayRooms">
   <div class="row">
-    <div class="col-md-6">
+    <div class="col m6">
       {{#each values cals.value}}
         {{#if isImportant id}}
           {{> DisplayRoom }}
         {{/if}}
       {{/each}}
     </div>
-    <div class="col-md-6">
+    <div class="col m6">
       {{#each values cals.value}}
         {{#unless isImportant id}}
           {{> DisplayRoom }}
