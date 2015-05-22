@@ -1,31 +1,9 @@
 <template name="Displays">
-  <h4 style="text-align: center;">Configured Displays</h4>
+  <h4 class="center-align">Configured Displays</h4>
   <div class="row">
     {{#each displays}}
       <div class="col s12 m6 l4">
-        <div class="card {{displayColor}} darken-1">
-          <div class="card-content white-text">
-            {{#if profile.name}}
-              <span class="card-title">{{profile.name}}</span>
-              <p>Title: {{profile.title}}</p>
-            {{/if}}
-            {{#unless profile.name}}
-              <span class="card-title">New Display</span>
-              <p style="font-size: 120%;">
-                Code <strong>{{pairCode}}</strong>
-              </p>
-            {{/unless}}
-          </div>
-          <div class="card-action {{displayColor}}">
-            <select class="browser-default" style="height: auto; margin-right: 20px; color: #000; display: inline-block; width: 100px;">
-              {{#each roles}}
-                <option {{optionAttrs ../profile.role}}>{{role}}</option>
-              {{/each}}
-            </select>
-            <a class="modal-trigger" href="#edit">Edit</a>
-            <a class="modal-trigger" href="#delete">X</a>
-          </div>
-        </div>
+        {{> DisplayCard}}
       </div>
     {{/each}}
     {{> DisplayPair}}

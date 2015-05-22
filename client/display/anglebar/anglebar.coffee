@@ -6,7 +6,7 @@ Meteor.setInterval ->
   timeDep.changed()
 , 1000
 
-Template.Display.helpers
+Template.AngleBar.helpers
   clock: (timeFormat) ->
     timeDep.depend()
     time.format timeFormat
@@ -51,17 +51,17 @@ Template.Display.helpers
     else
       string.substr(0, 20) + '...'
 
-  @autorun =>
-    state = State.findOne key: 'announce'
+    @autorun =>
+      state = State.findOne key: 'announce'
 
-    if state and state.value.active and state.value.expires
-      timeDep.depend()
+      if state and state.value.active and state.value.expires
+        timeDep.depend()
 
-    active = state and state.value.active
-    if active and state.value.expires
-      active = moment(state.value.expires).isAfter()
+      active = state and state.value.active
+      if active and state.value.expires
+        active = moment(state.value.expires).isAfter()
 
-    @find('.sliding').style.left = if active
-      (@find('.primary').clientWidth + 50) + 'px'
-    else
-      '-1000px'
+      @find('.sliding').style.left = if active
+        (@find('.primary').clientWidth + 50) + 'px'
+      else
+        '-1000px'

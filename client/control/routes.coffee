@@ -1,11 +1,6 @@
 Router.map ->
-  @route 'control',
-    path: '/control'
-    template: 'ControlHome'
-    layoutTemplate: 'ControlLayout'
-
   @route 'displays',
-    path: '/control/displays'
+    path: '/control'
     template: 'Displays'
     layoutTemplate: 'ControlLayout'
     data: ->
