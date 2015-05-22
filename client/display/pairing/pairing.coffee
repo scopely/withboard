@@ -22,7 +22,7 @@ Template.DisplayPairing.onRendered ->
       onError: (err) ->
         console.log 'Pairing subscription error:', err
 
-        if err.error == 400
+        if err.error is 400
           # probably just an old code that the server doesn't acknowledge
           Router.go 'display'
 

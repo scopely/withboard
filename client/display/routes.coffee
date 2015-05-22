@@ -1,54 +1,24 @@
-Router.map ->
-  @route 'displayDefault',
-    path: '/display'
-    template: 'DisplayDefault'
-    layoutTemplate: 'Display'
+Router.route 'displayDefault',
+  path: '/display'
+  template: 'DisplayDefault'
+  layoutTemplate: 'Display'
 
-  @route 'displayPairing',
-    path: '/display/pairing'
-    template: 'DisplayPairing'
+addRole = (name, cb) ->
+  Router.route "display#{name}",
+    path: "/display/#{name.toLowerCase()}"
+    template: "Display#{name}"
     layoutTemplate: 'Display'
+    data: cb
 
-  @route 'displayRooms',
-    path: '/display/rooms'
-    template: 'DisplayRooms'
-    layoutTemplate: 'Display'
-    data: ->
-      cals: State.findOne
-        key: 'calendars'
+addRole 'Pairing'
+addRole 'Rooms', -> cals: State.findOne key: 'calendars'
+addRole 'Recruiting',  -> State.findOne key: 'recruiting-list'
+addRole 'Newrelic',  ->   State.findOne key: 'newrelic'
+addRole 'Metrics', ->     Config.findOne key: 'metric-layout'
+addRole 'Titan', ->  url: Config.findOne key: 'titan-url'
 
-  @route 'displayRecruiting',
-    path: '/display/recruiting'
-    template: 'DisplayRecruiting'
-    layoutTemplate: 'Display'
-    data: ->
-      State.findOne
-        key: 'recruiting-list'
-
-  @route 'displayNewrelic',
-    path: '/display/newrelic'
-    template: 'DisplayNewrelic'
-    layoutTemplate: 'Display'
-    data: ->
-      State.findOne
-        key: 'newrelic'
-
-  @route 'displayMetrics',
-    path: '/display/metrics'
-    template: 'DisplayMetrics'
-    layoutTemplate: 'Display'
-    data: ->
-      Config.findOne
-        key: 'metric-layout'
-
-  @route 'displayTitan',
-    path: '/display/titan'
-    template: 'DisplayTitan'
-    layoutTemplate: 'Display'
-    data: ->
-      url: Config.findOne key: 'titan-url'
-
-  @route 'displayRoles',
+# Serves as a catchall so missing roles still load the Display
+Router.route 'displayRoles',
     path: '/display/:role'
     template: 'DisplayDefault'
     layoutTemplate: 'Display'

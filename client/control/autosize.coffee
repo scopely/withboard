@@ -1,4 +1,3 @@
-
 window.textareaAutoResize = ($textarea) ->
   hiddenDiv = $('<div class="hiddendiv common"></div>')
   $('body').append hiddenDiv

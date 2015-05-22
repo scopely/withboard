@@ -1,0 +1,16 @@
+<template name="DisplayNewrelic">
+  {{#each value}}
+  <div class="app">
+    <h2>{{name}}</h2>
+    {{#each metrics}}
+    <div class="metric">
+      <div class="glimpse">
+        <h3>{{name}}</h3>
+        <h1>{{latest data}}</h1>
+      </div>
+      {{> Graph data=data name=name }}
+    </div>
+    {{/each}}
+  </div>
+  {{/each}}
+</template>

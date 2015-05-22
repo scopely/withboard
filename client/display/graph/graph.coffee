@@ -1,32 +1,5 @@
-numberFormat = Intl.NumberFormat()
-
-Template.DisplayNewrelic.helpers
-  latest: (data) ->
-    data[data.length - 1].pretty
-
-Template.DisplayMetrics.helpers
-  getMetric: (name) ->
-    state = State.findOne key: 'metrics'
-    if state
-      state.value.filter((s) -> s.id == name )[0]
-
-  latest: (metricId, divisor, suffix) ->
-    suffix = '' if not suffix
-
-    state = State.findOne key: 'metrics'
-    return '???' if not state
-
-    metric = state.value.filter((s) -> s.id == metricId )[0]
-    return 'n/a' if not metric
-
-    value = metric.points[metric.points.length - 1].y / (divisor or 1)
-    value = Math.round(value * 10) / 10
-
-    numberFormat.format(value) + suffix
-
 Template.Graph.rendered = ->
   @node = @find '.graph'
-  self = @
 
   width  = 280
   height = 120
@@ -56,7 +29,7 @@ Template.Graph.rendered = ->
   svg.append 'path'
     .attr 'class', 'line'
 
-  @autorun (computation) ->
+  @autorun =>
     data = Template.currentData().data
     metric = Template.currentData().name
     min = if metric is 'Apdex' then 0.8 else 0
@@ -64,7 +37,7 @@ Template.Graph.rendered = ->
     x.domain  d3.extent(data,   (d) -> d.x )
     y.domain [min, d3.max(data, (d) -> d.y )]
 
-    svg = d3.select(self.node).transition()
+    svg = d3.select(@node).transition()
     svg.select '.line'
       .duration 1500
       .attr 'd', valueline data
