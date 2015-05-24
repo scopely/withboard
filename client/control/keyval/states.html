@@ -1,44 +1,14 @@
 <template name="States">
-  <h4 style="text-align: center;">System States</h4>
+  <h4 class="center-align">System States</h4>
 
   <ul class="collapsible" data-collapsible="accordion">
     <li>
-      <div class="collapsible-header"><i class="mdi-content-add"></i>New entry...</div>
-      <div class="collapsible-body row">
-        <form class="form-create">
-          <div class="input-field col l2">
-            <input id="key" type="text" class="validate">
-            <label for="key">Key</label>
-          </div>
-          <div class="input-field col l8">
-            <textarea id="value" class="materialize-textarea" spellcheck="false"></textarea>
-            <label for="value">Value</label>
-          </div>
-          <div class="input-field col l2">
-            <button type="submit" class="btn btn-create">Create</button>
-            <button type="button" class="btn btn-cancel teal lighten-4 blue-grey-text">Cancel</button>
-          </div>
-        </form>
-      </div>
+      {{> KeyValNewRow}}
     </li>
 
     {{#each states}}
-      <li class="config-item">
-        <div class="collapsible-header flow-text">
-          <strong>{{key}}</strong>
-          <code style="font-size: 50%; margin-left: 2.5em;">{{json value}}</code>
-        </div>
-        <div class="collapsible-body row">
-          <form class="form-update">
-            <div class="input-field col l10">
-              <textarea class="materialize-textarea">{{json value}}</textarea>
-            </div>
-            <div class="input-field col l2">
-              <button type="submit" class="btn btn-save">Save</button>
-              <button type="button" class="btn btn-delete red lighten-1">Delete</button>
-            </div>
-          </form>
-        </div>
+      <li class="state-item">
+        {{> KeyValRow}}
       </li>
     {{/each}}
   </ul>
