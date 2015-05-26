@@ -17,7 +17,7 @@ Template.Graph.rendered = ->
     .y0 height
     .y1 (d) -> y(d.y)
 
-  svg = d3.select self.node
+  svg = d3.select @node
     .append 'svg'
       .attr 'width', width + (2 * margin)
       .attr 'height', height + (2 * margin)
