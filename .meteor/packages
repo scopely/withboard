@@ -6,6 +6,7 @@ coffeescript
 materialize:materialize
 zimme:iron-router-active
 momentjs:moment
+dschulz:jquery-qrcode
 d3
 
 meteorhacks:kadira

@@ -7,7 +7,7 @@ Meteor.publish 'displays', ->
       username: 1
       online: 1
   else if @userId
-    Meter.user()
+    Meteor.user()
   else
     []
 
@@ -29,7 +29,7 @@ Meteor.methods
   deleteDisplay: (_id) ->
     user = Meteor.users.findOne @userId
     return null if not user or user.profile.type == 'display'
-    
+
     console.log 'DISPLAY DELETE:', _id
     Meteor.users.remove _id
 

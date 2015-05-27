@@ -4,7 +4,14 @@ Template.DisplayPairing.onRendered ->
   Meteor.call 'getPairingCode', (err, code) ->
     Session.set 'pairingCode', code
 
-    console.log 'Waiting for pairing to begin for', code
+    $('#qr-pair').qrcode
+      text: Meteor.absoluteUrl "control/pair/#{code}"
+      size: 400
+      #ecLevel: 'H'
+      fill: "#00557f"
+      #background: "#fafafa"
+      radius: 0.3
+
     Meteor.subscribe 'pairing', code,
       onReady: ->
         console.log 'Finalizing pairing'

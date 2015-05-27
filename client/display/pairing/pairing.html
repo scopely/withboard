@@ -1,6 +1,18 @@
 <template name="DisplayPairing">
-  <div class="orange lighten-2 card-panel" style="margin: 100px auto; max-width: 800px;">
-    <h1>Display ID: <code style="font-size: 130%;">{{code}}</code></h1>
-    <h4>Please enter this code in the control panel to activate this display.</h4>
+  <div class="row" style="margin: 100px auto;">
+    <div class="col s12 m6 center-align">
+      <a href="/control/pair/{{code}}" id="qr-pair" target="_blank"></a>
+    </div>
+
+    <div class="col s12 m5">
+      <div class="orange lighten-2 card-panel">
+        <h1>Pairing code: <code style="font-size: 130%;">{{code}}</code></h1>
+        <h4>
+          Please enter this code in the control panel
+          or scan the QR
+          to activate this display.
+        </h4>
+      </div>
+    </div>
   </div>
 </template>
