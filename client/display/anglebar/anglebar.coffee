@@ -28,7 +28,6 @@ Template.AngleBar.helpers
       clans.value.filter((c) ->
         c.key == clan.value
       )[0]
-    else {}
 
   announce: ->
     state = State.findOne key: 'announce'
