@@ -12,13 +12,11 @@ Template.AngleBar.helpers
     time.format timeFormat
 
   label: ->
-    display = Displays.findOne()
-
-    if display
+    if display = Displays.findOne()
       {title, role, _id} = display
       Session.get('label') or title or role or _id
-    else
-      Config.findOne(key: 'org').value or 'Inactive'
+    else 'Inactive'
+    # Config.findOne(key: 'org').value
 
   clan: ->
     clan  =  State.findOne key: 'daily-clan'
