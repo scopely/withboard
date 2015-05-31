@@ -1,4 +1,4 @@
-applicationID = '8ED67160'
+applicationID = 'E058BE10'
 session = null
 
 initializeCastApi = ->
@@ -56,9 +56,7 @@ stopApp = ->
 
 
 Template.ControlLayout.onRendered ->
-  Meteor.subscribe 'displays'
-  Meteor.subscribe 'config'
-  Meteor.subscribe 'state'
+  Meteor.subscribe 'control'
 
   console.log 'Setting up Cast sender'
   timer = setInterval ->

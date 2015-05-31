@@ -2,11 +2,13 @@ meteor-platform
 iron:router
 accounts-google
 coffeescript
+aldeed:collection2
+
+force-ssl
 
 materialize:materialize
 zimme:iron-router-active
 momentjs:moment
-dschulz:jquery-qrcode
 d3
 
 meteorhacks:kadira

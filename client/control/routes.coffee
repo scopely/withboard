@@ -4,13 +4,15 @@ Router.map ->
     template: 'Displays'
     layoutTemplate: 'ControlLayout'
     data: ->
-      displays: Meteor.users.find {'profile.type': 'display'}, sort: 'profile.name': 1
-      users: Meteor.users.find 'profile.type': {$ne: 'display'}
+      displays: Displays.find {}, sort: name: 1
 
   @route 'pair',
     path: '/control/pair/:code'
-    waitOn: -> Meteor.subscribe 'pair', @params.code
-    data: -> Router.go 'displays' if Meteor.user()
+    action: ->
+      Displays.update @params.code, $set:
+        pairedAt: new Date()
+        token: Random.secret()
+      , -> Router.go 'displays'
 
   @route 'settings',
     path: '/control/settings'

@@ -1,13 +1,13 @@
 Template.DisplayActions.events
   'submit .edit': (event) ->
     {name, title} = event.target
-    Meteor.call 'updateDisplay', @_id,
+    Displays.update @_id, $set:
       name:  name.value
       title: title.value
     false
 
   'submit .delete': (event) ->
-    Meteor.call 'deleteDisplay', @_id
+    Displays.remove @_id
     false
 
 Template.DisplayActions.onRendered ->

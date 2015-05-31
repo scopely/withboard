@@ -1,9 +1,17 @@
-Meteor.publish 'display', ->
-  return [] unless @userId
+Meteor.publish 'display', (token) ->
+  check token, String
+  unless display = Displays.findOne {token}
+    return @error new Meteor.Error 404, 'No such display'
 
   val = Math.random().toString(16).slice(2)
-  @onStop =>
-    Meteor.users.update {_id: @userId, online: val}, $set: online: false
-  Meteor.users.update @userId, $set: online: val
+  @onStop ->
+    Displays.update {_id: display._id, online: val},
+      $set: online: false
+  Displays.update display._id,
+    $set: online: val
 
-  [Config.find(), State.find()]
+  [
+    Displays.find display._id
+    Config.find()
+    State.find()
+  ]

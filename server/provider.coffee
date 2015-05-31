@@ -42,7 +42,13 @@ Meteor.methods
       value: value
       source: 'provider'
 
-Meteor.publish 'config', ->
-  if this.userId then Config.find() else []
-Meteor.publish 'state', ->
-  if this.userId then State.find() else []
+Meteor.publish 'provider', (key) ->
+  realKey = Config.findOne key: 'provider-key'
+  if not realKey or realKey.value != key
+    return @error new Meteor.Error 401, 'Invalid provider key'
+
+  [
+    Displays.find()
+    Config.find()
+    State.find()
+  ]

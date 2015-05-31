@@ -1,14 +1,29 @@
+Session.set 'display token', localStorage.DisplayToken
+
+sub = null
 Template.Display.rendered = ->
-  @subscribe 'display'
+  @autorun ->
+    sub = if token = Session.get 'display token'
+      localStorage.DisplayToken = token
+      @subscribe ['display', token, onStop: (err) ->
+        console.log err
+        Session.set 'display token'
+      ]
+    else
+      delete localStorage.DisplayToken
+      @subscribe ['pair']
 
   @autorun ->
-    user = Meteor.user()
-
-    if not Meteor.userId()
-      Router.go 'displayPairing'
-    else if user and user.profile.role
-      Router.go '/display' +
-        if user.profile.role == 'default' then '' else "/#{user.profile.role}"
+    if display = Displays.findOne()
+      if display.token
+        Session.set 'display token', display.token
+        Router.go "/display/#{display.role ? 'default'}"
+      else
+        Router.go 'displayPairing'
+    else if sub.ready()
+      Session.set 'display token', true
+      #Router.go 'displayPairing'
+    console.log 'display', display, sub.ready()
 
   # Support chromecast receivers
   if window.cast and cast.receiver

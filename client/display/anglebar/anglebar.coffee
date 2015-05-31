@@ -11,21 +11,14 @@ Template.AngleBar.helpers
     timeDep.depend()
     time.format timeFormat
 
-  label: () ->
-    user = Meteor.user()
+  label: ->
+    display = Displays.findOne()
 
-    if !user
-      'Inactive'
-    else if Session.get 'label'
-      Session.get 'label'
-    else if user.profile.type != 'display' and user.profile.name
-      user.profile.name.split(' ')[0]
-    else if user.profile.title or user.profile.role
-      user.profile.title or user.profile.role
-    else if user.username
-      user.username.slice 8
+    if display
+      {title, role, _id} = display
+      Session.get('label') or title or role or _id
     else
-      Config.findOne(key: 'org').value
+      Config.findOne(key: 'org').value or 'Inactive'
 
   clan: ->
     clan  =  State.findOne key: 'daily-clan'

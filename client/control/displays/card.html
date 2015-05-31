@@ -1,25 +1,30 @@
 <template name="DisplayCard">
-  <div class="card {{displayColor}} darken-1">
-    <div class="card-content white-text">
-      {{#if profile.name}}
-        <span class="card-title">{{profile.name}}</span>
-        <p>Title: {{profile.title}}</p>
+  <div class="card {{displayColor}}">
+    <div class="card-content black-text">
+      {{#if token}}
+        <span class="card-title black-text">{{name}}</span>
+        <p>Title: {{title}}</p>
       {{/if}}
-      {{#unless profile.name}}
-        <span class="card-title">New Display</span>
+      {{#unless token}}
+        <a class="pair btn" href="#" style="padding: 0 0.5em; float: right;">
+          <i class="large mdi-content-add"></i>
+        </a>
+        <span class="card-title black-text">New Display</span>
         <p style="font-size: 120%;">
-          Code <strong>{{pairCode}}</strong>
+          Code <strong>{{_id}}</strong>
         </p>
       {{/unless}}
     </div>
-    <div class="card-action {{displayColor}}">
-      <select class="browser-default" style="height: auto; margin-right: 20px; color: #000; display: inline-block; width: 100px;">
-        {{#each roles}}
-          <option {{optionAttrs ../profile.role}}>{{role}}</option>
-        {{/each}}
-      </select>
-      <a class="modal-trigger" href="#edit">Edit</a>
-      <a class="modal-trigger" href="#delete">X</a>
-    </div>
+    {{#if token}}
+      <div class="card-action">
+        <select class="browser-default" style="height: auto; margin-right: 20px; color: #000; display: inline-block; width: 100px;">
+          {{#each roles}}
+            <option {{optionAttrs ../role}}>{{role}}</option>
+          {{/each}}
+        </select>
+        <a class="modal-trigger" href="#edit">Edit</a>
+        <a class="delete" href="#">X</a>
+      </div>
+    {{/if}}
   </div>
 </template>
