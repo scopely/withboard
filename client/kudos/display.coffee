@@ -1,5 +1,5 @@
-ddp = new ReactiveVar
-collections = new ReactiveVar
+window.ddp = new ReactiveVar
+window.collections = new ReactiveVar
 
 timer = new Chronos.Timer 60 * 1000
 timer.start()
@@ -9,21 +9,6 @@ Template.DisplayKudos.helpers
     c.Posts.findOne {}, sort: date: -1
   oldPosts: -> if c = collections.get()
     c.Posts.find {}, skip: 1, sort: date: -1
-
-Template.Kudo.helpers
-  postImage: -> if c = collections.get()
-    c.PostImages.findOne @image if @image
-  person: (_id) -> if c = collections.get()
-    c.People.findOne _id ? @
-  people: (_ids) -> if c = collections.get()
-    _ids.map (_id) -> c.People.findOne _id ? @
-
-  timeAgo: (time) ->
-    timer.time.get()
-    moment(time).fromNow()
-
-  first: (name) ->
-    name and name.split(' ')[0]
 
 Template.DisplayKudos.onRendered ->
   @autorun => if url = Config.findOne(key: 'kudos-url')

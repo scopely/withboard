@@ -1,0 +1,23 @@
+<template name="Kudo">
+  <blockquote>
+    <span class="body">
+      {{#emojione}}
+        {{body}}
+      {{/emojione}}
+    </span>
+    &nbsp;
+    <cite>
+      &mdash;
+      {{#with person owner}}
+        From {{name}}
+      {{/with}}
+      to
+      {{#each people to}}
+        <span>{{first name}}</span>
+      {{/each}}
+    </cite>
+    <time>
+      {{timeAgo date}}
+    </time>
+  </blockquote>
+</template>

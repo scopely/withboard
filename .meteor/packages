@@ -10,6 +10,8 @@ materialize:materialize
 zimme:iron-router-active
 momentjs:moment
 d3
+jparker:gravatar
+qnub:emojione
 
 meteorhacks:kadira
 gandev:server-eval

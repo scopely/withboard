@@ -11,19 +11,3 @@
     </div>
   {{/each}}
 </template>
-
-<template name="Kudo">
-  <blockquote>{{body}} &nbsp;
-  <cite>
-    {{#with person owner}}
-      From {{name}}
-    {{/with}}
-    to
-    {{#each people to}}
-      <span>{{first name}}</span>
-    {{/each}}
-  </cite>
-  <time>
-    {{timeAgo date}}
-  </time></blockquote>
-</template>
