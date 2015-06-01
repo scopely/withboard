@@ -1,31 +1,11 @@
-assertProvider = (userId) ->
-  if not userId
-    console.log 'Provider attempt with no user id'
-    throw new Meteor.Error 401, 'Not enough privledges'
-
-  if not Meteor.users.findOne(userId).provider
-    console.log 'Provider attempt from non-provider'
-    throw new Meteor.Error 401, 'Not provider'
+checkProviderKey = (key) ->
+  if realKey = Config.findOne(key: 'provider-key')
+    realKey.value is key
 
 Meteor.methods
-  setupProvider: (key) ->
-    realKey = Config.findOne key: 'provider-key'
-    if not realKey or realKey.value != key
+  setConfig: (auth, key, value) ->
+    unless checkProviderKey auth
       throw new Meteor.Error 401, 'Invalid provider key'
-    else
-      console.log 'Provider connected'
-
-    user = Meteor.users.findOne provider: true
-    this.setUserId if user
-      user._id
-    else
-      Meteor.users.insert
-        provider: true
-        profile: {}
-    true
-
-  setConfig: (key, value) ->
-    assertProvider @userId
 
     console.log 'Provider set config', key, 'to', JSON.stringify(value).substr(0, 256)
     Config.upsert {key: key},
@@ -33,8 +13,9 @@ Meteor.methods
       value: value
       source: 'provider'
 
-  setState: (key, value) ->
-    assertProvider @userId
+  setState: (auth, key, value) ->
+    unless checkProviderKey auth
+      throw new Meteor.Error 401, 'Invalid provider key'
 
     console.log 'Provider set state', key, 'to', JSON.stringify(value).substr(0, 256)
     State.upsert {key: key},
@@ -43,9 +24,9 @@ Meteor.methods
       source: 'provider'
 
 Meteor.publish 'provider', (key) ->
-  realKey = Config.findOne key: 'provider-key'
-  if not realKey or realKey.value != key
+  unless checkProviderKey key
     return @error new Meteor.Error 401, 'Invalid provider key'
+  console.log 'Provider connected'
 
   [
     Displays.find()
