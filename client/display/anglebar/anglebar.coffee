@@ -52,6 +52,6 @@ Template.AngleBar.helpers
       active = moment(state.value.expires).isAfter()
 
     if active
-      ($('.primary').clientWidth + 50) + 'px'
+      ($('.primary').width() + 50) + 'px'
     else
       '-1000px'
