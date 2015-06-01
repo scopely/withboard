@@ -41,17 +41,17 @@ Template.AngleBar.helpers
     else
       string.substr(0, 20) + '...'
 
-    @autorun =>
-      state = State.findOne key: 'announce'
+  sliderPos: ->
+    state = State.findOne key: 'announce'
 
-      if state and state.value.active and state.value.expires
-        timeDep.depend()
+    if state and state.value.active and state.value.expires
+      timeDep.depend()
 
-      active = state and state.value.active
-      if active and state.value.expires
-        active = moment(state.value.expires).isAfter()
+    active = state and state.value.active
+    if active and state.value.expires
+      active = moment(state.value.expires).isAfter()
 
-      @find('.sliding').style.left = if active
-        (@find('.primary').clientWidth + 50) + 'px'
-      else
-        '-1000px'
+    if active
+      ($('.primary').clientWidth + 50) + 'px'
+    else
+      '-1000px'
