@@ -16,13 +16,7 @@ addRole 'Newrelic',  ->   State.findOne key: 'newrelic'
 addRole 'Metrics', ->     Config.findOne key: 'metric-layout'
 addRole 'Titan', ->  url: Config.findOne key: 'titan-url'
 addRole 'Welcome', -> {}
-
-Router.route "displayPairing",
-  path: "/display/pairing"
-  template: "DisplayPairing"
-  layoutTemplate: 'Display'
-  data: -> if display = Displays.findOne()
-    code: display._id
+addRole 'Kudos', -> {}
 
 # Serves as a catchall so missing roles still load the Display
 Router.route 'displayRoles',

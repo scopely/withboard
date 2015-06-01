@@ -3,12 +3,13 @@ root.root = root
 
 root.Roles = [
   'default'
-  'rooms'
+  #'rooms'
   #'recruiting'
   'newrelic'
   'metrics'
-  'titan'
+  #'titan'
   'welcome'
+  'kudos'
 ]
 
 root.State = new Meteor.Collection 'state'
