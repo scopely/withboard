@@ -1,0 +1,6 @@
+.welcome {
+  margin-top: -150px;
+  z-index: -50;
+  position: relative;
+  width: 100%;
+}

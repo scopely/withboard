@@ -15,6 +15,7 @@ addRole 'Recruiting',  -> State.findOne key: 'recruiting-list'
 addRole 'Newrelic',  ->   State.findOne key: 'newrelic'
 addRole 'Metrics', ->     Config.findOne key: 'metric-layout'
 addRole 'Titan', ->  url: Config.findOne key: 'titan-url'
+addRole 'Welcome', -> {}
 
 Router.route "displayPairing",
   path: "/display/pairing"
