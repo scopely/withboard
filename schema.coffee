@@ -1,7 +1,16 @@
 root = global ? window
 root.root = root
 
-root.Roles = ['default', 'rooms', 'recruiting', 'newrelic', 'metrics', 'titan']
+root.Roles = [
+  'default'
+  'rooms'
+  #'recruiting'
+  'newrelic'
+  'metrics'
+  #'titan'
+  'welcome'
+  'kudos'
+]
 
 root.State = new Meteor.Collection 'state'
 root.Config = new Meteor.Collection 'config'

@@ -22,8 +22,6 @@ Template.Display.rendered = ->
         Router.go 'displayPairing'
     else if sub.ready()
       Session.set 'display token', true
-      #Router.go 'displayPairing'
-    console.log 'display', display, sub.ready()
 
   # Support chromecast receivers
   if window.cast and cast.receiver

@@ -10,8 +10,12 @@ materialize:materialize
 zimme:iron-router-active
 momentjs:moment
 d3
+jparker:gravatar
+qnub:emojione
 
 meteorhacks:kadira
 gandev:server-eval
 service-configuration
 andrei:iron-router-body-class
+reactive-var
+remcoder:chronos

@@ -1,0 +1,13 @@
+<template name="DisplayKudos">
+  {{#with topPost}}
+    <div class="big kudos">
+      {{> Kudo}}
+    </div>
+  {{/with}}
+
+  {{#each oldPosts}}
+    <div class="old kudos">
+      {{> Kudo}}
+    </div>
+  {{/each}}
+</template>

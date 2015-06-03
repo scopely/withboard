@@ -35,6 +35,9 @@ iron:location@1.0.7
 iron:middleware-stack@1.0.7
 iron:router@1.0.7
 iron:url@1.0.7
+jparker:crypto-core@0.1.0
+jparker:crypto-md5@0.1.1
+jparker:gravatar@0.3.1
 jquery@1.11.3_2
 json@1.0.3
 launch-screen@1.0.2
@@ -56,10 +59,12 @@ oauth@1.1.4
 oauth2@1.1.3
 observe-sequence@1.0.6
 ordered-dict@1.0.3
+qnub:emojione@0.0.3
 random@1.0.3
 reactive-dict@1.1.0
 reactive-var@1.0.5
 reload@1.1.3
+remcoder:chronos@0.3.1
 retry@1.0.3
 routepolicy@1.0.5
 service-configuration@1.0.4
