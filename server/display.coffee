@@ -6,7 +6,7 @@ Meteor.publish 'display', (token) ->
   val = Math.random().toString(16).slice(2)
   @onStop ->
     Displays.update {_id: display._id, online: val},
-      $set: online: false
+      $unset: online: 1
   Displays.update display._id,
     $set: online: val
 
