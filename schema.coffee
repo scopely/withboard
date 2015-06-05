@@ -4,7 +4,7 @@ root.root = root
 root.Roles = [
   'default'
   'rooms'
-  #'recruiting'
+  'recruiting'
   'newrelic'
   'metrics'
   'titan'
