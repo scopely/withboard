@@ -4,6 +4,8 @@
       {{#if token}}
         <span class="card-title black-text">{{name}}</span>
         <p>Title: {{title}}</p>
+
+        {{> Template.dynamic template=controlTemplate}}
       {{/if}}
       {{#unless token}}
         <a class="pair btn" href="#" style="padding: 0 0.5em; float: right;">

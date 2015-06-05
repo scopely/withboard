@@ -3,12 +3,15 @@ Template.DisplayCard.helpers
     if not @token
       'cyan lighten-3'
     else if @online
-      'light-green darken-1'
+      'light-green lighten-2'
     else
       'blue-grey darken-1'
 
   roles: -> Roles.map (role) -> {role}
   optionAttrs: (role) -> if role is @role then {selected: true} else {}
+
+  controlTemplate: ->
+    "Control#{@role[0].toUpperCase()}#{@role.slice(1)}Display" if @role
 
 Template.DisplayCard.events
   'click a.modal-trigger': -> Session.set 'selected display', @_id

@@ -7,7 +7,7 @@ root.Roles = [
   #'recruiting'
   'newrelic'
   'metrics'
-  #'titan'
+  'titan'
   'welcome'
   'kudos'
 ]
@@ -20,7 +20,7 @@ Displays.attachSchema new SimpleSchema
   name      : type: String, optional: true
   title     : type: String, optional: true
   role      : type: String, optional: true
-  config    : type: String, optional: true
+  config    : type: Object, defaultValue: {}, blackbox: true
 
   online    : type: String, optional: true
   token     : type: String, optional: true
