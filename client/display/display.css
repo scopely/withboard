@@ -7,3 +7,10 @@
 
 .DisplayMetrics h2 { font-size: 1.5em; }
 .DisplayNewrelic h2 { font-size: 1.5em; }
+
+.overlay {
+  position: absolute;
+  top: -50px;
+  left: 0;
+  right: 0;
+}

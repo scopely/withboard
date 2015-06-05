@@ -1,5 +1,8 @@
 Session.set 'display token', localStorage.DisplayToken
 
+Template.Display.helpers
+  overlay: -> Session.get 'overlay'
+
 sub = null
 Template.Display.rendered = ->
   @autorun ->
@@ -22,6 +25,12 @@ Template.Display.rendered = ->
         Router.go 'displayPairing'
     else if sub.ready()
       Session.set 'display token', true
+
+  @autorun ->
+    if (state = State.findOne(key: 'lunch')) and state.value is true
+      if config = Config.findOne(key: 'lunch-graphic')
+        return Session.set 'overlay', config.value
+    Session.set 'overlay'
 
   # Support chromecast receivers
   if window.cast and cast.receiver

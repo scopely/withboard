@@ -12,7 +12,9 @@ Template.AngleBar.helpers
     time.format timeFormat
 
   label: ->
-    if display = Displays.findOne()
+    if Session.get 'overlay'
+      ''
+    else if display = Displays.findOne()
       {title, role, _id} = display
       Session.get('label') or title or role or _id
     else 'Inactive'
