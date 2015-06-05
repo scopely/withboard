@@ -15,3 +15,6 @@ Meteor.publish 'display', (token) ->
     Config.find()
     State.find()
   ]
+
+Meteor.startup ->
+  Displays.update {}, {$unset: online: 1}, multi: true

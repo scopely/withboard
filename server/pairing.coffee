@@ -1,9 +1,9 @@
 getNewCode = ->
   x = 5
   while x--
-    try
-      code = Math.random().toString(36).slice(2, 6)
-      return Displays.insert _id: code, firstSeen: new Date()
+    try return Displays.insert
+      _id: Math.random().toString(36).slice(2, 6)
+      firstSeen: new Date()
     catch ex
       throw ex unless ex.code is 11000
 
@@ -17,3 +17,6 @@ Meteor.publish 'pair', ->
 
   Displays.find code,
     fields: token: 1
+
+Meteor.startup ->
+  Displays.remove token: null
