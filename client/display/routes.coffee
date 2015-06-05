@@ -17,6 +17,7 @@ addRole 'Metrics', ->     Config.findOne key: 'metric-layout'
 addRole 'Titan', ->  url: Config.findOne key: 'titan-url'
 addRole 'Welcome', -> {}
 addRole 'Kudos', -> {}
+addRole 'Holiday', -> {}
 
 # Serves as a catchall so missing roles still load the Display
 Router.route 'displayRoles',

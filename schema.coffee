@@ -10,6 +10,7 @@ root.Roles = [
   'titan'
   'welcome'
   'kudos'
+  'holiday'
 ]
 
 root.State = new Meteor.Collection 'state'

@@ -1,0 +1,22 @@
+.DisplayHoliday {
+  background-color: #FCF0E3;
+}
+
+.DisplayHoliday #body {
+  text-align: center;
+}
+
+.DisplayHoliday #body h1 {
+  color: white;
+ -webkit-text-stroke-width: 3px;
+ -webkit-text-stroke-color: #00AEC7;
+ font-size: 100px;
+ font-weight: 900;
+ margin: -15px 0 0 0;
+ line-height: 90%;
+}
+
+.DisplayHoliday #body img {
+  margin-top: 10px;
+  width: 400px;
+}
