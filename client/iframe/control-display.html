@@ -3,8 +3,19 @@
     <input id="url" type="text" value="{{config.iframeUrl}}">
     <label for="url" class="active">IFrame URL</label>
   </div>
-  <div class="range-field">
-    Scale
-    <input type="range" id="scale" min="0.5" max="2.5" step="0.1" value="{{config.iframeScale}}" />
+  <div class="row">
+    <div class="col s6">
+      <div class="range-field">
+        Scale
+        <input type="range" id="scale" {{scaleAttrs}} />
+      </div>
+    </div>
+
+    <div class="col s6">
+      <div class="range-field">
+        Refresh (min)
+        <input type="range" id="refresh" {{refreshAttrs}} />
+      </div>
+    </div>
   </div>
 </template>
