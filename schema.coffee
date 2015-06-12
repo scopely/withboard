@@ -11,6 +11,7 @@ root.Roles = [
   'welcome'
   'kudos'
   'holiday'
+  'iframe'
 ]
 
 root.State = new Meteor.Collection 'state'

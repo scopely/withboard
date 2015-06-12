@@ -18,6 +18,7 @@ addRole 'Titan', ->  url: Config.findOne key: 'titan-url'
 addRole 'Welcome', -> {}
 addRole 'Kudos', -> {}
 addRole 'Holiday', -> {}
+addRole 'Iframe', -> display: Displays.findOne()
 
 # Serves as a catchall so missing roles still load the Display
 Router.route 'displayRoles',
