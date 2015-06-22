@@ -1,28 +1,29 @@
 articles = new ReactiveVar []
 article = new ReactiveVar
+leftImage = new ReactiveVar false
 
 Template.DisplayRss.helpers
-  article: -> console.log article.get(); article.get()
+  article: -> article.get()
+  leftImage: -> leftImage.get()
+
   image: -> @['media:content'].$.url
   snippit: -> @description.match(/<blockquote>(.+)<\/blockquote>/)[1]
   date: -> moment(@pubDate).format 'LLL'
 
 Template.DisplayRss.onRendered ->
   updateFeed = ->
-    console.log 'Updating RSS'
     {_id} = Template.currentData().display
     Meteor.call 'getRss', _id, (err, newList) ->
       if err
-        console.log 'RSS error:', err
+        console.log 'RSS update error:', err
       else
         articles.set newList.filter (item) -> item['media:content']
         article.set articles.get()[0]
         console.log 'Got', articles.get().length, 'articles'
 
   nextArticle = ->
-    console.log 'Switching article'
-
     article.set Random.choice articles.get()
+    leftImage.set(not leftImage.get())
 
   interval = null
   @autorun -> if ({display} = Template.currentData()) and display
