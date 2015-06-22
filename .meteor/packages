@@ -19,3 +19,5 @@ service-configuration
 andrei:iron-router-body-class
 reactive-var
 remcoder:chronos
+http
+peerlibrary:xml2js

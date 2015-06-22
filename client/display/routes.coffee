@@ -19,6 +19,7 @@ addRole 'Welcome', -> {}
 addRole 'Kudos', -> {}
 addRole 'Holiday', -> {}
 addRole 'Iframe', -> display: Displays.findOne()
+addRole 'Rss', ->    display: Displays.findOne()
 
 # Serves as a catchall so missing roles still load the Display
 Router.route 'displayRoles',
