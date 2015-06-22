@@ -1,6 +1,6 @@
 articles = new ReactiveVar []
 article = new ReactiveVar
-leftImage = new ReactiveVar false
+leftImage = new ReactiveVar true
 
 Template.DisplayRss.helpers
   article: -> article.get()
@@ -18,12 +18,17 @@ Template.DisplayRss.onRendered ->
         console.log 'RSS update error:', err
       else
         articles.set newList.filter (item) -> item['media:content']
-        article.set articles.get()[0]
+        nextArticle()
         console.log 'Got', articles.get().length, 'articles'
 
-  nextArticle = ->
-    article.set Random.choice articles.get()
-    leftImage.set(not leftImage.get())
+  nextArticle = -> if nextObj = Random.choice articles.get()
+    console.log 'Switching to', nextObj.title
+
+    image = document.createElement 'img'
+    image.src = nextObj['media:content'].$.url
+    image.onload = (e) ->
+      article.set nextObj
+      leftImage.set(not leftImage.get())
 
   interval = null
   @autorun -> if ({display} = Template.currentData()) and display
