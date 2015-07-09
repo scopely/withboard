@@ -7,4 +7,4 @@ Template.DisplayTitan.onRendered ->
 
         iframe = document.getElementById('titan')
         iframe.contentWindow.postMessage {view: 'dashboard', apiKey, dashboardId}, origin
-  ), 5000
+  ), 15000
