@@ -16,10 +16,11 @@ addRole 'Newrelic',  ->   State.findOne key: 'newrelic'
 addRole 'Metrics', ->     Config.findOne key: 'metric-layout'
 addRole 'Titan', ->  url: Config.findOne key: 'titan-url'
 addRole 'Welcome', -> {}
-addRole 'Kudos', -> {}
+addRole 'Kudos', ->  display: Displays.findOne()
 addRole 'Holiday', -> {}
 addRole 'Iframe', -> display: Displays.findOne()
 addRole 'Rss', ->    display: Displays.findOne()
+addRole 'Image', ->  display: Displays.findOne()
 
 # Serves as a catchall so missing roles still load the Display
 Router.route 'displayRoles',

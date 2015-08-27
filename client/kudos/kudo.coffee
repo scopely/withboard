@@ -1,3 +1,6 @@
+timer = new Chronos.Timer 60 * 1000
+timer.start()
+
 Template.Kudo.helpers
   postImage: -> if c = collections.get()
     c.PostImages.findOne @image if @image

@@ -13,6 +13,7 @@ root.Roles = [
   'holiday'
   'iframe'
   'rss'
+  'image'
 ]
 
 root.State = new Meteor.Collection 'state'

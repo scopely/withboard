@@ -1,13 +1,21 @@
 <template name="DisplayKudos">
-  {{#with topPost}}
-    <div class="big kudos">
-      {{> Kudo}}
-    </div>
-  {{/with}}
+  <div class="row">
+    <div class="col s8">
+      {{#with topPost}}
+        <div class="big kudos">
+          {{> Kudo}}
+        </div>
+      {{/with}}
 
-  {{#each oldPosts}}
-    <div class="old kudos">
-      {{> Kudo}}
+      {{#each oldPosts}}
+        <div class="old kudos">
+          {{> Kudo}}
+        </div>
+      {{/each}}
     </div>
-  {{/each}}
+
+    <div class="col s4">
+      <iframe {{iframeAttrs}}></iframe>
+    </div>
+  </div>
 </template>
