@@ -20,6 +20,9 @@ Template.AngleBar.helpers
     else 'Inactive'
     # Config.findOne(key: 'org').value
 
+  imageUrl: ->
+    Session.get('icon url') or 'https://i.imgur.com/gbkYtnS.png'
+
   clan: ->
     clan  =  State.findOne key: 'daily-clan'
     clans = Config.findOne key: 'clans'

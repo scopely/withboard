@@ -1,10 +1,10 @@
 <template name="ControlImageDisplay">
   <div class="input-field">
-    <input id="url" type="text" value="{{config.imageUrl}}">
-    <label for="url" class="active">Image URL</label>
+    <input id="{{_id}}-url" class="url" type="text" value="{{config.imageUrl}}">
+    <label for="{{_id}}-url" class="active">Image URL</label>
   </div>
   <label>
-    <input id="fullScreen" type="checkbox" checked="{{config.fullScreen}}">
-    <label for="fullScreen" class="active">Display fullscreen</label>
+    <input id="{{_id}}-fullScreen" class="fullScreen" type="checkbox" checked="{{config.fullScreen}}">
+    <label for="{{_id}}-fullScreen" class="active">Display fullscreen</label>
   </label>
 </template>
