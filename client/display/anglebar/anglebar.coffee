@@ -12,12 +12,16 @@ Template.AngleBar.helpers
     time.format timeFormat
 
   label: ->
-    if Session.get 'overlay'
+    text = if Session.get 'overlay'
       ''
     else if display = Displays.findOne()
       {title, role, _id} = display
       Session.get('label') or title or role or _id
     else 'Inactive'
+
+    window.castReceiverManager.setApplicationState text
+    return text
+
     # Config.findOne(key: 'org').value
 
   imageUrl: ->
