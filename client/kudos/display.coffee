@@ -6,7 +6,7 @@ Template.DisplayKudos.helpers
     c.Posts.findOne {}, sort: date: -1
   oldPosts: -> if c = collections.get()
     c.Posts.find {}, skip: 1, sort: date: -1
-
+###
   iframeAttrs: -> if @display and @display.config
     scale = @display.config.iframeScale ? 1
 
@@ -28,7 +28,7 @@ Template.DisplayKudos.onRendered ->
       console.log 'interval', display.config.iframeRefresh
       if display and interval = display.config.iframeRefresh
         Meteor.setInterval refresh, interval * 60 * 1000
-
+###
 Template.DisplayKudos.onRendered ->
   @autorun => if url = Config.findOne(key: 'kudos-url')
     unless connection = ddp.get()
