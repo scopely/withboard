@@ -7,9 +7,9 @@ window.addEventListener 'message', ({data, origin}) ->
       Session.set 'icon url', data.icon
       Session.set 'label', data.name
     else if data.type is 'ready'
-      setState origin
+      setState origin, url
 
-setState = (origin) -> if display = Displays.findOne()
+setState = (origin, url) -> if display = Displays.findOne()
   apiKey = display.config.titanApiKey
   dashboardId = display.config.titanDashboardId
   origin = url.value.split('/').slice(0,3).join('/')
