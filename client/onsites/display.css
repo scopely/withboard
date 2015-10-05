@@ -15,6 +15,10 @@
   font-weight: normal;
   margin: 0;
 }
+.DisplayOnsites h4 em {
+  font-weight: 300;
+  font-style: normal;
+}
 
 .DisplayOnsites strong {
   font-weight: 900;
@@ -30,9 +34,11 @@
 }
 
 .horz-bar {
+  min-height: 400px;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
+  align-items: center;
 }
 .horz-bar section {
   margin-bottom: 15px;
