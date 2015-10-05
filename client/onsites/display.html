@@ -1,19 +1,28 @@
 <template name="DisplayOnsites">
-  {{#each guests}}
-    <h3><strong>{{visitor}}</strong> - {{dept}}</h3>
-    <h4>in <strong>{{room}}</strong></h4>
+  {{#unless guests.length}}
+    <hgroup class="no-data">
+      <h2>There are no onsites scheduled today.</h2>
+      <h3>Enjoy the rest of your {{day}}.</h3>
+    </hgroup>
+  {{/unless}}
 
-    <table>
-      {{#each schedule}}
-        <tr>
-          <td><strong>{{host}}</strong></td>
-          <td style="text-align: right;">{{time from}}</td>
-          <td style="padding: 0;">&ndash;</td>
-          <td>{{time to}}</td>
-        </tr>
-      {{/each}}
-    </table>
+  <div class="horz-bar">
+    {{#each guests}}
+      <section>
+        <h3><strong>{{visitor}}</strong> - {{dept}}</h3>
+        <h4>in <strong>{{room}}</strong></h4>
 
-    <hr>
-  {{/each}}
+        <table>
+          {{#each schedule}}
+            <tr>
+              <td><strong>{{host}}</strong></td>
+              <td style="text-align: right;">{{time from}}</td>
+              <td style="padding: 0;">&ndash;</td>
+              <td>{{time to}}</td>
+            </tr>
+          {{/each}}
+        </table>
+      </section>
+    {{/each}}
+  </div>
 </template>
