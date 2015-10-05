@@ -1,0 +1,19 @@
+<template name="DisplayOnsites">
+  {{#each guests}}
+    <h3><strong>{{visitor}}</strong> - {{dept}}</h3>
+    <h4>in <strong>{{room}}</strong></h4>
+
+    <table>
+      {{#each schedule}}
+        <tr>
+          <td><strong>{{host}}</strong></td>
+          <td style="text-align: right;">{{time from}}</td>
+          <td style="padding: 0;">&ndash;</td>
+          <td>{{time to}}</td>
+        </tr>
+      {{/each}}
+    </table>
+
+    <hr>
+  {{/each}}
+</template>

@@ -19,7 +19,7 @@ Template.AngleBar.helpers
       Session.get('label') or title or role or _id
     else 'Inactive'
 
-    window.castReceiverManager.setApplicationState text
+    window.castReceiverManager?.setApplicationState text
     return text
 
     # Config.findOne(key: 'org').value

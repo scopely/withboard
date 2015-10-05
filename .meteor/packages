@@ -21,3 +21,5 @@ reactive-var
 remcoder:chronos
 http
 peerlibrary:xml2js
+danopia:google-api
+harrison:babyparse

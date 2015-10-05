@@ -11,8 +11,9 @@ addRole = (name, cb) ->
     data: cb
 
 addRole 'Rooms', -> cals: State.findOne key: 'calendars'
-addRole 'Recruiting',  -> State.findOne key: 'recruiting-list'
-addRole 'Newrelic',  ->   State.findOne key: 'newrelic'
+addRole 'Recruiting', ->  State.findOne key: 'recruiting-list'
+addRole 'Onsites', ->     guests: State.findOne(key: 'onsites')?.value
+addRole 'Newrelic', ->    State.findOne key: 'newrelic'
 addRole 'Metrics', ->     Config.findOne key: 'metric-layout'
 addRole 'Titan', ->  url: Config.findOne key: 'titan-url'
 addRole 'Welcome', -> {}

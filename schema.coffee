@@ -14,6 +14,7 @@ root.Roles = [
   'iframe'
   'rss'
   'image'
+  'onsites'
 ]
 
 root.State = new Meteor.Collection 'state'
