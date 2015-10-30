@@ -11,6 +11,10 @@ Template.ControlIframeDisplay.events
     Displays.update @_id, $set:
       'config.iframeRefresh': event.target.value
 
+  'change #css': (event) ->
+    Displays.update @_id, $set:
+      'config.iframeCss': event.target.value
+
 Template.ControlIframeDisplay.helpers
   scaleAttrs: ->
     min: 0.5
