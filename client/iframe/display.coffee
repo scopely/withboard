@@ -1,11 +1,16 @@
 Template.DisplayIframe.helpers
   attrs: -> if @display and @display.config
     scale = @display.config.iframeScale ? 1
+    css = [
+      "-webkit-transform: scale(#{scale})"
+      '-webkit-transform-origin: 0 0'
+      @display.config.iframeCss
+    ]
 
     src: @display.config.iframeUrl
     width: "#{100/scale}%"
     height: "1000px"
-    style: "-webkit-transform: scale(#{scale}); -webkit-transform-origin: 0 0;"
+    style: css.join ';'
 
 Template.DisplayIframe.onRendered ->
   interval = null
@@ -18,6 +23,5 @@ Template.DisplayIframe.onRendered ->
     Meteor.clearInterval interval if interval
 
     interval = if display = Template.currentData().display
-      console.log 'interval', display.config.iframeRefresh
       if display and interval = display.config.iframeRefresh
         Meteor.setInterval refresh, interval * 60 * 1000
