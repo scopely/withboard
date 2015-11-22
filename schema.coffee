@@ -30,4 +30,5 @@ Displays.attachSchema new SimpleSchema
   online    : type: String, optional: true
   token     : type: String, optional: true
   firstSeen : type: Date
+  lastSeen  : type: Date,   optional: true # When offline, the last time it was seen
   pairedAt  : type: Date,   optional: true

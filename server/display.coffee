@@ -7,8 +7,10 @@ Meteor.publish 'display', (token) ->
   @onStop ->
     Displays.update {_id: display._id, online: val},
       $unset: online: 1
+      $set: lastSeen: new Date()
   Displays.update display._id,
     $set: online: val
+    $unset: lastSeen: 1
 
   [
     Displays.find display._id
