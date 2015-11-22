@@ -23,5 +23,5 @@ Template.DisplayIframe.onRendered ->
     Meteor.clearInterval interval if interval
 
     interval = if display = Template.currentData().display
-      if display and interval = display.config.iframeRefresh
+      if display and (interval = display.config.iframeRefresh) > 0
         Meteor.setInterval refresh, interval * 60 * 1000
