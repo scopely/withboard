@@ -14,6 +14,7 @@ Template.DisplayImages.helpers
   attrs: -> if img = image.get()
     css = 'background-image: url("' + img.url + '"); background-size: contain;'
     css += 'background-repeat: no-repeat; background-position: center;'
+    css += 'transition: background-image 1s;'
     css += 'flex: 1'
     style: css
 
