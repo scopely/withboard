@@ -14,6 +14,7 @@ root.Roles = [
   'iframe'
   'rss'
   'image'
+  'images'
   'onsites'
 ]
 

@@ -16,7 +16,7 @@ Template.AngleBar.helpers
       ''
     else if display = Displays.findOne()
       {title, role, _id} = display
-      Session.get('label') or title or role or _id
+      Session.get('label') ? title ? role ? _id
     else 'Inactive'
 
     window.castReceiverManager?.setApplicationState text

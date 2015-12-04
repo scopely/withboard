@@ -8,7 +8,7 @@ update = ->
     user: Meteor.users.findOne(userId)
   {data, errors} = Baby.parse raw
 
-  today = '10/7/2015'  # moment().format 'M/D/YYYYY'
+  today = '11/20/2015' # moment().format 'M/D/YYYYY'
 
   guests = []
   guest = null
@@ -18,7 +18,7 @@ update = ->
       guests.push guest
 
     if time and guest
-      [from, to] = time.match(/[0-9:]+ [AP]M/g)
+      [from, to] = time.match(/[0-9:]+ ?[AP]M/g)
       fromMoment = moment [guest.date, from].join(' '), 'M/D/YYYY h:mm am'
       toMoment = moment [guest.date, to].join(' '), 'M/D/YYYY h:mm am'
 
