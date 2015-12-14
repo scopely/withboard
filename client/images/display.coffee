@@ -29,7 +29,7 @@ Template.DisplayImages.onRendered ->
 
   @autorun -> if ({display} = Template.currentData()) and display
     {imageSet, imageInterval, fullScreen} = display.config
-    intervalSecs.set imageInterval
+    intervalSecs.set imageInterval ? 30
     fullScreenToggle.set fullScreen
 
     if imageMap = State.findOne(key: 'images')?.value

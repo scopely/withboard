@@ -32,7 +32,7 @@ update = ->
 
   imageMap = {}
   for key, folderId of folders
-    imageMap[key] = getFullList folderId
+    imageMap[key] = getList folderId
 
   State.upsert {key: 'images'},
     $set: value: imageMap
