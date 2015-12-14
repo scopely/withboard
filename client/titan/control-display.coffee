@@ -14,3 +14,14 @@ Template.ControlTitanDisplay.events
     else
       Displays.update @_id, $unset:
         'config.titanDashboardId': 1
+
+  'change #dashColumns': (event) ->
+    Displays.update @_id, $set:
+      'config.titanDashColumns': event.target.value
+
+Template.ControlTitanDisplay.helpers
+  dashColumnsAttrs: ->
+    min: 1
+    max: 4
+    step: 1
+    value: @config.titanDashColumns ? 2
