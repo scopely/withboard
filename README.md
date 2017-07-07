@@ -44,16 +44,16 @@ Check back later if you'd like to just use prebuilt providers :)
 You'll need to install the [Meteor](http://meteor.com) platform if you haven't already.
 
 1. Make a copy of `settings.dist.json` and fill in the settings.
-  1. You'll want to create Google OAuth2 web credentials to allow admin panel access.
-  2. Drop your company's email domain into `domain` to whitelist who can control the system.
-  3. The `assets_s3_bucket` is used for any graphical assets, most importantly the default `logo.png` is loaded out of the path. Doesn't have to be S3 really.
-  4. `organization_name` is the default TV title.
-  5. You'll fill in `cast_application_id` later.
+    1. You'll want to create Google OAuth2 web credentials to allow admin panel access.
+    2. Drop your company's email domain into `domain` to whitelist who can control the system.
+    3. The `assets_s3_bucket` is used for any graphical assets, most importantly the default `logo.png` is loaded out of the path. Doesn't have to be S3 really.
+    4. `organization_name` is the default TV title.
+    5. You'll fill in `cast_application_id` later.
 1. Deploy your clone somewhere. I use EC2, but it's up to you.
 2. Gain access to the [Cast SDK Console](https://cast.google.com/publish/)
 3. Create a new Cast application.
-  * Your URL should look like `https://whatever.yourcompany.com/display`
-  * You can list a Chrome sender app URL: `https://whatever.yourcompany.com/control`
+    * Your URL should look like `https://whatever.yourcompany.com/display`
+    * You can list a Chrome sender app URL: `https://whatever.yourcompany.com/control`
 4. Copy your new 8-character app ID from the Cast SDK Console
 5. Drop your app ID into your copy of `settings.json`
 6. Deploy your app again
