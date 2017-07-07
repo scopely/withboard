@@ -1,0 +1,23 @@
+{
+  "name": "withboard",
+  "version": "5.0.0",
+  "description": "Withboard ========= Copyright Scopely, Inc. 2014-2017. Distributed under the Apache 2.0 License. See `LICENSE.md` for details.",
+  "main": "index.js",
+  "dependencies": {
+    "babel-runtime": "^6.23.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/scopely/withboard.git"
+  },
+  "author": "",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/scopely/withboard/issues"
+  },
+  "homepage": "https://github.com/scopely/withboard#readme"
+}
