@@ -1,0 +1,21 @@
+#old-sharing-link {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+
+  background: #e65100;
+}
+
+#old-sharing-link .card-panel {
+  margin: 100px auto;
+  max-width: 600px;
+  display: flex;
+}
+
+#old-sharing-link .material-icons {
+  font-size: 1em;
+  margin-right: 0.4em;
+  color: #fb8c00;
+}

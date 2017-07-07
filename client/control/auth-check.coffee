@@ -1,13 +1,17 @@
-loginHook = (route)->
-  return @next() if route.url.slice(0, 8) isnt '/control'
+loginHook = (route) ->
+  return @next() if route.url.slice(0, 8) is '/display'
 
   if Meteor.loggingIn()
     @render 'Loading'
-  else unless Meteor.userId()
+  else if Meteor.userId()
+    @next()
+  else if @params.query.token
+    # Probably a public share link. Don't worry about auth
+    @next()
+  else
+    console.log @
     @layout false
     @render 'Login'
-  else
-    @next()
 
 Router.onRun loginHook
 Router.onBeforeAction loginHook

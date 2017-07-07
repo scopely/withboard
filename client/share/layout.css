@@ -1,0 +1,15 @@
+@media only screen and (min-width: 993px) {
+  #share-wrap.multi-screen {
+    padding-left: 240px;
+  }
+}
+
+#share-wrap {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+#share-wrap nav {
+  z-index: 998;
+}

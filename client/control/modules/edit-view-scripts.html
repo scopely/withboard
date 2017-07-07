@@ -1,0 +1,46 @@
+<template name="EditViewScripts">
+  <div class="row">
+    <div class="col m4">
+      <div class="collection">
+        {{#each template.scripts}}
+          <a href="#" class="select-script collection-item {{itemClass}}">{{hook}}: {{param}}</a>
+        {{/each}}
+        <a href="#" id="new-script" class="collection-item">New script</a>
+      </div>
+    </div>
+
+    <div class="col m8">
+      {{#unless script}}
+        Select or create a script to manage logic for your view.
+      {{/unless}}
+
+      <form id="edit-script">
+        {{#if newScript}}
+          <div>
+            <select name="hook" class="browser-default">
+              <option value="on-create">On creation</option>
+              <option value="on-render">On render</option>
+              <option value="on-destroy">On destroy</option>
+              <option value="helper">Helper</option>
+              <option value="event">Event handler</option>
+              <option value="hook">Hook</option>
+            </select>
+            <input name="param" type="text" style="height:1.5rem; margin:0; max-width: 150px" placeholder="(unset)">
+          </div>
+        {{/if}}
+
+        <div class="script-editor"></div>
+
+        {{#if script}}
+          {{#if newScript}}
+            <button type="button" id="cancel-script" class="btn waves-effect waves-red">Cancel script creation</button>
+          {{/if}}
+          {{#if existingScript}}
+            <button type="button" id="delete-script" class="btn waves-effect waves-red">Delete script</button>
+          {{/if}}
+          <button type="submit" class="btn waves-effect waves-green">Save script</button>
+        {{/if}}
+      </form>
+    </div>
+  </div>
+</template>

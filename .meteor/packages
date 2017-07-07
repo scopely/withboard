@@ -1,10 +1,9 @@
-meteor-platform
 iron:router
 accounts-google
 coffeescript
 aldeed:collection2
 
-force-ssl
+# force-ssl
 
 materialize:materialize
 zimme:iron-router-active
@@ -13,13 +12,32 @@ d3
 jparker:gravatar
 qnub:emojione
 
-meteorhacks:kadira
+#meteorhacks:kadira
 gandev:server-eval
 service-configuration
-andrei:iron-router-body-class
 reactive-var
-remcoder:chronos
+#remcoder:chronos
 http
 peerlibrary:xml2js
 danopia:google-api
 harrison:babyparse
+perak:codemirror
+shreks7:coffee-compiler
+meteor-base
+mobile-experience
+mongo
+blaze-html-templates
+session
+jquery
+tracker
+logging
+reload
+random
+ejson
+spacebars
+check
+mrt:smart-publish
+spacebars-compiler
+standard-minifier-css
+standard-minifier-js
+force-ssl

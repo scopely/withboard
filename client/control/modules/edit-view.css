@@ -1,0 +1,20 @@
+#view-editor .collection {
+  max-height: 500px;
+  overflow-y: auto;
+}
+
+#edit-script select {
+  width: auto;
+  display: inline-block;
+}
+
+#edit-script input {
+  width: 200px;
+}
+
+.tab-body {
+  display: none;
+}
+.tab-body.selected {
+  display: block;
+}

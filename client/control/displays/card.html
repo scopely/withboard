@@ -1,31 +1,72 @@
 <template name="DisplayCard">
   <div class="card {{displayColor}}">
-    <div class="card-content black-text">
-      {{#if token}}
-        <span class="card-title black-text">{{name}}</span>
-        <p>Title: {{title}}</p>
+    {{#if token}}
+      <div class="card-content black-text">
+        <span class="card-title black-text">
+          {{name}}
+        </span>
 
-        {{> Template.dynamic template=controlTemplate}}
-      {{/if}}
-      {{#unless token}}
+        {{> ControlAssignDisplay}}
+
+        {{#if platformIs 'chromecast'}}
+          <div class="chip" style="margin-top: 0.5em;">
+            Chromecast
+            <i class="close material-icons">cast</i>
+          </div>
+        {{/if}}
+
+        {{#if platformIs 'chrome app'}}
+          <div class="chip" style="margin-top: 0.5em;">
+            App v{{status.app.version}}
+          </div>
+        {{/if}}
+
+        {{#with status.platformInfo}}
+          <div class="chip" style="margin-top: 0.5em;">
+            {{os}} {{arch}}
+          </div>
+        {{/with}}
+
+        {{#if status.restartRequired}}
+          <div class="chip" style="margin-top: 0.5em;">
+            Restart for {{status.restartRequired}}
+            <i class="close material-icons">system_update_alt</i>
+          </div>
+        {{/if}}
+
+        {{#if status.screenSize}}
+          <div class="chip" style="margin-top: 0.5em;">
+            {{status.screenSize.width}}×{{status.screenSize.height}}
+          </div>
+        {{/if}}
+
+        <div class="action-bar">
+          <a class="rename" href="#"><i class="material-icons">mode_edit</i></a>
+
+          {{#if canReboot}}
+            <a class="reboot" href="#"><i class="material-icons">power_settings_new</i></a>
+          {{/if}}
+
+          {{#if config.hardware.fourUp}}
+            <a class="unFourUp" href="#"><i class="material-icons">grid_off</i></a>
+          {{else}}
+            {{#if can4up}}
+              <a class="fourUp" href="#"><i class="material-icons">grid_on</i></a>
+            {{/if}}
+          {{/if}}
+
+          <a class="delete" href="#"><i class="material-icons">delete</i></a>
+        </div>
+      </div>
+    {{else}}
+      <div class="card-content black-text">
         <a class="pair btn" href="#" style="padding: 0 0.5em; float: right;">
           <i class="large mdi-content-add"></i>
         </a>
         <span class="card-title black-text">New Display</span>
         <p style="font-size: 120%;">
-          Code <strong>{{_id}}</strong>
+          Code <code>{{_id}}</code>
         </p>
-      {{/unless}}
-    </div>
-    {{#if token}}
-      <div class="card-action">
-        <select class="browser-default" style="height: auto; margin-right: 20px; color: #000; display: inline-block; width: 100px;">
-          {{#each roles}}
-            <option {{optionAttrs ../role}}>{{role}}</option>
-          {{/each}}
-        </select>
-        <a class="modal-trigger" href="#edit">Edit</a>
-        <a class="delete" href="#">X</a>
       </div>
     {{/if}}
   </div>

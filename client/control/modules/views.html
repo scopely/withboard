@@ -1,0 +1,20 @@
+<template name="Views">
+  <a class="waves-effect waves-light btn" name="new-view">
+    Add view
+  </a>
+
+  <blockquote>
+    {{#each views}}
+      <p>
+        <strong style="font-size: 1.4em; display: inline-block; min-width: 200px;">{{name}}</strong>
+
+        <a class="waves-effect waves-light btn modal-trigger" href="/modules/{{module}}/views/{{_id}}">
+          Edit view
+        </a>
+        <a class="waves-effect waves-light btn modal-trigger" href="#fetcher-editor" name="edit-view-fetcher">
+          Edit fetcher
+        </a>
+      </p>
+    {{/each}}
+  </blockquote>
+</template>

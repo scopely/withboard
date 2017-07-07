@@ -4,10 +4,8 @@ if Meteor.settings.domain
 
 # OAuth configuration
 if Meteor.settings.google
-  ServiceConfiguration.configurations.remove
+  ServiceConfiguration.configurations.upsert
     service: 'google'
-
-  ServiceConfiguration.configurations.insert
-    service: 'google'
+  , $set:
     clientId: Meteor.settings.google.id
     secret:   Meteor.settings.google.secret

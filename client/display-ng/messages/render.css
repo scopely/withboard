@@ -1,0 +1,38 @@
+
+.iconed {
+  display: flex;
+  flex-direction: row;
+}
+.message-full.iconed > .material-icons {
+  font-size: 10em;
+  color: #1976d2;
+}
+.message-small.iconed > .material-icons {
+  font-size: 3em;
+  color: #1976d2;
+}
+
+.modal-inner {
+  margin-left: 1em;
+  align-self: center;
+  font-size: 2em;
+}
+
+.modal-inner > * {
+  margin: 0;
+}
+
+.modal-inner h4 {
+  font-size: 180%;
+}
+.message-small .modal-inner p {
+  display: none;
+}
+
+.modal .message-small {
+  padding: 12px 24px;
+}
+
+.message-small .modal-inner {
+  font-size: 1.2em;
+}

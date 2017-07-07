@@ -1,40 +1,40 @@
-applicationID = 'E058BE10'
 session = null
+debug = false
 
 initializeCastApi = ->
-  sessionRequest = new chrome.cast.SessionRequest applicationID
+  sessionRequest = new chrome.cast.SessionRequest Meteor.settings.public.cast_application_id
   apiConfig = new chrome.cast.ApiConfig sessionRequest, sessionListener, receiverListener
 
   chrome.cast.initialize apiConfig, ->
-    console.log 'cast: init success'
+    console.log 'cast: init success' if debug
   , ->
     console.log 'cast: error'
 
 onSuccess = (message) ->
-  console.log 'cast:', message
+  console.log 'cast:', message if debug
 
 onStopAppSuccess = ->
-  console.log 'cast: session stopped'
+  console.log 'cast: session stopped' if debug
 
 sessionListener = (e) ->
-  console.log 'cast: new session ID:', e.sessionId
+  console.log 'cast: new session ID:', e.sessionId if debug
   session = e
 
   if session.media.length isnt 0
-    console.log 'cast: found', session.media.length, 'existing media sessions.'
+    console.log 'cast: found', session.media.length, 'existing media sessions.' if debug
   session.addUpdateListener sessionUpdateListener.bind @
 
 sessionUpdateListener = (isAlive) ->
   message = if isAlive then 'session updated:' else 'session removed:'
-  console.log 'cast:', message, session.sessionId
+  console.log 'cast:', message, session.sessionId if debug
 
   session = null unless isAlive
 
 receiverListener = (e) ->
   if e is 'available'
-    console.log 'cast: receiver found'
+    console.log 'cast: receiver found' if debug
   else
-    console.log 'cast: receiver list empty'
+    console.log 'cast: receiver list empty' if debug
 
 launchApp = ->
   console.log 'cast: launching app...'
@@ -42,7 +42,7 @@ launchApp = ->
     console.log 'cast: launch error'
 
 onRequestSessionSuccess = (e) ->
-  console.log 'cast: session success:', e.sessionId
+  console.log 'cast: session success:', e.sessionId if debug
   session = e
   session.addUpdateListener sessionUpdateListener.bind @
   if session.media.length isnt 0
@@ -55,13 +55,11 @@ stopApp = ->
   session.stop onStopAppSuccess, onError
 
 
-Template.ControlLayout.onRendered ->
-  Meteor.subscribe 'control'
-
-  console.log 'Setting up Cast sender'
+Template.ControlLayout.onRendered -> if chrome?
+  console.log 'Setting up Cast sender' if debug
   timer = setInterval ->
     if chrome.cast and chrome.cast.isAvailable
-      console.log 'Setting up Cast'
+      console.log 'Setting up Cast' if debug
       clearInterval timer
       initializeCastApi()
   , 50

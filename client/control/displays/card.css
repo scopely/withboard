@@ -1,0 +1,14 @@
+.action-bar {
+  display: flex;
+  margin: 0.5em 0 -1em;
+  color: #fff;
+}
+.action-bar a {
+  color: #f9a825;
+  padding: 0.5em;
+  display: inline-block;
+  text-shadow: 1px 2px 10px rgba(0, 0, 0, 0.6);
+}
+.action-bar a:hover {
+  color: #f57f17;
+}

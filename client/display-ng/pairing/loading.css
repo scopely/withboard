@@ -1,0 +1,62 @@
+#loading-video {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: -300px;
+}
+
+#pairing-info {
+  position: absolute;
+  top: 48%;
+  left: 50%;
+  width: 10em;
+  margin-left: -5em;
+  margin-top: 1.8em;
+  padding-top: 0.2em;
+  text-align: center;
+  font-size: 175%;
+  text-align: center;
+  color: #13C0BC;
+  border-top: 1px solid #13C0BC;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+
+#pairing-code {
+  position: absolute;
+  top: 48%;
+  left: 0%;
+  right: 0%;
+  margin-top: 0;
+  text-align: center;
+}
+
+#pairing-code span {
+  font-size: 225%;
+  text-align: center;
+  color: #13C0BC;
+  line-height: 0;
+  letter-spacing: 10px;
+  text-transform: uppercase;
+}
+
+#loading-msg {
+  position: absolute;
+  bottom: 1em;
+  left: 0%;
+  right: 0%;
+  margin-top: 0;
+
+  font-size: 225%;
+  text-align: center;
+  color: #13C0BC;
+  text-transform: lowercase;
+
+  animation: loading-color 10s infinite;
+}
+
+@keyframes loading-color {
+  0%   { color: #13C0BC; }
+  50%  { color: #0B7472; }
+  100% { color: #13C0BC; }
+}

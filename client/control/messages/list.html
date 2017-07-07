@@ -1,0 +1,16 @@
+<template name="MessageList">
+  <h5>Past messages</h5>
+
+  <ul class="collection">
+    {{#each messages}}
+      <li class="collection-item avatar {{messageClass}}">
+        <i class="material-icons circle">{{icon}}</i>
+        <span class="title">{{title}} <span class="time-ago">{{ago}}</span></span>
+        <p>{{subtitle}}</p>
+        <a href="#!" class="secondary-content">
+          <i class="material-icons">close</i>
+        </a>
+      </li>
+    {{/each}}
+  </ul>
+</template>

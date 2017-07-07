@@ -1,0 +1,13 @@
+<template name="RenderScreen">
+  {{#with renderedTemplate}}
+    {{> Template.dynamic template=this data=screenData}}
+
+    <style type="text/css">
+      {{viewCss}}
+    </style>
+
+  {{else}}
+    <p class="passive-msg">rendering...</p>
+  {{/with}}
+
+</template>

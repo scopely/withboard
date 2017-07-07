@@ -3,4 +3,7 @@ Template.ControlLayout.onRendered ->
     closeOnClick: true
 
 Template.ControlLayout.events
-  'click .logout': -> Meteor.logout(); false
+  'click .logout': (evt) ->
+    evt.preventDefault()
+    Meteor.logout()
+    Router.go '/'

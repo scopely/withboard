@@ -1,6 +1,6 @@
 Apache 2.0
 ----------
-Copyright Scopely, Inc. 2014
+Copyright Scopely, Inc. 2014-2017
 
 Licensed under the Apache License, Version 2.0 (the "License");  
 you may not use these files except in compliance with the License.  

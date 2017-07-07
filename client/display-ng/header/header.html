@@ -1,0 +1,33 @@
+<template name="LeanHeader">
+  <header id="lean-header" {{headerAttrs}}>
+    {{#if imageUrl}}
+      <img class="custom logo" src="{{imageUrl}}">
+    {{else}}
+      <img class="stock logo" src="{{logoUrl}}">
+    {{/if}}
+    <h1 class="primary">{{label}}</h1>
+
+    {{#if loading}}
+      <div class="preloader-wrapper active">
+        <div class="spinner-layer spinner-red-only">
+          <div class="circle-clipper left">
+            <div class="circle"></div>
+          </div><div class="gap-patch">
+            <div class="circle"></div>
+          </div><div class="circle-clipper right">
+            <div class="circle"></div>
+          </div>
+        </div>
+      </div>
+    {{else}}
+      <h2 class="connection-indicator">
+        <i class="material-icons">{{connectionIcon}}</i>
+      </h2>
+    {{/if}}
+
+    {{#if primarySurface}}
+      <h2>{{clock 'h:mm a'}}</h2>
+      <h3>{{clock 'ddd MMMM D'}}</h3>
+    {{/if}}
+  </header>
+</template>

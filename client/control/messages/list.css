@@ -1,0 +1,23 @@
+.time-ago {
+  margin-left: 1em;
+  font-style: italic;
+  font-size: 80%;
+}
+
+.message-active {
+  animation-duration: 1.5s;
+  animation-name: message-strobe;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  animation-timing-function: ease-in-out;
+}
+
+@keyframes message-strobe {
+  from {
+    background-color: rgba(50, 50, 255, 0.3);
+  }
+
+  to {
+    background-color: rgba(200, 200, 200, 0.3);
+  }
+}

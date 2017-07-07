@@ -1,12 +1,10 @@
 <template name="Displays">
   <h4 class="center-align">Configured Displays</h4>
-  <div class="row">
+  <div class="row flex-row">
     {{#each displays}}
       <div class="col s12 m6 l4">
         {{> DisplayCard}}
       </div>
     {{/each}}
   </div>
-
-  {{> DisplayActions selectedDisplay}}
 </template>

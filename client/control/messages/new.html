@@ -1,0 +1,111 @@
+<template name="NewMessage">
+  <div class="row">
+    <form class="col s12 l8 offset-l2">
+      <div class="card-panel grey lighten-3 z-depth-2">
+        <h5 style="text-align: center;">New Broadcast</h5>
+        <div class="row">
+          <div class="col s12 m3" style="text-align: center;">
+            <i class="huge material-icons">{{icon}}</i>
+            <a class="waves-effect waves-light btn-flat dropdown-button" data-activates='icons'>
+              Change
+            </a>
+          </div>
+
+          <div class="col s12 m9">
+            <div class="row">
+              <div class="input-field col m8 s12">
+                <input id="title" type="text" value={{preset "title"}}>
+                <label for="title">Message title</label>
+              </div>
+
+              <div class="input-field col m4 s8">
+                <select id="priority">
+                  <option value="1">High</option>
+                  <option value="2" selected>Normal</option>
+                  <option value="3">Low</option>
+                </select>
+                <label>
+                  Importance
+                  (<a href="#importance-modal">hmm?</a>)
+                </label>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="input-field col s12">
+                <input id="subtitle" type="text" value={{preset "subtitle"}}>
+                <label for="subtitle">Extra text (subtitle)</label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="button-bar" style="text-align: right;">
+          {{#with feedback}}
+            <span class="{{color}}-text">{{text}}</span>
+          {{/with}}
+
+          <button class="btn-flat waves-effect waves-light" type="button" name="cancel">
+            Cancel
+          </button>
+
+          <button class="btn waves-effect waves-light" type="submit">
+            Submit
+            <i class="material-icons right">send</i>
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <ul id='icons' class='dropdown-content'>
+    {{#each icons}}
+      <li>
+        <a href="#!" class="select-icon">
+          <i class="material-icons">{{this}}</i>
+        </a>
+      </li>
+    {{/each}}
+  </ul>
+
+  <div id="importance-modal" class="modal">
+    <div class="modal-content">
+      <h4>Message Importance</h4>
+      <p>A notification can be sent with different priorities.</p>
+
+      <p>
+        <strong>Note:</strong>
+        The second line of text is not shown in the small overlay.
+        The primary title should be clear by itself.
+      </p>
+
+
+      <h5>P1: High Importance</h5>
+      <p>
+        Displays a large overlay for 5 minutes,
+        then a small overlay for another 10 minutes.
+        Useful for all-hands meetings.
+      </p>
+
+
+      <h5>P2: Normal Importance</h5>
+      <p>
+        Displays a large overlay for 1 minute,
+        then a small overlay for another 5 minutes.
+        Typical for day-to-day stuff like food and office updates.
+      </p>
+
+
+      <h5>P3: Low Importance</h5>
+      <p>
+        Displays a small overlay for 3 minutes, and that's it.
+        Useful for minor office reminders.
+      </p>
+
+
+    </div>
+    <div class="modal-footer">
+      <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Got it</a>
+    </div>
+  </div>
+</template>

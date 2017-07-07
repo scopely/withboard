@@ -1,0 +1,21 @@
+<template name="SharingList">
+  <h5>Active sharing links</h5>
+
+  <div class="collection">
+    {{#each shares}}
+      <a class="collection-item avatar" href="/sharing/{{_id}}">
+        <i class="material-icons circle">{{icon}}</i>
+        <span class="title">{{title}}</span>
+        <p>{{shareInfo}}</p>
+        <a href="#!" class="secondary-content">
+          <i class="material-icons">close</i>
+        </a>
+      </a>
+    {{/each}}
+  </div>
+
+  <button class="btn waves-effect waves-light new" type="button">
+    New share
+    <i class="material-icons right">share</i>
+  </button>
+</template>

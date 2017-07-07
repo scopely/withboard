@@ -1,0 +1,18 @@
+<template name="MessagePresets">
+  <h5 class="new-msg-intro">
+    Broadcast about...
+  </h5>
+
+  <div class="row message-presets">
+    {{#each presets}}
+      <div class="col s12 m6 l3">
+        <p>
+          <a class="waves-effect waves-light btn-large">
+            <i class="material-icons left">{{icon}}</i>
+            {{name}}
+          </a>
+        </p>
+      </div>
+    {{/each}}
+  </div>
+</template>

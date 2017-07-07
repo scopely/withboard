@@ -1,0 +1,24 @@
+<template name="DisplayNgPairing">
+  <video id="loading-video" width="600" height="600" autoplay loop>
+    <source src="/loading.mp4">
+  </video>
+
+  {{#with code}}
+    <h3 id="pairing-info">
+      pairing code
+    </h3>
+    <h4 id="pairing-code">
+      <span>{{this}}</span>
+    </h4>
+  {{else}}
+    <h4 id="loading-msg">
+      Waiting
+    </h4>
+  {{/with}}
+
+  <style type="text/css">
+    #canvas {
+      background-color: #211d25;
+    }
+  </style>
+</template>

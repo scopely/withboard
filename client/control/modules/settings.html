@@ -1,0 +1,46 @@
+<template name="Settings">
+  <table>
+    <thead>
+      <tr>
+        <th>Setting</th>
+        <th>Type</th>
+        {{#if settable}}
+          <th>Value</th>
+        {{/if}}
+      </tr>
+    </thead>
+
+    <tbody>
+      {{#each settings}}
+        <tr>
+          <td><abbr title="{{key}}">{{label}}</abbr></td>
+          <td>{{type}}</td>
+          {{#if ../settable}}
+            <td>{{> Template.dynamic template=settingTmpl}}</td>
+          {{/if}}
+        </tr>
+      {{/each}}
+    </tbody>
+  </table>
+</template>
+
+<template name="SecretSettingValue">
+  <input type="password" value="{{value}}" {{extras}}>
+</template>
+
+<template name="StringSettingValue">
+  <input type="text" value="{{value}}" {{extras}}>
+</template>
+
+<template name="UserIdSettingValue">
+  <select {{extras}} class="browser-default">
+    <option disabled selected value="">Select a user</option>
+    {{#each users}}
+      <option value={{_id}}>{{profile.name}}</option>
+    {{/each}}
+  </select>
+</template>
+
+<template name="UrlSettingValue">
+  <input type="text" value="{{value}}" {{extras}}>
+</template>

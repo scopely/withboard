@@ -1,0 +1,25 @@
+<template name="Share">
+  <style type="text/css">
+    {{#with canvasBg}}
+      #canvas {
+        background: {{this}};
+        z-index: 0;
+      }
+    {{/with}}
+  </style>
+
+  <div id="share-wrap" class={{wrapClass}}>
+    {{#if multiScreen}}
+      <nav>
+        {{> ShareNav screenId=screenId screens=screens}}
+      </nav>
+    {{/if}}
+
+    <!-- The content canvas should not have control over nav parts of the page -->
+    <div id="canvas">
+      <div id="contents">
+        {{> RenderScreen screenId=screenId}}
+      </div>
+    </div>
+  </div>
+</template>

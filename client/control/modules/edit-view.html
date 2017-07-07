@@ -1,0 +1,77 @@
+<template name="EditView">
+  <nav>
+    <div class="nav-wrapper">
+      <div class="col s12">
+        <a href="/modules" class="breadcrumb">Modules</a>
+        <a href="/modules/{{module._id}}" class="breadcrumb">{{module.name}}</a>
+        <a href="/modules/{{module._id}}/views/{{view._id}}" class="breadcrumb">{{view.name}}</a>
+      </div>
+    </div>
+  </nav>
+
+  <ul class="tabs"> <!-- class="active" -->
+    <li class="tab col s3"><a href="#settings">Settings</a></li>
+    <li class="tab col s3"><a href="#screens">Screens</a></li>
+    <li class="tab col s3"><a href="#html">HTML</a></li>
+    <li class="tab col s3"><a href="#scripts">Scripts</a></li>
+    <li class="tab col s3"><a href="#css">CSS</a></li>
+  </ul>
+
+  <div {{tabBody 'settings'}}>
+    {{> Settings settings=view.settings contextType='view' id=view._id }}
+
+    <button class="btn waves-effect waves-light" type="button" name="new-setting">
+      Add setting
+    </button>
+  </div>
+
+  <div {{tabBody 'screens'}}>
+    <table>
+      <tr>
+        <th>Name</th>
+        {{#each view.settings}}
+          <th><abbr title="{{key}}">{{label}}</abbr></th>
+        {{/each}}
+        <th>Displays</th>
+        <th></th>
+      </tr>
+
+      {{#each screens}}
+      <tr>
+        <td>{{name}}</td>
+        {{#each settingValues}}
+          <td>
+            {{> Template.dynamic template=settingTmpl}}
+          </td>
+        {{/each}}
+        <td>TODO</td>
+        <td>
+          <a href={{screenLink}}>
+            <i class="material-icons">link</i>
+          </a>
+          <a href="#delete">
+            <i class="material-icons">delete</i>
+          </a>
+        </td>
+      </tr>
+      {{/each}}
+    </table>
+  </div>
+
+  <div {{tabBody 'html'}}>
+    <div class="html-editor"></div>
+    <a href="#!" id="save-html" class="btn waves-effect waves-green">Save HTML</a>
+  </div>
+
+  <div {{tabBody 'scripts'}}>
+    {{#with view}}
+      {{> EditViewScripts}}
+    {{/with}}
+  </div>
+
+  <div {{tabBody 'css'}}>
+    <div class="css-editor"></div>
+    <a href="#!" id="save-css" class="btn waves-effect waves-green">Save CSS</a>
+  </div>
+
+</template>

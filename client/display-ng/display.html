@@ -1,0 +1,30 @@
+<head>
+  <link href="https://fonts.googleapis.com/css?family=Lato:300,400,900|Slabo+27px" rel="stylesheet" type="text/css">
+  <script src="//www.gstatic.com/cast/sdk/libs/receiver/2.0.0/cast_receiver.js"></script>
+</head>
+
+<template name="DisplayNg">
+  <style type="text/css">
+    {{#with canvasBg}}
+      body {
+        background: {{this}};
+      }
+    {{/with}}
+  </style>
+
+  <div id="canvas">
+    {{#if hasScreen}}
+      {{> LeanHeader}}
+
+      <div id="contents">
+        {{> RenderScreen screenId=screenId}}
+      </div>
+    {{else}}
+      {{> DisplayNgPairing}}
+    {{/if}}
+  </div>
+  
+  {{#if showMessages}}
+    {{> RenderMessage}}
+  {{/if}}
+</template>

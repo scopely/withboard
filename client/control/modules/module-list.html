@@ -1,0 +1,33 @@
+<template name="ModuleList">
+  {{#each modules}}
+    <div class="module row">
+      <div class="col s12 m3">
+        <h4 class="row-header">
+          <a href="/modules/{{_id}}">
+            {{name}}
+          </a>
+        </h4>
+      </div>
+      {{#each views}}
+        <div class="col s6 m3">
+          <a href="/modules/{{module}}/views/{{_id}}" class="card-panel gray">
+            {{name}}
+          </a>
+        </div>
+      {{/each}}
+    </div>
+  {{/each}}
+
+  <button class="btn waves-effect waves-light" type="button" name="new-module">
+    New module
+  </button>
+
+  <a class="btn waves-effect waves-light" id="export-all">
+    Export all modules
+  </a>
+
+  <a class="btn waves-effect waves-light" id="import-file">
+    Import modules
+  </a>
+  <input type="file" id="import-upload" style="display: none;">
+</template>

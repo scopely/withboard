@@ -1,0 +1,26 @@
+<template name="EditModule">
+  <nav>
+    <div class="nav-wrapper">
+      <div class="col s12">
+        <a href="/modules" class="breadcrumb">Modules</a>
+        <a href="/modules/{{module._id}}" class="breadcrumb">{{module.name}}</a>
+      </div>
+    </div>
+  </nav>
+
+  {{#with module}}
+    <h3>{{name}} v{{version}}</h3>
+
+    {{#if settings.length}}
+      {{> Settings settings=settings contextType='module' id=_id settable=true }}
+    {{/if}}
+    <button class="btn waves-effect waves-light" type="button" name="new-setting">
+      Add setting
+    </button>
+    <a class="waves-effect waves-light btn modal-trigger" href="#fetcher-editor" name="edit-fetcher">
+      Edit fetcher
+    </a>
+  {{/with}}
+
+  {{> Views}}
+</template>

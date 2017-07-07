@@ -1,0 +1,9 @@
+<template name="Messages">
+  {{#if hasPreset}}
+    {{> NewMessage }}
+  {{else}}
+    {{> MessagePresets }}
+  {{/if}}
+
+  {{> MessageList }}
+</template>

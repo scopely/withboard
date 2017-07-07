@@ -1,0 +1,21 @@
+.material-icons.huge {
+  font-size: 6em;
+  display: block;
+  color: rgb(38, 166, 154);
+}
+
+.select-icon {
+  text-align: center;
+}
+
+#icons {
+  width: 400px;
+}
+#icons.active {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+}
+#icons li {
+  width: auto;
+}

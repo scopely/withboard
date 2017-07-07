@@ -1,0 +1,46 @@
+#lean-header {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	padding: 1em 2.5em 0;
+	flex-shrink: 0; /* content shouldn't adjust the header */
+	color: #555;
+}
+
+#lean-header .primary {
+	flex: 1;
+}
+
+#lean-header .logo {
+	height: 70px;
+	margin-right: 2em;
+}
+
+#lean-header h1,
+#lean-header h2,
+#lean-header h3 {
+	font-size: 2em;
+	line-height: 100%;
+	margin: 0 0.1em;
+	text-transform: uppercase;
+	text-shadow: 1px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+#lean-header .connection-indicator {
+	margin: 0 1em;
+}
+#lean-header .connection-indicator i {
+	font-size: 2em;
+}
+
+#lean-header .preloader-wrapper {
+	margin: 0 1em;
+}
+
+#lean-header h1 {
+	letter-spacing: 2px;
+}
+
+#lean-header h3 {
+	font-weight: 300;
+}

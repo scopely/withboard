@@ -1,0 +1,14 @@
+{
+  "public": {
+    "cast_application_id": "ABCDABCD",
+    "organization_name": "Untitled",
+    "assets_s3_bucket": "https://s3.amazonaws.com/my-graphical-assets/"
+  },
+
+  "domain": "mycompany.com",
+
+  "google": {
+    "id": "bunch-of-gibberish.googleusercontent.com",
+    "secret": "asdfasdfasdfasdfasdf"
+  }
+}

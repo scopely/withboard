@@ -1,0 +1,55 @@
+<template name="ControlAssignDisplay">
+  <select name="view" class="browser-default">
+    <option value="" disabled selected>Select a view</option>
+    {{#each modules}}
+      <optgroup label={{name}}>
+        {{#each views}}
+          <option value={{_id}} {{viewMaybeSelected}}>{{name}}</option>
+        {{/each}}
+      </optgroup>
+    {{/each}}
+  </select>
+
+  {{#if screens.count}}
+    <form name="assign-screen">
+      <select name="screen" class="browser-default">
+        <option value="" disabled>Select a screen</option>
+        {{#each screens}}
+          <option value={{_id}} {{screenMaybeSelected}}>{{name}}</option>
+        {{/each}}
+        <option value="new">New screen...</option>
+      </select>
+
+      {{#unless newScreen}}
+        {{#if config.hardware.fourUp}}
+          <!-- Experimental 4-up mode for 4K -->
+          <button type="submit" class="btn waves-effect waves-light">⬉</button>
+          <button class="btn waves-effect waves-light assign-pane" data-pane="topRight">⬈</button>
+          <button class="btn waves-effect waves-light assign-pane" data-pane="bottomLeft">⬋</button>
+          <button class="btn waves-effect waves-light assign-pane" data-pane="bottomRight">⬊</button>
+        {{else}}
+          <!-- Normal, single-surface mode -->
+          <button type="submit" class="btn waves-effect waves-light">Assign screen</button>
+        {{/if}}
+      {{/unless}}
+    </form>
+  {{/if}}
+
+  {{#if newScreen}}
+    <form name="new-screen">
+      <div class="input-field">
+        <input type="text" name="name" value="New {{view.name}}">
+        <label for="name" class="active">Screen Label</label>
+      </div>
+
+      {{#each settings}}
+        <div class="input-field">
+          {{> Template.dynamic template=settingTmpl data=settingData}}
+          <label for="">{{label}}</label>
+        </div>
+      {{/each}}
+
+      <button type="submit" class="btn waves-effect waves-light">Assign new screen</button>
+    </form>
+  {{/if}}
+</template>

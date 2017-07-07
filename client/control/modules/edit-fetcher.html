@@ -1,0 +1,31 @@
+<template name="EditFetcherModal">
+  <div id="fetcher-editor" class="modal">
+    <div class="modal-content">
+      <form action="#">
+        <h4>Fetcher Editor</h4>
+
+        <div class="row">
+          <div class="col m6">
+            <input type="checkbox" id="enableFetcher" />
+            <label for="enableFetcher">Enable fetcher</label>
+          </div>
+          <div class="col m6">
+            Data TTL:
+            <input type="number" id="fetcherTtl" style="height:auto;width:auto;margin:0;" />
+          </div>
+        </div>
+
+        <div class="editor"></div>
+      </form>
+    </div>
+
+    <div class="modal-footer">
+      <a href="#!" class="modal-action modal-close waves-effect waves-red btn-flat action-cancel">Cancel</a>
+      <a href="#!" class="modal-action modal-close waves-effect waves-green btn action-save">Save</a>
+    </div>
+  </div>
+</template>
+
+<body>
+  {{> EditFetcherModal}}
+</body>

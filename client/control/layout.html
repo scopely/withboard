@@ -1,35 +1,41 @@
+<template name="NavLinks">
+  <li class="{{isActiveRoute regex='displays'}}"><a href="/assign">Displays</a></li>
+  <li class="{{isActiveRoute regex='module'}}"><a href="/modules">Modules</a></li>
+  <li class="{{isActiveRoute regex='message'}}"><a href="/messages">Messages</a></li>
+  <li class="{{isActiveRoute regex='shar'}}"><a href="/sharing">Sharing</a></li>
+  <li class="{{isActiveRoute regex='status'}}"><a href="/status">Status</a></li>
+  <li class="logout"><a href="/logout">Log out</a></li>
+</template>
+
 <template name="ControlLayout">
-  <nav>
-    <div class="nav-wrapper container">
-      <a href="/control" class="brand-logo center">Withboard</a>
-      <a href="#" data-activates="mobile-demo" class="button-collapse">
-        <i class="mdi-navigation-menu"></i>
-      </a>
+  <div class="navbar-fixed">
+    <nav>
+      <div class="nav-wrapper container">
+        <!-- menu button -->
+        <a href="#" data-activates="mobile-nav" class="button-collapse">
+          <i class="material-icons">menu</i>
+        </a>
+  
+        <!-- logo/launch -->
+        <ul class="right">
+          <li><a href="/display" target="_blank"><i class="material-icons">launch</i></a></li>
+        </ul>
+        <a href="#" class="brand-logo right">Withboard</a>
+  
+        <!-- navbar links -->
+        <ul class="left hide-on-med-and-down">
+          {{> NavLinks}}
+        </ul>
+  
+        <!-- mobile menu -->
+        <ul class="side-nav" id="mobile-nav">
+          {{> NavLinks}}
+        </ul>
+      </div>
+    </nav>
+  </div>
 
-      <ul class="left hide-on-med-and-down">
-        <li class="{{isActiveRoute regex='displays'}}"><a href="/control">Displays</a></li>
-        <li class="{{isActiveRoute regex='settings'}}"><a href="/control/settings">Settings</a></li>
-        <li class="{{isActiveRoute regex='states'}}"><a href="/control/states">States</a></li>
-      </ul>
-      <ul class="right hide-on-med-and-down">
-        <li><a href="/display" target="_blank">Open local display</a></li>
-        <li><a href="/logout" class="logout">Logout</a></li>
-      </ul>
-
-      <ul class="side-nav" id="mobile-demo">
-        <li class="{{isActiveRoute regex='vehicles'}}"><a href="/control/displays">Displays</a></li>
-        <!--li><a href="/control/slides">Slides</a></li-->
-        <li class="{{isActiveRoute regex='vehicles'}}"><a href="/control/settings">Settings</a></li>
-        <li class="{{isActiveRoute regex='vehicles'}}"><a href="/control/states">States</a></li>
-        <!--li><a href="/control/users">Users</a></li-->
-        <li><hr></li>
-        <li><a href="/display" target="_blank">Open local display</a></li>
-        <li><a href="/logout">Logout</a></li>
-      </ul>
-    </div>
-  </nav>
-
-  <div class="container" style="margin: 50px auto 150px;">
+  <div class="container" style="margin: 50px auto;">
     {{> yield}}
   </div>
 </template>
