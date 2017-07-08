@@ -13,5 +13,5 @@ Template.EditModule.events
     Session.set 'fetcher context',
       type: 'module'
       id: @_id
-    $('#fetcher-editor').openModal
+    $('#fetcher-editor').modal 'open',
       dismissible: false

@@ -68,7 +68,7 @@ Template.RenderMessage.onRendered -> @autorun =>
 
   if currentId = @renderedId.get()
     # Hide the rendered message
-    @$('.modal').closeModal
+    @$('.modal').modal 'close',
       out_duration: 2000
 
       # Stop rendering once it's gone
@@ -87,7 +87,7 @@ Template.RenderMessage.onRendered -> @autorun =>
 
     # Open the dialog after it renders
     setTimeout =>
-      @$('.modal').openModal
+      @$('.modal').model 'open',
         dismissible: false
         opacity: if size is 'full' then 0.5 else 0.15
         in_duration: 600

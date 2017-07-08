@@ -4,7 +4,7 @@ Template.Views.events
     Session.set 'fetcher context',
       type: 'view'
       id: @_id
-    $('#fetcher-editor').openModal
+    $('#fetcher-editor').modal 'open',
       dismissible: false
 
   'click [name=new-view]': (e) ->

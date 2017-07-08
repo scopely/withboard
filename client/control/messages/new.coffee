@@ -65,7 +65,7 @@ Template.NewMessage.events
 
   'click [href=#importance-modal]': (evt) ->
     evt.preventDefault()
-    $('#importance-modal').openModal()
+    $('#importance-modal').modal('open')
 
   'submit form': (evt) ->
     evt.preventDefault()
