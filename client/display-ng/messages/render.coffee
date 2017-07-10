@@ -87,7 +87,7 @@ Template.RenderMessage.onRendered -> @autorun =>
 
     # Open the dialog after it renders
     setTimeout =>
-      @$('.modal').model 'open',
+      @$('.modal').modal 'open',
         dismissible: false
         opacity: if size is 'full' then 0.5 else 0.15
         in_duration: 600
