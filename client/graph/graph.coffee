@@ -37,12 +37,13 @@ Template.Graph.onRendered ->
     .attr 'class', 'line'
 
   @autorun =>
-    {data, name} = Template.currentData()
+    {data, name, max} = Template.currentData()
     min = if name is 'Apdex' then 0.8 else 0
     min = Math.min(min, d3.min(data, (d) -> d.y))
+    max = Math.max(max ? 0, d3.max(data, (d) -> d.y))
 
     x.domain  d3.extent(data,   (d) -> d.x )
-    y.domain [min, d3.max(data, (d) -> d.y )]
+    y.domain [min, max]
 
     svg = @d3.transition()
     svg.select '.line'
