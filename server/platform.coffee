@@ -7,7 +7,7 @@ Meteor.methods
       Displays.update _id, $set: {platform}
 
   setStatus: (_id, fields) ->
-    console.log 'status', _id, fields
+    #console.log 'status', _id, fields
     check _id, String
     throw new Meteor.Error('wat') unless fields.constructor is Object
     throw new Meteor.Error('ugh') unless display = Displays.findOne _id
