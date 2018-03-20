@@ -55,11 +55,17 @@ stopApp = ->
   session.stop onStopAppSuccess, onError
 
 
-Template.ControlLayout.onRendered -> if chrome?
+initTimer = null
+startTimer = -> if chrome? and not initTimer
   console.log 'Setting up Cast sender' if debug
-  timer = setInterval ->
-    if chrome.cast and chrome.cast.isAvailable
+  initTimer = setInterval ->
+    if chrome.cast?.isAvailable
       console.log 'Setting up Cast' if debug
-      clearInterval timer
+      clearInterval initTimer
       initializeCastApi()
-  , 50
+  , 150
+
+Template.Login.onRendered ->
+  startTimer()
+Template.ControlLayout.onRendered ->
+  startTimer()
