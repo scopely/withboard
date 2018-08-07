@@ -19,8 +19,14 @@ Template.MessagePresets.helpers
     title: 'Friday All-Hands – Starting now!'
     subtitle: 'Grab lunch and head down to the Pit'
   ,
+    icon: 'cake'
+    name: 'Birthday Shoutout'
+    title: 'Happy Brithday Person!'
+    subtitle: 'Say Happy birthday'
+  ,
     icon: 'mode_comment'
     name: 'Other'
+  
   ]
 
 
