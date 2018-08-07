@@ -21,7 +21,7 @@ Template.MessagePresets.helpers
   ,
     icon: 'cake'
     name: 'Birthday Shoutout'
-    title: 'Happy Brithday Person!'
+    title: 'Happy Birthday Person!'
     subtitle: 'Say Happy birthday'
   ,
     icon: 'mode_comment'
