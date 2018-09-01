@@ -177,3 +177,9 @@ Template.EditView.events
           view: 1
 
     Screens.remove @_id
+
+  'click a[href="#refresh"]': (e) ->
+    e.preventDefault()
+    # schedule the screen for an immediate fetching
+    Screens.update @_id, $unset:
+      expires: true
