@@ -47,6 +47,9 @@
 }
 
 /* interactivity support on logo, for sidenavs */
+#lean-header .logo-trigger {
+  z-index: 1000;
+}
 #lean-header .logo-trigger i {
   display: none;
   width: 70px;
