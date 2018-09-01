@@ -6,10 +6,17 @@ Template.NewMessage.onCreated ->
     @offset = +new Date() - serverMillis
 
 Template.NewMessage.onRendered ->
-  @$('[data-activates=icons]').dropdown
-    constrain_width: false
-  @$('select').material_select()
-  Materialize.updateTextFields()
+  [@iconDrop] = M.Dropdown.init @$('[data-target=icons]'),
+    constrainWidth: false
+    onOpenStart: () =>
+      setTimeout () =>
+        [icons] = @$('#icons')
+        icons.style.display = 'flex'
+        icons.style.height = 'auto'
+      , 1
+  [@prioModal] = M.Modal.init @$('#importance-modal')
+  M.FormSelect.init(@$('select'))
+  M.updateTextFields()
 
 Template.NewMessage.helpers
   preset: (key) ->
@@ -27,6 +34,7 @@ Template.NewMessage.helpers
     'mode_comment'
     'restaurant'
     'event'
+    'cake'
     'phone_android'
     'headset'
     'videogame_asset'
@@ -65,7 +73,8 @@ Template.NewMessage.events
 
   'click [href="#importance-modal"]': (evt) ->
     evt.preventDefault()
-    $('#importance-modal').modal('open')
+    {prioModal} = Template.instance()
+    prioModal.open()
 
   'submit form': (evt) ->
     evt.preventDefault()

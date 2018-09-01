@@ -40,7 +40,6 @@ ejson@1.1.0
 es5-shim@4.8.0
 force-ssl@1.1.0
 force-ssl-common@1.1.0
-fourseven:scss@4.9.0
 gandev:server-eval@0.6.6
 geojson-utils@1.0.10
 google-config-ui@1.0.0
@@ -67,7 +66,6 @@ launch-screen@1.1.1
 livedata@1.0.18
 localstorage@1.2.0
 logging@1.1.20
-materialize:materialize@0.100.2
 mdg:validation-error@0.5.1
 meteor@1.9.2
 meteor-base@1.4.0

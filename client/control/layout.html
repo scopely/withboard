@@ -1,10 +1,11 @@
 <template name="NavLinks">
-  <li class="{{isActiveRoute regex='displays'}}"><a href="/assign">Displays</a></li>
-  <li class="{{isActiveRoute regex='module'}}"><a href="/modules">Modules</a></li>
-  <li class="{{isActiveRoute regex='message'}}"><a href="/messages">Messages</a></li>
-  <li class="{{isActiveRoute regex='shar'}}"><a href="/sharing">Sharing</a></li>
-  <li class="{{isActiveRoute regex='status'}}"><a href="/status">Status</a></li>
-  <li class="logout"><a href="/logout">Log out</a></li>
+  <li class="{{isActiveRoute regex='displays'}}"><a class="sidenav-close" href="/assign">Displays</a></li>
+  <li class="{{isActiveRoute regex='module'}}"><a class="sidenav-close" href="/modules">Modules</a></li>
+  <li class="{{isActiveRoute regex='message'}}"><a class="sidenav-close" href="/messages">Messages</a></li>
+  <li class="{{isActiveRoute regex='shar'}}"><a class="sidenav-close" href="/sharing">Sharing</a></li>
+  <li class="{{isActiveRoute regex='status'}}"><a class="sidenav-close" href="/status">Status</a></li>
+  <li><div class="divider"></div></li>
+  <li class="logout"><a class="sidenav-close" href="/">Log out</a></li>
 </template>
 
 <template name="ControlLayout">
@@ -12,23 +13,28 @@
     <nav>
       <div class="nav-wrapper container">
         <!-- menu button -->
-        <a href="#" data-activates="mobile-nav" class="button-collapse">
+        <a href="#" data-target="slide-out" class="sidenav-trigger">
           <i class="material-icons">menu</i>
         </a>
-  
+
         <!-- logo/launch -->
         <ul class="right">
           <li><a href="/display" target="_blank"><i class="material-icons">launch</i></a></li>
         </ul>
         <a href="#" class="brand-logo right">Withboard</a>
-  
+
         <!-- navbar links -->
         <ul class="left hide-on-med-and-down">
           {{> NavLinks}}
         </ul>
-  
+
         <!-- mobile menu -->
-        <ul class="side-nav" id="mobile-nav">
+        <ul class="sidenav" id="slide-out">
+          <div class="user-view">
+            <a href="#user"><img class="circle" src={{logoUrl}}></a>
+            <a href="#name"><span class="white-text name">{{userName}}</span></a>
+            <a href="#email"><span class="white-text email">{{orgName}}</span></a>
+          </div>
           {{> NavLinks}}
         </ul>
       </div>

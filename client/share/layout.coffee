@@ -1,5 +1,5 @@
 Template.Share.onCreated ->
-  @screenId = new ReactiveVar @data.screens[0]._id
+  @screenId = new ReactiveVar @data.screens[0]?._id
 
   @autorun =>
     {hash} = Iron.Location.get()
@@ -19,6 +19,8 @@ Template.Share.helpers
 
   multiScreen: ->
     @screens.length > 1
-    
+  hasScreens: ->
+    @screens.length > 0
+
   wrapClass: ->
     if @screens.length > 1 then 'multi-screen' else ''

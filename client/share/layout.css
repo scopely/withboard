@@ -10,6 +10,20 @@
   flex-direction: column;
 }
 
-#share-wrap nav {
+#share-wrap .sidenav {
   z-index: 998;
+}
+
+#share-wrap > nav {
+  background: #29b6f6;
+}
+
+.no-screens {
+  background: linear-gradient(160deg, #444, #111);
+  flex: 1;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }

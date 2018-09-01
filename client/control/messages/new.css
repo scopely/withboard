@@ -9,13 +9,13 @@
 }
 
 #icons {
-  width: 400px;
-}
-#icons.active {
-  display: flex;
+  width: 420px;
   flex-flow: row wrap;
   justify-content: space-between;
 }
 #icons li {
   width: auto;
+}
+#icons i {
+  margin: 0;
 }

@@ -11,7 +11,6 @@ aldeed:collection2
 
 # force-ssl
 
-materialize:materialize
 momentjs:moment
 d3
 jparker:gravatar
@@ -44,5 +43,5 @@ force-ssl@1.1.0
 shell-server@0.3.1
 google-config-ui@1.0.0
 dynamic-import@0.4.2
-underscore
-reactive-dict
+underscore@1.0.10
+reactive-dict@1.2.0

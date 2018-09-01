@@ -10,6 +10,7 @@ Template.MessageList.helpers
       'message-active'
 
 Template.MessageList.events
-  'click .secondary-content': ->
+  'click .secondary-content': (evt) ->
+    evt.preventDefault()
     if confirm 'Really delete?'
       Messages.remove @_id

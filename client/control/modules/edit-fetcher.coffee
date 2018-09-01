@@ -1,31 +1,38 @@
 editor = null
 
 Session.setDefault 'fetcher context', {}
-Template.EditFetcherModal.onRendered -> Tracker.autorun =>
-  {type, id} = Session.get 'fetcher context'
-  context = switch type
-    when 'module' then Modules.findOne id
-    when 'view' then Views.findOne id
+Template.EditFetcherModal.onRendered ->
+  [window.EditFetcherModal] = M.Modal.init @$('.modal'),
+    dismissible: false
+    onOpenEnd: () ->
+      editor.focus()
 
-  if context
-    Session.set 'fetcher ttl', context.ttl ? 0
-    @$('#fetcherTtl').val context.ttl
-    unless editor?
-      editor = CodeMirror @$('.editor')[0],
-        lineNumbers: true
-        mode: 'coffeescript'
-        theme: 'neo'
-        tabSize: 2
-        value: context.fetcher ? "@setData 'apps', {}"
+  Tracker.autorun =>
+    {type, id} = Session.get 'fetcher context'
+    context = switch type
+      when 'module' then Modules.findOne id
+      when 'view' then Views.findOne id
+
+    if context
+      Session.set 'fetcher ttl', context.ttl ? 0
+      @$('#fetcherTtl').val context.ttl
+      unless editor?
+        editor = CodeMirror @$('.editor')[0],
+          lineNumbers: true
+          mode: 'coffeescript'
+          theme: 'neo'
+          tabSize: 2
+          value: context.fetcher ? "@setData 'apps', {}"
+      else
+        console.log 'do we care about fetcher?'
+        # context was updated. do we care?
     else
-      console.log 'do we care about fetcher?'
-      # context was updated. do we care?
-  else
-    @$('.editor').empty()
-    editor = null
+      @$('.editor').empty()
+      editor = null
 
 Template.EditFetcherModal.events
-  'click .action-save': ->
+  'click .action-save': (evt) ->
+    evt.preventDefault()
     newScript = editor.getValue()
 
     # We get a lot of tabs.
@@ -47,5 +54,6 @@ Template.EditFetcherModal.events
 
     Session.set 'fetcher context', false
 
-  'click .action-cancel': ->
+  'click .action-cancel': (evt) ->
+    evt.preventDefault()
     Session.set 'fetcher context', false
