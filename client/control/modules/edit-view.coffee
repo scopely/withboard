@@ -66,7 +66,7 @@ Template.EditView.onRendered ->
 
   # Init and select tabs
   @$('ul.tabs').tabs()
-  @$('a[href=#' + Session.get('tab') + ']').click()
+  @$('a[href="#' + Session.get('tab') + '"]').click()
 
 
 # TODO: do we need to garbage collect the editors?
@@ -160,7 +160,7 @@ Template.EditView.events
       else
         console.log 'setting create ok to', value
 
-  'click a[href=#delete]': (e) ->
+  'click a[href="#delete"]': (e) ->
     e.preventDefault()
     return unless confirm "Do you really want to delete #{@name}?"
 

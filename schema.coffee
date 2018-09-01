@@ -1,6 +1,3 @@
-root = global ? window
-root.root = root
-
 root.Displays = new Meteor.Collection 'displays'
 Displays.attachSchema new SimpleSchema
   name      : type: String, optional: true

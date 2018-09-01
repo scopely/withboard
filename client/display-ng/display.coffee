@@ -90,7 +90,7 @@ Template.DisplayNg.onRendered ->
   # Possibly also sourcing identity from the Chromebit
   # Or reporting hardware info, LAN IP, RAM usage, etc.
   # All communicatoin is done with IPC to Withboard Display app
-	window.addEventListener 'message', (event) ->
+  window.addEventListener 'message', (event) ->
     return if event.source is event.target
     return unless event.data?.constructor is Object
     return unless event.data.command

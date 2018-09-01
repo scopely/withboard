@@ -63,7 +63,7 @@ Template.NewMessage.events
   'click [name=cancel]': ->
     Session.set 'msg preset'
 
-  'click [href=#importance-modal]': (evt) ->
+  'click [href="#importance-modal"]': (evt) ->
     evt.preventDefault()
     $('#importance-modal').modal('open')
 
