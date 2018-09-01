@@ -1,33 +1,24 @@
 <template name="ShareNav">
-  <div class="nav-wrapper container-fluid">
-    <a href="#" class="brand-logo center">
-      {{#with label}} {{this}} {{else}} Withboard Viewer{{/with}}
-    </a>
-    <a href="#" data-target="slide-out" class="sidenav-trigger">
-      <i class="material-icons">menu</i>
-    </a>
+  <ul class="sidenav sidenav-fixed" id="slide-out">
+    <div class="user-view">
+      <img class="circle" src={{logoUrl}}>
+      <span class="white-text name">{{userName}}</span>
+      <span class="white-text email">{{orgName}}</span>
+    </div>
 
-    <ul class="sidenav sidenav-fixed" id="slide-out">
-      <div class="user-view">
-        <img class="circle" src={{logoUrl}}>
-        <span class="white-text name">{{userName}}</span>
-        <span class="white-text email">{{orgName}}</span>
-      </div>
+    <li class="header-item">
+      <i class="material-icons">share</i>
+      <span>{{shareName}}</span>
+    </li>
+    <li><div class="divider"></div></li>
 
-      <li class="header-item">
-        <i class="material-icons">share</i>
-        <span>{{shareName}}</span>
-      </li>
-      <li><div class="divider"></div></li>
+    {{#each screens}}
+      <li class="{{isActiveScreen}}"><a href="#{{_id}}">{{name}}</a></li>
+    {{/each}}
 
-      {{#each screens}}
-        <li class="{{isActiveScreen}}"><a href="#{{_id}}">{{name}}</a></li>
-      {{/each}}
-
-      <!--
-      <li class="sep"><hr></li>
-      <li><a href="#" target="_blank" class="pop-out"><i class="material-icons">launch</i></a></li>
-      -->
-    </ul>
-  </div>
+    <!--
+    <li class="sep"><hr></li>
+    <li><a href="#" target="_blank" class="pop-out"><i class="material-icons">launch</i></a></li>
+    -->
+  </ul>
 </template>

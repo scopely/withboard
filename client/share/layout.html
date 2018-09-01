@@ -9,15 +9,12 @@
   </style>
 
   <div id="share-wrap" class={{wrapClass}}>
-    {{#if multiScreen}}
-      <nav>
-        {{> ShareNav screenId=screenId screens=screens}}
-      </nav>
-    {{/if}}
+    {{> ShareNav screenId=screenId screens=screens}}
 
     {{#if hasScreens}}
       <!-- The content canvas should not have control over nav parts of the page -->
       <div id="canvas">
+        {{> LeanHeader }}
         <div id="contents">
           {{> RenderScreen screenId=screenId}}
         </div>

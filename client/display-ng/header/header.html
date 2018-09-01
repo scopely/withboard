@@ -1,10 +1,13 @@
 <template name="LeanHeader">
   <header id="lean-header" {{headerAttrs}}>
-    {{#if imageUrl}}
-      <img class="custom logo" src="{{imageUrl}}">
-    {{else}}
-      <img class="stock logo" src="{{logoUrl}}">
-    {{/if}}
+    <a href="#" data-target="slide-out" class="sidenav-trigger logo-trigger">
+      {{#if imageUrl}}
+        <img class="custom logo" src="{{imageUrl}}">
+      {{else}}
+        <img class="stock logo" src="{{logoUrl}}">
+      {{/if}}
+      <i class="material-icons" {{headerAttrs}}>menu</i>
+    </a>
     <h1 class="primary">{{label}}</h1>
 
     {{#if loading}}

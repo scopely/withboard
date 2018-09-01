@@ -13,7 +13,8 @@
 
 #lean-header .logo {
   height: 70px;
-  margin-right: 2em;
+  margin-right: 24px;
+  display: block;
 }
 
 #lean-header h1,
@@ -43,4 +44,24 @@
 
 #lean-header h3 {
   font-weight: 300;
+}
+
+/* interactivity support on logo, for sidenavs */
+#lean-header .logo-trigger i {
+  display: none;
+  width: 70px;
+  height: 70px;
+  margin-right: 24px;
+  font-size: 50px;
+  text-align: center;
+  line-height: 1.45;
+  border-radius: 50%;
+  background-color: rgba(120, 120, 120, 0.4);
+  color: black;
+}
+#lean-header .logo-trigger:hover img {
+  display: none;
+}
+#lean-header .logo-trigger:hover i {
+  display: block;
 }
