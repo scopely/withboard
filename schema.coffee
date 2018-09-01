@@ -20,6 +20,8 @@ Displays.attachSchema new SimpleSchema
   token     : type: String, optional: true
   firstSeen : type: Date
   lastSeen  : type: Date,   optional: true # When offline, the last time it was seen
+  firstIp   : type: String
+  latestIp  : type: String
   pairedAt  : type: Date,   optional: true
 
 

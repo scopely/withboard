@@ -40,6 +40,12 @@
           </div>
         {{/if}}
 
+        {{#if latestIp}}
+          <div class="chip" style="margin-top: 0.5em;">
+            {{latestIp}}
+          </div>
+        {{/if}}
+
         <div class="action-bar">
           <a class="rename" href="#"><i class="material-icons">mode_edit</i></a>
 
@@ -65,7 +71,10 @@
         </a>
         <span class="card-title black-text">New Display</span>
         <p style="font-size: 120%;">
-          Code <code>{{_id}}</code>
+          <strong>Code</strong> <code>{{_id}}</code>
+        </p>
+        <p>
+          <strong>IP</strong> <code>{{firstIp}}</code>
         </p>
       </div>
     {{/if}}

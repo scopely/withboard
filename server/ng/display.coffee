@@ -3,7 +3,8 @@ Meteor.smartPublish '/ng/display', (token, pane) ->
   unless display = Displays.findOne {token}
     throw new Meteor.Error 404, 'No such display'
 
-  console.log 'Starting pub for', display._id, pane, token
+  ipAddress = Meteor.call('getClientIpAddress')
+  console.log 'Starting pub for', display._id, pane, token, ipAddress
 
   # Only primary subs should report status
   unless pane
@@ -13,7 +14,9 @@ Meteor.smartPublish '/ng/display', (token, pane) ->
         $unset: online: 1
         $set: lastSeen: new Date()
     Displays.update display._id,
-      $set: online: val
+      $set:
+        online: val
+        latestIp: ipAddress
       $unset: lastSeen: 1
 
   if pane

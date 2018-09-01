@@ -1,9 +1,12 @@
 getNewCode = ->
+  ipAddress = Meteor.call('getClientIpAddress')
   x = 5
   while x--
     try return Displays.insert
       _id: Math.random().toString(36).slice(2, 6)
       firstSeen: new Date()
+      firstIp: ipAddress
+      latestIp: ipAddress
       ng: true
     catch ex
       throw ex unless ex.code is 11000
