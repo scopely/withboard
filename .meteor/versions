@@ -40,9 +40,7 @@ ejson@1.1.0
 es5-shim@4.8.0
 force-ssl@1.1.0
 force-ssl-common@1.1.0
-gandev:server-eval@0.6.6
 geojson-utils@1.0.10
-google-config-ui@1.0.0
 google-oauth@1.2.5
 harrison:babyparse@1.0.1
 hot-code-push@1.0.4
@@ -105,7 +103,6 @@ routepolicy@1.0.13
 service-configuration@1.0.11
 session@1.1.8
 shell-server@0.3.1
-shreks7:coffee-compiler@0.0.2
 socket-stream-client@0.2.2
 spacebars@1.0.15
 spacebars-compiler@1.1.3

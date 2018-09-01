@@ -1,7 +1,7 @@
-compileCoffee = Meteor.wrapAsync(CoffeeCompiler.compileToJS)
 compile = (source) ->
   try
-    compileCoffee(source).split '\n'
+    output = CoffeeScript.compile source
+    output.split '\n'
   catch err
     throw new Meteor.Error 400, 'Unable to compile script.\n' + err
 

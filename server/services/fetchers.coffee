@@ -23,6 +23,7 @@ updateOneModule = ->
     config: config
     context: context
     setData: (key, value) ->
+      throw new Error "Data Key and Value are required" unless key and value
       console.log 'Setting key', key#, 'to', value
       Data.upsert {context, key}, $set:
         value: value
@@ -31,7 +32,7 @@ updateOneModule = ->
 
   js = Meteor.call 'compileCoffee', outdated.fetcher, 'block'
   eval(js).apply self # TODO!!!
-  console.log 'All done updating module'
+  console.log 'Done updating module'
   true
 
 updateOneScreen = ->
@@ -74,6 +75,7 @@ updateOneScreen = ->
     config: config
     context: context
     setData: (key, value) ->
+      throw new Error "Data Key and Value are required" unless key and value
       console.log 'Setting key', key#, 'to', value
       Data.upsert {context, key}, $set:
         value: value
@@ -87,7 +89,7 @@ updateOneScreen = ->
     Screens.update outdated._id,
       $unset: failure: true
 
-    console.log 'All done updating screen'
+    console.log 'Done updating screen'
   catch err
     console.log 'Encountered error reloading', outdated.name, err.stack
     Screens.update outdated._id, $set:
