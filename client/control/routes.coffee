@@ -17,7 +17,7 @@ Router.map ->
     data: ->
       newDisplay: Displays.findOne {
         _id: @params.code
-      }, sort: name: 1
+      }
       availDisplays: Displays.find {
         _id: $not: @params.code
         online: $not: 1

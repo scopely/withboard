@@ -51,13 +51,13 @@
                     </a>
                   </td>
                   <td>
-                    {{name}}
-                  </td>
-                  <td colspan="2">
-                    <div>Next sync {{fromNow expires}}</div>
+                    <div>{{name}}</div>
                     {{#with failure}}
                       <div>{{message}}</div>
                     {{/with}}
+                  </td>
+                  <td colspan="2">
+                    <div>Next sync {{fromNow expires}}</div>
                   </td>
                 </tr>
               {{else}}

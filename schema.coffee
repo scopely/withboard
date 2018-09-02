@@ -1,7 +1,6 @@
 root.Displays = new Meteor.Collection 'displays'
 Displays.attachSchema new SimpleSchema
   name      : type: String, optional: true
-  title     : type: String, optional: true
 
   # ASSIGNMENTs
   view      : type: String, optional: true

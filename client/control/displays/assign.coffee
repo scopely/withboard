@@ -56,7 +56,7 @@ Template.ControlAssignDisplay.events
       screenId.set screen
       Displays.update display, $set:
         screen: screen
-        view: screen.view
+        view: viewId.get()
 
   'submit form[name=assign-screen]': (event) ->
     event.preventDefault()
