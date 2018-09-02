@@ -83,5 +83,17 @@ Template.ManageSharing.helpers
     Screens.find view: viewId.get()
 
   entryScreen: ->
-    @entries.map (e) ->
+    @entries?.map (e) ->
       Screens.findOne e.id
+
+
+#########################
+## Administrative
+
+Template.ManageSharing.events
+  'click a[name=delete]': (evt) ->
+    evt.preventDefault()
+    if confirm "Really delete?"
+      Shares.remove @_id, (err) ->
+        if err then alert err
+        else Router.go '/sharing'
