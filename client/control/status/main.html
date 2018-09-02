@@ -5,8 +5,8 @@
       <table>
         <thead>
           <tr>
+            <th class="health">Health</th>
             <th>Module / View</th>
-            <th>Health</th>
             <th>Warn since</th>
             <th>Interval</th>
           </tr>
@@ -15,20 +15,20 @@
         <tbody>
           {{#each views}}
             <tr class="expanded-{{viewIsExpanded}}">
-              <td>
-                {{#with viewModule}}
-                  <a href="/modules/{{_id}}">{{name}}</a>
-                {{/with}}
-                /
-                <a href="/modules/{{module}}/views/{{_id}}#screens">{{name}}</a>
-              </td>
-              <td>
+              <td class="health">
                 <a href="#toggle">
                   {{#with viewIcon}}
                     <i class="material-icons" style="color: {{color}};" title={{title}}>{{icon}}</i>
                   {{/with}}
                   <i class="material-icons" style="color: #90a4ae;">{{viewCollapser}}</i>
                 </a>
+              </td>
+              <td>
+                {{#with viewModule}}
+                  <a href="/modules/{{_id}}">{{name}}</a>
+                {{/with}}
+                /
+                <a href="/modules/{{module}}/views/{{_id}}#screens">{{name}}</a>
               </td>
               <td>
                 {{#with firstFailure}}
@@ -42,14 +42,22 @@
 
               {{#each viewScreens}}
                 <tr>
-                  <td>{{name}}</td>
-                  <td colspan="3">
+                  <td class="health">
                     {{#with screenIcon}}
                       <i class="material-icons" style="color: {{color}};">{{icon}}</i>
                     {{/with}}
-                    <span style="margin-left: 1em; vertical-align: super;">
-                      Next sync {{fromNow expires}}
-                    </span>
+                    <a href="#refresh-screen">
+                      <i class="material-icons">refresh</i>
+                    </a>
+                  </td>
+                  <td>
+                    {{name}}
+                  </td>
+                  <td colspan="2">
+                    <div>Next sync {{fromNow expires}}</div>
+                    {{#with failure}}
+                      <div>{{message}}</div>
+                    {{/with}}
                   </td>
                 </tr>
               {{else}}
@@ -60,6 +68,7 @@
                 </tr>
               {{/each}}
 
+              <!--
               {{#with firstFailure}}
                 <tr>
                   <td colspan="4">
@@ -72,6 +81,7 @@
                   </td>
                 </tr>
               {{/with}}
+              -->
               <tr><td colspan="4"></td></tr>
             {{/if}}
           {{/each}}
@@ -83,9 +93,9 @@
       <table>
         <thead>
           <tr>
+            <th class="health">Health</th>
             <th>Code</th>
             <th>Display</th>
-            <th>Status</th>
             <th>Last seen</th>
           </tr>
         </thead>
@@ -93,16 +103,21 @@
         <tbody>
           {{#with unpaired.count}}
             <tr class="unpaired">
-              <td colspan="2">
-                <em>{{this}} unpaired devices online</em>
-              </td>
-              <td colspan="2">
+              <td class="health">
                 <i class="material-icons" style="color: #ffc107;">timelapse</i>
+              </td>
+              <td colspan="3">
+                <em>{{this}} unpaired devices online</em>
               </td>
             </tr>
           {{/with}}
           {{#each displays}}
             <tr>
+              <td class="health">
+                {{#with displayIcon}}
+                  <i class="material-icons" style="color: {{color}};">{{icon}}</i>
+                {{/with}}
+              </td>
               <td>{{_id.toUpperCase}}</td>
               <td>
                 {{#if token}}
@@ -110,11 +125,6 @@
                 {{else}}
                   <em>(unpaired)</em>
                 {{/if}}
-              </td>
-              <td>
-                {{#with displayIcon}}
-                  <i class="material-icons" style="color: {{color}};">{{icon}}</i>
-                {{/with}}
               </td>
               <td>{{fromNow lastSeen}}</td>
             </tr>

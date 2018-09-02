@@ -75,3 +75,9 @@ Template.StatusMain.events
       currentView.set null
     else
       currentView.set @_id
+
+  'click a[href="#refresh-screen"]': (e) ->
+    e.preventDefault()
+    # schedule the screen for an immediate fetching
+    Screens.update @_id, $unset:
+      expires: true

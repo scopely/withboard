@@ -17,5 +17,10 @@
   }
   tr.expanded-true {
     background-color: rgba(0, 0, 0, 0.03);
+    border-bottom: 0;
+  }
+
+  td.health, th.health {
+    text-align: center;
   }
 }
