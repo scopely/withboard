@@ -72,17 +72,20 @@ Template.DisplayNg.onRendered ->
   # Ack that we started
   # Try submitting basic status info too
   if cast?.receiver and location.hostname isnt 'localhost'
-    window.castReceiverManager = cast.receiver.CastReceiverManager.getInstance()
-    window.castReceiverManager.start()
-    Session.set 'platform', 'chromecast'
+    try
+      window.castReceiverManager = cast.receiver.CastReceiverManager.getInstance()
+      window.castReceiverManager.start()
+      Session.set 'platform', 'chromecast'
 
-    # Report basic data to Withboard
-    submitData = ->
-      if id = Session.get 'display id'
-        if data = window.castReceiverManager.getApplicationData()
-          Meteor.call 'setStatus', id, data
-    setInterval submitData, 15 * 60 * 1000 # every 15 minutes
-    setTimeout submitData, 15 * 1000 # after 10 seconds
+      # Report basic data to Withboard
+      submitData = ->
+        if id = Session.get 'display id'
+          if data = window.castReceiverManager.getApplicationData()
+            Meteor.call 'setStatus', id, data
+      setInterval submitData, 15 * 60 * 1000 # every 15 minutes
+      setTimeout submitData, 15 * 1000 # after 10 seconds
+    catch err
+      console.log 'Failed to set up Cast receiver.', err
 
   # Support ChromeOS/Chromebit receivers
   # We have more flexibility with this hardware
