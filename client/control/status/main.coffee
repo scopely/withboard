@@ -45,6 +45,7 @@ Template.StatusMain.helpers
       icon: 'signal_wifi_off', color: '#ff5722'
 
   fromNow: (time) -> if time
+    Chronos.liveMoment()
     moment(time).fromNow()
 
   viewModule: ->
