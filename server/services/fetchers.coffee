@@ -84,7 +84,20 @@ updateOneScreen = ->
 
   try
     js = Meteor.call 'compileCoffee', view.fetcher, 'block'
-    eval(js).apply self # TODO!!!
+    # blocking eval with a timeout
+    do Meteor.wrapAsync (cb) ->
+      setTimeout ->
+        cb? new Meteor.Error('timeout', "Fetcher ran too long")
+        cb = null
+      , 5 * 60 * 1000 # five minutes
+      Meteor.defer ->
+        try
+          out = eval(js).apply self
+          cb? null, out
+        catch err
+          cb? err
+        finally
+          cb = null
 
     Screens.update outdated._id,
       $unset: failure: true
@@ -96,7 +109,7 @@ updateOneScreen = ->
       # TODO: back off if failing for past hour
       # TODO: maybe after there's a manual refresh button
       failure:
-        message: 'Unexpected ' + err.name + ' in fetcher'
+        message: err.message or "Unexpected #{err.name} in fetcher"
         details: err.stack
         since: outdated.failure?.since ? new Date()
 
