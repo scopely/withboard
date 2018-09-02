@@ -23,6 +23,7 @@ Displays.attachSchema new SimpleSchema
   firstIp   : type: String
   latestIp  : type: String
   pairedAt  : type: Date,   optional: true
+  swappedBy : type: String, optional: true # TODO: clean up
 
 
 Setting = new SimpleSchema

@@ -66,9 +66,14 @@
       </div>
     {{else}}
       <div class="card-content black-text">
-        <a class="pair btn" href="#" style="padding: 0 0.5em; float: right;">
-          <i class="material-icons">add</i>
-        </a>
+        <div style="padding: 0 0.5em; float: right; display: flex; flex-direction: column;">
+          <a class="pair waves-effect btn" href="#" style="margin-bottom: 1em;">
+            <i class="material-icons left">add</i>pair
+          </a>
+          <a class="swap waves-effect btn" href="/assign/swap/{{_id}}">
+            <i class="material-icons left">swap_horiz</i>swap
+          </a>
+        </div>
         <span class="card-title black-text">New Display</span>
         <p style="font-size: 120%;">
           <strong>Code</strong> <code>{{_id}}</code>

@@ -8,6 +8,26 @@ Router.map ->
     data: ->
       displays: Displays.find {}, sort: name: 1
 
+  @route 'displaySwap',
+    path: '/assign/swap/:code'
+    template: 'DisplaySwap'
+    layoutTemplate: 'ControlLayout'
+    waitOn: ->
+      Meteor.subscribe 'control'
+    data: ->
+      newDisplay: Displays.findOne {
+        _id: @params.code
+      }, sort: name: 1
+      availDisplays: Displays.find {
+        _id: $not: @params.code
+        lastSeen: $ne: null
+      }, sort: name: 1
+    onAfterAction: ->
+      setTimeout =>
+        if not @data().newDisplay
+          Router.go '/assign'
+      , 1000
+
   @route 'pair',
     path: '/pair/:code'
     action: ->
@@ -15,7 +35,6 @@ Router.map ->
         pairedAt: new Date()
         token: Random.secret()
       , -> Router.go 'displays'
-
 
   @route 'moduleList',
     path: '/modules'
