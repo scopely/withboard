@@ -94,6 +94,16 @@ Router.map ->
       Shares.findOne @params.id
 
 
+  @route 'StatusMain',
+    path: '/status'
+    layoutTemplate: 'ControlLayout'
+    waitOn: ->
+      Meteor.subscribe 'control'
+    data: ->
+      views: Views.find {ttl: $ne: null}, sort: name: 1
+      displays: Displays.find {}, sort: name: 1
+
+
   @route 'index',
     path: '/'
     action: ->

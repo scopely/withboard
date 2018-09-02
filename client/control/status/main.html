@@ -1,0 +1,75 @@
+<template name="StatusMain">
+  <div class="row">
+    <div class="col l6">
+      <table>
+        <thead>
+          <tr>
+            <th>Module</th>
+            <th>View</th>
+            <th>Health</th>
+            <th>Interval</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          {{#each views}}
+            <tr>
+              <td>
+                {{#with viewModule}}
+                  <a href="/modules/{{_id}}">{{name}}</a>
+                {{/with}}
+              </td>
+              <td>
+                <a href="/modules/{{module}}/views/{{_id}}">{{name}}</a>
+              </td>
+              <td>
+                {{#with viewIcon}}
+                  <i class="material-icons" style="color: {{color}};">{{icon}}</i>
+                {{/with}}
+              </td>
+              <td>{{ttl}}s</td>
+            </tr>
+
+            {{#with firstFailure}}
+              <tr>
+                <td colspan="4" style="padding-top: 0;">
+                  <p style="margin-top: 0.3em;">
+                    <code>{{message}}</code>
+                  </p>
+                  <p>Since {{fromNow since}}</p>
+                </td>
+              </tr>
+            {{/with}}
+          {{/each}}
+        </tbody>
+      </table>
+    </div>
+    <div class="col l6">
+      <table>
+        <thead>
+          <tr>
+            <th>Code</th>
+            <th>Label</th>
+            <th>Status</th>
+            <th>Last seen</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          {{#each displays}}
+            <tr>
+              <td>{{_id.toUpperCase}}</td>
+              <td>{{name}}</td>
+              <td>
+                {{#with displayIcon}}
+                  <i class="material-icons" style="color: {{color}};">{{icon}}</i>
+                {{/with}}
+              </td>
+              <td>{{fromNow lastSeen}}</td>
+            </tr>
+          {{/each}}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</template>
