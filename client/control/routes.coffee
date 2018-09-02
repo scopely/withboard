@@ -20,7 +20,8 @@ Router.map ->
       }, sort: name: 1
       availDisplays: Displays.find {
         _id: $not: @params.code
-        lastSeen: $ne: null
+        online: $not: 1
+        token: $not: null
       }, sort: name: 1
     onAfterAction: ->
       setTimeout =>
