@@ -23,7 +23,7 @@ updateOneModule = ->
     config: config
     context: context
     setData: (key, value) ->
-      throw new Error "Data Key and Value are required" unless key and value
+      throw new Error "Data Key and Value are required" unless key and value isnt null
       console.log 'Setting key', key#, 'to', value
       Data.upsert {context, key}, $set:
         value: value
@@ -75,7 +75,7 @@ updateOneScreen = ->
     config: config
     context: context
     setData: (key, value) ->
-      throw new Error "Data Key and Value are required" unless key and value
+      throw new Error "Data Key and Value are required" unless key and value isnt null
       console.log 'Setting key', key#, 'to', value
       Data.upsert {context, key}, $set:
         value: value
