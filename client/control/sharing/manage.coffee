@@ -51,6 +51,9 @@ Template.ManageSharing.events
     {viewId} = Template.instance()
     screen = event.target.screen.value
 
+    if @entries.some (e) -> e.type is 'screen' and e.id is screen
+      return alert "That screen is already in this share"
+
     Shares.update @_id,
       $push: entries:
         type: 'screen'
@@ -84,7 +87,7 @@ Template.ManageSharing.helpers
 
   entryScreen: ->
     @entries?.map (e) ->
-      Screens.findOne e.id
+      Screens.findOne(e.id) ? {_id: e.id, name: '(deleted)'}
 
 
 #########################
