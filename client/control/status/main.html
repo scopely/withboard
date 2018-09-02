@@ -5,8 +5,7 @@
       <table>
         <thead>
           <tr>
-            <th>Module</th>
-            <th>View</th>
+            <th>Module / View</th>
             <th>Health</th>
             <th>Warn since</th>
             <th>Interval</th>
@@ -15,20 +14,19 @@
 
         <tbody>
           {{#each views}}
-            <tr>
+            <tr class="expanded-{{viewIsExpanded}}">
               <td>
                 {{#with viewModule}}
                   <a href="/modules/{{_id}}">{{name}}</a>
                 {{/with}}
+                /
+                <a href="/modules/{{module}}/views/{{_id}}#screens">{{name}}</a>
               </td>
               <td>
-                <a href="/modules/{{module}}/views/{{_id}}">{{name}}</a>
-              </td>
-              <td>
-                {{#with viewIcon}}
-                  <i class="material-icons" style="color: {{color}};">{{icon}}</i>
-                {{/with}}
                 <a href="#toggle">
+                  {{#with viewIcon}}
+                    <i class="material-icons" style="color: {{color}};" title={{title}}>{{icon}}</i>
+                  {{/with}}
                   <i class="material-icons" style="color: #90a4ae;">{{viewCollapser}}</i>
                 </a>
               </td>
@@ -44,9 +42,7 @@
 
               {{#each viewScreens}}
                 <tr>
-                  <td colspan="2">
-                    {{name}}
-                  </td>
+                  <td>{{name}}</td>
                   <td colspan="3">
                     {{#with screenIcon}}
                       <i class="material-icons" style="color: {{color}};">{{icon}}</i>
@@ -56,11 +52,17 @@
                     </span>
                   </td>
                 </tr>
+              {{else}}
+                <tr class="noconfig">
+                  <td colspan="4">
+                    <em>no screens configured</em>
+                  </td>
+                </tr>
               {{/each}}
 
               {{#with firstFailure}}
                 <tr>
-                  <td colspan="5">
+                  <td colspan="4">
                     <p style="margin-top: 0;">
                       First failure: {{message}}
                     </p>
@@ -70,6 +72,7 @@
                   </td>
                 </tr>
               {{/with}}
+              <tr><td colspan="4"></td></tr>
             {{/if}}
           {{/each}}
         </tbody>
@@ -91,7 +94,7 @@
           {{#with unpaired.count}}
             <tr class="unpaired">
               <td colspan="2">
-                {{this}} pending devices connected
+                <em>{{this}} unpaired devices online</em>
               </td>
               <td colspan="2">
                 <i class="material-icons" style="color: #ffc107;">timelapse</i>

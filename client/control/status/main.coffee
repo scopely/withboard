@@ -17,16 +17,18 @@ Template.StatusMain.helpers
     bools = Screens.find
       view: @_id
     .map (x) -> !x.failure
-    if bools.includes true
+    if @ttl is 0
+      icon: 'timer_off', color: '#78909c', title: 'Fetcher is turned off'
+    else if bools.includes true
       if bools.includes false
-        icon: 'warning', color: '#ffc107'
+        icon: 'warning', color: '#ffc107', title: 'Some screens are broken'
       else
-        icon: 'cloud_done', color: '#8bc34a'
+        icon: 'cloud_done', color: '#8bc34a', title: 'All screens are healthy :)'
     else
       if bools.includes false
-        icon: 'error', color: '#ff5722'
+        icon: 'error', color: '#ff5722', title: 'Every screen is broken :('
       else
-        icon: 'tv_off', color: '#78909c'
+        icon: 'tv_off', color: '#78909c', title: 'No configured screens'
 
   screenIcon: ->
     if @failure

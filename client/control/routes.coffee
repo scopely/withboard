@@ -100,7 +100,7 @@ Router.map ->
     waitOn: ->
       Meteor.subscribe 'control'
     data: ->
-      views: Views.find {ttl: $ne: null}, sort: name: 1
+      views: Views.find {ttl: $ne: null}, sort: module: 1, name: 1
       displays: Displays.find {token: $ne: null}, sort: name: 1
       unpaired: Displays.find {token:  null}
 
