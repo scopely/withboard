@@ -1,0 +1,39 @@
+<template name="ManageDisplay">
+  <h4>
+    <i class="material-icons" style="font-size: 1.5em; vertical-align: text-bottom; padding-right: 10px;">tv</i>
+    {{name}}
+  </h4>
+  <hr>
+
+  {{> DisplayCard}}
+
+  # ASSIGNMENTs
+  <p>view: {{view}}</p>
+  <p>screen: {{screen}}</p>
+
+  # each of these has view and screen
+  <p>panes: {{panes}}</p>
+
+  # DEVICE SETTINGs/DATA
+  <p>platform: {{platform}}</p>
+  <p>config:</p>
+  {{#each objectPair config}}
+    <p>{{key}}: {{value}}</p>
+  {{/each}}
+  <p>status:</p>
+  {{#each objectPair status}}
+    <p>{{key}}: {{value}}</p>
+  {{/each}}
+
+  # TRACKING
+  <p>online: {{online}}</p>
+  <p>token: {{token}}</p>
+  <p>firstSeen: {{firstSeen}}</p>
+  <p>lastSeen: {{lastSeen}}</p>
+  <p>firstIp: {{firstIp}}</p>
+  <p>latestIp: {{latestIp}}</p>
+  <p>pairedAt: {{pairedAt}}</p>
+  <p>swappedBy: {{swappedBy}}</p>
+
+
+</template>

@@ -8,6 +8,16 @@ Router.map ->
     data: ->
       displays: Displays.find {}, sort: name: 1
 
+  @route 'ManageDisplay',
+    path: '/control/display/:code'
+    layoutTemplate: 'ControlLayout'
+    waitOn: ->
+      Meteor.subscribe 'control'
+    data: ->
+      Displays.findOne {
+        _id: @params.code.toLowerCase()
+      }
+
   @route 'displaySwap',
     path: '/assign/swap/:code'
     template: 'DisplaySwap'
