@@ -101,7 +101,8 @@ Router.map ->
       Meteor.subscribe 'control'
     data: ->
       views: Views.find {ttl: $ne: null}, sort: name: 1
-      displays: Displays.find {}, sort: name: 1
+      displays: Displays.find {token: $ne: null}, sort: name: 1
+      unpaired: Displays.find {token:  null}
 
 
   @route 'index',

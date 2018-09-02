@@ -1,0 +1,17 @@
+.status-main {
+  code.stack {
+    white-space: pre-wrap;
+    word-break: break-word;
+    overflow-y: auto;
+  }
+
+  h3 {
+    border-bottom: 3px solid #ccc;
+    text-align: center;
+    padding: 0.3em 1em;
+  }
+
+  tr:hover {
+    background-color: rgba(0, 0, 0, 0.04);
+  }
+}

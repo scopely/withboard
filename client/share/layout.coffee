@@ -21,6 +21,3 @@ Template.Share.helpers
     @screens.length > 1
   hasScreens: ->
     @screens.length > 0
-
-  wrapClass: ->
-    if @screens.length > 1 then 'multi-screen' else ''

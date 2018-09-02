@@ -1,12 +1,14 @@
 <template name="StatusMain">
-  <div class="row">
+  <div class="status-main row">
     <div class="col l6">
+      <h3>Data Fetchers</h3>
       <table>
         <thead>
           <tr>
             <th>Module</th>
             <th>View</th>
             <th>Health</th>
+            <th>Warn since</th>
             <th>Interval</th>
           </tr>
         </thead>
@@ -26,40 +28,86 @@
                 {{#with viewIcon}}
                   <i class="material-icons" style="color: {{color}};">{{icon}}</i>
                 {{/with}}
+                <a href="#toggle">
+                  <i class="material-icons" style="color: #90a4ae;">{{viewCollapser}}</i>
+                </a>
               </td>
-              <td>{{ttl}}s</td>
+              <td>
+                {{#with firstFailure}}
+                  {{fromNow since}}
+                {{/with}}
+              </td>
+              <td>{{interval}}</td>
             </tr>
 
-            {{#with firstFailure}}
-              <tr>
-                <td colspan="4" style="padding-top: 0;">
-                  <p style="margin-top: 0.3em;">
-                    <code>{{message}}</code>
-                  </p>
-                  <p>Since {{fromNow since}}</p>
-                </td>
-              </tr>
-            {{/with}}
+            {{#if viewIsExpanded}}
+
+              {{#each viewScreens}}
+                <tr>
+                  <td colspan="2">
+                    {{name}}
+                  </td>
+                  <td colspan="3">
+                    {{#with screenIcon}}
+                      <i class="material-icons" style="color: {{color}};">{{icon}}</i>
+                    {{/with}}
+                    <span style="margin-left: 1em; vertical-align: super;">
+                      Next sync {{fromNow expires}}
+                    </span>
+                  </td>
+                </tr>
+              {{/each}}
+
+              {{#with firstFailure}}
+                <tr>
+                  <td colspan="5">
+                    <p style="margin-top: 0;">
+                      First failure: {{message}}
+                    </p>
+                    <p>
+                      <code class="stack">{{details}}</code>
+                    </p>
+                  </td>
+                </tr>
+              {{/with}}
+            {{/if}}
           {{/each}}
         </tbody>
       </table>
     </div>
     <div class="col l6">
+      <h3>Display Devices</h3>
       <table>
         <thead>
           <tr>
             <th>Code</th>
-            <th>Label</th>
+            <th>Display</th>
             <th>Status</th>
             <th>Last seen</th>
           </tr>
         </thead>
 
         <tbody>
+          {{#with unpaired.count}}
+            <tr class="unpaired">
+              <td colspan="2">
+                {{this}} pending devices connected
+              </td>
+              <td colspan="2">
+                <i class="material-icons" style="color: #ffc107;">timelapse</i>
+              </td>
+            </tr>
+          {{/with}}
           {{#each displays}}
             <tr>
               <td>{{_id.toUpperCase}}</td>
-              <td>{{name}}</td>
+              <td>
+                {{#if token}}
+                  {{name}}
+                {{else}}
+                  <em>(unpaired)</em>
+                {{/if}}
+              </td>
               <td>
                 {{#with displayIcon}}
                   <i class="material-icons" style="color: {{color}};">{{icon}}</i>
