@@ -83,7 +83,8 @@ Router.map ->
     waitOn: ->
       Meteor.subscribe '/sharing/list'
     data: ->
-      shares: Shares.find()
+      myShares: Shares.find(owner: Meteor.userId())
+      otherShares: Shares.find(owner: $ne: Meteor.userId())
 
   @route 'ManageSharing',
     path: '/sharing/:id'

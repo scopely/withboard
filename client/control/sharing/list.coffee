@@ -1,4 +1,8 @@
 Template.SharingList.helpers
+  orgName: ->
+    Meteor.settings.public.organization_name
+
+Template.SharingListEntry.helpers
   icon: ->
     switch @sharing
       when 'myself' then 'person'
