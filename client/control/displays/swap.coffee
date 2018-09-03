@@ -17,7 +17,7 @@ Template.DisplaySwap.events
     evt.preventDefault()
 
     oldDisplay = Displays.findOne evt.target.prevDisplay.value
-    newDisplay = Displays.findOne @newDisplay._id
+    newDisplay = Displays.findOne @_id
 
     setFields =
       pairedAt: new Date()

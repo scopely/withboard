@@ -1,28 +1,43 @@
 <template name="DisplaySwap">
   <div class="col s12 m8 l6">
     <div class="card cyan lighten-3">
-      <form class="card-content black-text">
-        <span class="card-title black-text">
-          Swapping in <strong>{{newDisplay._id.toUpperCase}}</strong>
-        </span>
+      {{#with newDisplay}}
+        <form class="card-content black-text">
+          <span class="card-title black-text">
+            Swapping in <strong>{{_id.toUpperCase}}</strong>
+          </span>
 
-        <p>Replace an existing display's computer with a new device</p>
-        <div class="input-field col s12">
-          <select required class="browser-default" name="prevDisplay">
-            <option value="" selected disabled>Select existing display to swap out</option>
-            {{#each availDisplays}}
-              <option value={{_id}}>{{name}}</option>
-            {{/each}}
-          </select>
-        </div>
+          <p>Replace an existing display's computer with a new device</p>
+          <div class="input-field col s12">
+            <select required class="browser-default" name="prevDisplay">
+              <option value="" selected disabled>Select existing display to swap out</option>
+              {{#each availDisplays}}
+                <option value={{_id}}>{{name}}</option>
+              {{/each}}
+            </select>
+          </div>
 
-        <div class="col s12">
-          <button class="btn waves-effect" type="submit">
-            Perform swap
-            <i class="material-icons right">swap_horiz</i>
-          </button>
+          <div class="col s12">
+            <button class="btn waves-effect" type="submit">
+              Perform swap
+              <i class="material-icons right">swap_horiz</i>
+            </button>
+          </div>
+        </form>
+
+      {{else}}
+        <div class="card-content black-text">
+          <span class="card-title">
+            The new device went away!
+          </span>
+          <p>
+            Oh well.
+            <a href="/assign" class="cyan-text text-darken-4">
+              Go back to dashboard...
+            </a>
+          </p>
         </div>
-      </form>
+      {{/with}}
     </div>
   </div>
 </template>
