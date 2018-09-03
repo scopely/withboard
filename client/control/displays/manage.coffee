@@ -6,9 +6,9 @@ Template.ManageDisplay.onRendered ->
     , 1
 
 Template.ManageDisplay.onCreated ->
-  {fourUp, onAfter, offAfter, offDays, zoom} = @data?.config.hardware ? {}
+  {fourUp, onAfter, offAfter, daysOff, zoom} = @data?.config.hardware ? {}
   @dailyScheduling = new ReactiveVar(!!onAfter or !!offAfter)
-  @weeklyScheduling = new ReactiveVar(!!offDays)
+  @weeklyScheduling = new ReactiveVar(!!daysOff)
   @overrideScaling = new ReactiveVar(!!zoom)
 
 Template.ManageDisplay.helpers
@@ -27,13 +27,13 @@ Template.ManageDisplay.helpers
   onAfter: ->
     @config.hardware?.onAfter
       ?.map (x) -> if x < 10 then "0#{x}" else "#{x}"
-      .join ':'
+      .join(':') ? '09:00'
   offAfter: ->
     @config.hardware?.offAfter
       ?.map (x) -> if x < 10 then "0#{x}" else "#{x}"
-      .join ':'
+      .join(':') ? '18:00'
   daysOffInclude: (d) ->
-    d in (@config.hardware?.daysOff ? [])
+    d in (@config.hardware?.daysOff ? [0,6])
 
   isChromeApp: ->
     @platform is 'chrome app'
