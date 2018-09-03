@@ -2,9 +2,9 @@
   <div class="card {{displayColor}}">
     {{#if token}}
       <div class="card-content black-text">
-        <span class="card-title black-text">
+        <a href="/control/display/{{_id.toUpperCase}}" class="card-title black-text">
           {{name}}
-        </span>
+        </a>
 
         {{> ControlAssignDisplay}}
 
@@ -64,6 +64,7 @@
           <a class="delete" href="#"><i class="material-icons">delete</i></a>
         </div>
       </div>
+
     {{else}}
       <div class="card-content black-text">
         <div style="padding: 0 0.5em; float: right; display: flex; flex-direction: column;">
@@ -74,12 +75,17 @@
             <i class="material-icons left">swap_horiz</i>swap
           </a>
         </div>
-        <span class="card-title black-text">New Display</span>
+
+        <a href="/control/display/{{_id.toUpperCase}}" class="card-title black-text">
+          New Display
+        </a>
         <p style="font-size: 120%;">
-          <strong>Code</strong> <code>{{_id.toUpperCase}}</code>
+          <strong style="font-weight: 200;">Pairing code:</strong>
+          <code style="font-weight: 600">{{_id.toUpperCase}}</code>
         </p>
         <p>
-          <strong>IP</strong> <code>{{firstIp}}</code>
+          <strong style="font-weight: 200;">IP:</strong>
+          <code>{{firstIp}}</code>
         </p>
       </div>
     {{/if}}

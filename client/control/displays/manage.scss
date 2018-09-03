@@ -1,0 +1,24 @@
+.hardwareConfig {
+  label {
+    color: #000;
+  }
+
+  hr {
+    border-width: 0;
+    border-top: 1px solid #ddd;
+    margin: 1em 0;
+  }
+
+  .many-checks label {
+    display: block;
+  }
+
+  .time-field input[type=number] {
+    width: 4em;
+    display: inline;
+  }
+
+  .weekday {
+    margin-right: 2em;
+  }
+}
