@@ -117,10 +117,16 @@
               <hr>
 
               <p class="form-field">
-                <button class="btn waves-effect waves-light" type="submit" name="action">
+                <button class="btn waves-effect waves-light" type="submit" name="save">
                   <i class="material-icons left">save</i>
-                  Save device config
+                  Save Config
                 </button>
+                {{#if online}}
+                  <button class="btn waves-effect waves-light amber" type="button" name="reboot">
+                    <i class="material-icons left">power_settings_new</i>
+                    Power Cycle
+                  </button>
+                {{/if}}
               </p>
             </form>
           </div>

@@ -84,5 +84,8 @@ Template.ManageDisplay.events
     else
       $unset[pre+'zoom'] = true
 
-    console.log @_id, $set, $unset
     Displays.update @_id, {$set, $unset}
+
+  'click button[name=reboot]': ->
+    Displays.update @_id, $set:
+      'config.rebootIf': @online

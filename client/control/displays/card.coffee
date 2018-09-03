@@ -34,7 +34,8 @@ Template.DisplayCard.events
         name:  name
 
   'click a.delete': ->
-    Displays.remove @_id
+    if confirm("Delete display from system?")
+      Displays.remove @_id
 
   'click a.pair': ->
     if name = prompt "Name for new display #{@_id}?"
