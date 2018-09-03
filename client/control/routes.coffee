@@ -25,19 +25,7 @@ Router.map ->
     waitOn: ->
       Meteor.subscribe 'control'
     data: ->
-      newDisplay: Displays.findOne {
-        _id: @params.code
-      }
-      availDisplays: Displays.find {
-        _id: $not: @params.code
-        online: $not: 1
-        token: $not: null
-      }, sort: name: 1
-    onAfterAction: ->
-      setTimeout =>
-        if not @data().newDisplay
-          Router.go '/assign'
-      , 1000
+      code: @params.code
 
   @route 'pair',
     path: '/pair/:code'

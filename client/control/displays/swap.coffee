@@ -1,4 +1,16 @@
-#Template.DisplaySwap.helpers
+Template.DisplaySwap.helpers
+  newDisplay: ->
+    Displays.findOne
+      _id: @code
+
+  availDisplays: ->
+    Displays.find
+      _id: $not: @code
+      online: $exists: false
+      token: $exists: true
+    ,
+      sort:
+        name: 1
 
 Template.DisplaySwap.events
   'submit form': (evt) ->
