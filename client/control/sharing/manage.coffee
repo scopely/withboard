@@ -105,5 +105,7 @@ Template.ManageSharing.helpers
 
   viewerDesc: ->
     if @viewer
-      Meteor.users.findOne(@viewer).profile.name
+      user = Meteor.users.findOne(@viewer)
+      emailName = user.services.google.email.split('@')[0]+'@'
+      user.profile.name or emailName
     else @ipAddress or 'Guest'

@@ -18,7 +18,9 @@ Meteor.smartPublish '/sharing/manage', (_id) ->
 
   @addDependency 'shareLog', 'viewer', (log) ->
     Meteor.users.find log.viewer,
-      fields: profile: 1
+      fields:
+        profile: 1
+        'services.google.email': 1
 
   [
     Shares.find {_id}
