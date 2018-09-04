@@ -8,12 +8,60 @@
         <code>{{_id.toUpperCase}}</code>
         <em style="font-weight: 100;">(unpaired display)</em>
       {{/if}}
+
+      <a class="rename" href="#"><i class="material-icons">mode_edit</i></a>
     </h4>
     <hr>
 
     <div class="row">
-      <div class="col s12 m8 l6 offset-m2 offset-l3">
+      <div class="col s12 m8 l6">
         {{> DisplayCard}}
+      </div>
+      <div class="col s12 m4 l6">
+        <div class="card grey lighten-3">
+          <div class="card-content black-text">
+            <span class="card-title black-text">
+              Identity Information
+            </span>
+
+            {{#if token}}
+
+              {{#if online}}
+                <p>Current session token: {{online}}</p>
+              {{else}}
+                {{#if lastSeen}}
+                  <p>Last seen {{fromNow lastSeen}}.</p>
+                {{else}}
+                  <p>The display isn't online and hasn't ever been offline. Odd.</p>
+                {{/if}}
+              {{/if}}
+              <p>Paired {{fromNow pairedAt}}.</p>
+
+            {{else}}
+              <p>Waiting to pair.</p>
+            {{/if}}
+            <p>First seen {{fromNow firstSeen}}.</p>
+            <p>IP address: {{latestIp}}</p>
+            {{#if ipChanged}}
+              <p>Original IP address: {{firstIp}}</p>
+            {{/if}}
+
+            {{#if swappedBy}}
+              <p>
+                Swapped out for
+                <a href="/control/display/{{swappedBy.toUpperCase}}">
+                  {{swappedBy.toUpperCase}}
+                </a>.
+              </p>
+            {{/if}}
+
+            <br>
+            <button class="btn waves-effect waves-light amber darken-3" type="button" name="delete">
+              <i class="material-icons left">delete</i>
+              Delete Display from system
+            </button>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -141,7 +189,7 @@
 
               <p>App version: {{status.app.version}}</p>
               <p>Display on: {{status.displayOn}}</p>
-              <p>Launch date: {{status.launchDate}}</p>
+              <p>Launch date: {{fromNow status.launchDate}}</p>
               <p>Platform arch: {{status.platformInfo.arch}}</p>
               <p>Platform OS: {{status.platformInfo.os}}</p>
               <p>Restart required for: {{status.restartRequired}}</p>
@@ -151,26 +199,6 @@
         </div>
       </div>
     {{/if}}
-    <div class="row">
-      <div class="col s12">
-        <div class="card">
-          <div class="card-content black-text">
-            <span class="card-title black-text">
-              Identity Information
-            </span>
-
-            <p>Online token: {{online}}</p>
-            <p>Longterm token: {{token}}</p>
-            <p>First seen: {{firstSeen}}</p>
-            <p>Last seen: {{lastSeen}}</p>
-            <p>Original IP: {{firstIp}}</p>
-            <p>Latest IP: {{latestIp}}</p>
-            <p>Paired at: {{pairedAt}}</p>
-            <p>Swapped by: {{swappedBy}}</p>
-          </div>
-        </div>
-      </div>
-    </div>
 
   {{else}}
     <div class="card amber lighten-3">

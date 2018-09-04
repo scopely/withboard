@@ -44,6 +44,13 @@ Template.ManageDisplay.helpers
   defaultScale: ->
     @status.screenSize?.width / 1280
 
+  fromNow: (time) -> if time
+    Chronos.liveMoment()
+    moment(time).fromNow()
+
+  ipChanged: ->
+    @firstIp isnt @latestIp
+
 Template.ManageDisplay.events
 
   'change [type=checkbox]': (evt) ->
@@ -85,6 +92,17 @@ Template.ManageDisplay.events
       $unset[pre+'zoom'] = true
 
     Displays.update @_id, {$set, $unset}
+
+  'click a.rename': (evt) ->
+    evt.preventDefault()
+    if name = prompt 'New name for display?', @name
+      Displays.update @_id, $set:
+        name:  name
+
+  'click button[name=delete]': ->
+    if confirm("Delete display from system?")
+      Displays.remove @_id
+      Router.go '/assign'
 
   'click button[name=reboot]': ->
     Displays.update @_id, $set:

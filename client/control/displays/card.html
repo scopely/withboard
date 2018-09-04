@@ -4,65 +4,30 @@
       <div class="card-content black-text">
         <a href="/control/display/{{_id.toUpperCase}}" class="card-title black-text">
           {{name}}
+
+          {{#if platformIs 'chromecast'}}
+            <div class="chip" style="margin-left: 0.5em; vertical-align: top;">
+              <i class="close material-icons">cast</i>
+              Chromecast
+            </div>
+          {{/if}}
+
+          {{#if platformIs 'chrome app'}}
+            <div class="chip" style="margin-left: 0.5em; vertical-align: top;">
+              <i class="close material-icons">tv</i>
+              ChromeOS
+            </div>
+          {{/if}}
+
+          {{#unless platform}}
+            <div class="chip" style="margin-left: 0.5em; vertical-align: top;">
+              <i class="close material-icons">tab</i>
+              Browser tab
+            </div>
+          {{/unless}}
         </a>
 
         {{> ControlAssignDisplay}}
-
-        {{#if platformIs 'chromecast'}}
-          <div class="chip" style="margin-top: 0.5em;">
-            Chromecast
-            <i class="close material-icons">cast</i>
-          </div>
-        {{/if}}
-
-        {{#if platformIs 'chrome app'}}
-          <div class="chip" style="margin-top: 0.5em;">
-            App v{{status.app.version}}
-          </div>
-        {{/if}}
-
-        {{#with status.platformInfo}}
-          <div class="chip" style="margin-top: 0.5em;">
-            {{os}} {{arch}}
-          </div>
-        {{/with}}
-
-        {{#if status.restartRequired}}
-          <div class="chip" style="margin-top: 0.5em;">
-            Restart for {{status.restartRequired}}
-            <i class="close material-icons">system_update_alt</i>
-          </div>
-        {{/if}}
-
-        {{#if status.screenSize}}
-          <div class="chip" style="margin-top: 0.5em;">
-            {{status.screenSize.width}}×{{status.screenSize.height}}
-          </div>
-        {{/if}}
-
-        {{#if latestIp}}
-          <div class="chip" style="margin-top: 0.5em;">
-            {{latestIp}}
-          </div>
-        {{/if}}
-
-        <div class="action-bar">
-          <a class="rename" href="#"><i class="material-icons">mode_edit</i></a>
-
-          {{#if canReboot}}
-            <a class="reboot" href="#"><i class="material-icons">power_settings_new</i></a>
-          {{/if}}
-
-          {{#if config.hardware.fourUp}}
-            <a class="unFourUp" href="#"><i class="material-icons">grid_off</i></a>
-          {{else}}
-            {{#if can4up}}
-              <a class="fourUp" href="#"><i class="material-icons">grid_on</i></a>
-            {{/if}}
-          {{/if}}
-
-          <a class="delete" href="#"><i class="material-icons">delete</i></a>
-        </div>
       </div>
 
     {{else}}
