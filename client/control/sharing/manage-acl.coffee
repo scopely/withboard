@@ -1,7 +1,13 @@
 ####################
 ## Access control
 
+Template.ManageSharingACLCard.onCreated ->
+  @isExpanded = new ReactiveVar false
+
 Template.ManageSharingACLCard.helpers
+  isExpanded: ->
+    Template.instance().isExpanded.get()
+
   url: ->
     path = "s/#{@_id}"
     path += "?token=#{@token}" if @token
@@ -10,7 +16,18 @@ Template.ManageSharingACLCard.helpers
   sharingIs: (other) ->
     @sharing is other
 
+  aclIcon: ->
+    switch @sharing
+      when 'myself' then 'person'
+      when 'domain' then 'domain'
+      when 'public' then 'public'
+
 Template.ManageSharingACLCard.events
+  'click .toggle-expand': (evt) ->
+    evt.preventDefault()
+    {isExpanded} = Template.instance()
+    isExpanded.set !isExpanded.get()
+
   'click .make-public': (evt) ->
     evt.preventDefault()
     Shares.update @_id,
