@@ -1,40 +1,3 @@
-####################
-## Access control
-
-Template.ManageSharing.helpers
-  url: ->
-    path = "s/#{@_id}"
-    path += "?token=#{@token}" if @token
-    Meteor.absoluteUrl path
-
-  sharingIs: (other) ->
-    @sharing is other
-
-Template.ManageSharing.events
-  'click .make-public': (evt) ->
-    evt.preventDefault()
-    Shares.update @_id,
-      $set:
-        sharing: 'public'
-        token: Random.secret()
-
-  'click .make-domain': (evt) ->
-    evt.preventDefault()
-    Shares.update @_id,
-      $set:
-        sharing: 'domain'
-      $unset:
-        token: 1
-
-  'click .make-myself': (evt) ->
-    evt.preventDefault()
-    Shares.update @_id,
-      $set:
-        sharing: 'myself'
-      $unset:
-        token: 1
-
-
 #########################
 ## Content management
 
@@ -100,3 +63,47 @@ Template.ManageSharing.events
       Shares.remove @_id, (err) ->
         if err then alert err
         else Router.go '/sharing'
+
+
+#########################
+## View log
+
+Template.ManageSharing.helpers
+  logEntry: ->
+    ShareLog.find {share: @_id},
+      sort: startedAt: -1
+      limit: 25
+
+  viewedScreens: ->
+    Screens.find
+      _id: $in: @screenSet
+
+  fromNow: (time) -> if time
+    Chronos.liveMoment()
+    moment(time).fromNow()
+
+  duration: ->
+    isLive = !@endedAt
+    suffix = ''
+    if isLive
+      Chronos.liveMoment()
+      suffix = '+'
+    msDiff = moment(@endedAt or new Date) - moment(@startedAt)
+    duration = moment.duration(msDiff)
+    days = parseInt(duration.as('days'))
+    hours = duration.get('hours')
+    minutes = duration.get('minutes')
+    if days > 0
+      "#{days}d #{hours}hr" + suffix
+    else if hours > 0
+      "#{hours}hr" + suffix
+    else
+      "#{minutes}min" + suffix
+
+  showViewers: (share) ->
+    share.owner is Meteor.userId()
+
+  viewerDesc: ->
+    if @viewer
+      Meteor.users.findOne(@viewer).profile.name
+    else @ipAddress or 'Guest'

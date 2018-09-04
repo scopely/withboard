@@ -120,3 +120,14 @@ Shares.attachSchema new SimpleSchema
 
   sharing   : type: String, allowedValues: ['myself', 'unlisted', 'domain', 'public']
   token     : type: String, optional: true
+
+root.ShareLog = new Meteor.Collection 'shareLog'
+ShareLog.attachSchema new SimpleSchema
+  share     : type: String
+  viewer    : type: String, optional: true
+  server    : type: String # instance of the server process
+  ipAddress : type: String
+  screenSet : type: [String], defaultValue: []
+
+  startedAt : type: Date
+  endedAt   : type: Date, optional: true

@@ -1,104 +1,121 @@
 <template name="ManageSharing">
-  <h3>{{title}}</h3>
+  <h3>
+    <i class="material-icons" style="font-size: 1.3em; vertical-align: text-bottom; padding-right: 10px;">share</i>
+    {{title}}
+  </h3>
+  <hr>
 
-  <div class="card blue-grey darken-1 access-control-card">
-    <div class="card-content white-text">
-      <span class="card-title">Access Control</span>
-      <p>
-        {{#if sharingIs 'myself'}}
-          Only you can currently use this link to access the shared content.
-          Select a sharing option below when you're ready to share the URL to this content.
-        {{/if}}
-        {{#if sharingIs 'domain'}}
-          You may circulate the link to this content within your organization.
-          Users will be prompted to log in before they can see the content
-          if they have not done so already.
-        {{/if}}
-        {{#if sharingIs 'public'}}
-          <strong>The following link can be used by <em>anyone</em></strong> to view the shared content.
-          The user will not be prompted to log in. Be careful who you share the link with.
-        {{/if}}
-      </p>
-      <p><code><a href={{url}}>{{url}}</a></code></p>
-
-      <p style="color: #f66; margin-top: 1em;">
-        Changing the sharing mode will irreversibly disable all existing links - be careful!
-        <br>If you didn't create this Share link, be considerate when changing the security.
-      </p>
-    </div>
-    <div class="card-action">
-      {{#unless sharingIs 'myself'}}
-        <a class="make-myself" href="#">
-          <i class="material-icons">person</i>
-          Restrict to just me
-        </a>
-      {{/unless}}
-
-      {{#unless sharingIs 'domain'}}
-        <a class="make-domain" href="#">
-          <i class="material-icons">domain</i>
-          Allow only domain access
-        </a>
-      {{/unless}}
-
-      {{#unless sharingIs 'public'}}
-        <a class="make-public" href="#">
-          <i class="material-icons">public</i>
-          Generate public link
-        </a>
-      {{/unless}}
-    </div>
-  </div>
-
-  <h4>Content</h4>
-  <ul class="collection">
-    {{#each entryScreen}}
-      <li class="collection-item">
-        <span class="title">{{name}}</span>
-        <a href="#!" class="secondary-content remove-entry">
-          <i class="material-icons">delete</i>
-        </a>
-      </li>
-    {{else}}
-      <li class="collection-item">
-        <span class="title"><em>(no content yet)</em></span>
-      </li>
-    {{/each}}
-  </ul>
-
-  <h5>Add content</h5>
-
-  <select name="view" class="browser-default">
-    <option value="" disabled selected>Select a view</option>
-    {{#each modules}}
-      <optgroup label={{name}}>
-        {{#each views}}
-          <option value={{_id}}>{{name}}</option>
-        {{/each}}
-      </optgroup>
-    {{/each}}
-  </select>
-
-  {{#if screens.count}}
-    <form name="add-screen">
-      <select name="screen" class="browser-default">
-        <option value="" disabled>Select a screen</option>
-        {{#each screens}}
-          <option value={{_id}}>{{name}}</option>
+  <div class="row">
+    <div class="col s12 m6 l4">
+      <h5>Shared Screens</h5>
+      <ul class="collection">
+        {{#each entryScreen}}
+          <li class="collection-item">
+            <span class="title">{{name}}</span>
+            <a href="#!" class="secondary-content remove-entry">
+              <i class="material-icons">delete</i>
+            </a>
+          </li>
         {{else}}
-          <option value="" disabled>No screens created</option>
+          <li class="collection-item">
+            <span class="title"><em>(no content yet)</em></span>
+          </li>
+        {{/each}}
+      </ul>
+
+      <h5>Add content</h5>
+
+      <select name="view" class="browser-default">
+        <option value="" disabled selected>Select a view</option>
+        {{#each modules}}
+          <optgroup label={{name}}>
+            {{#each views}}
+              <option value={{_id}}>{{name}}</option>
+            {{/each}}
+          </optgroup>
         {{/each}}
       </select>
 
-      <button type="submit" class="btn waves-effect waves-light">Add screen</button>
-    </form>
-  {{/if}}
+      {{#if screens.count}}
+        <form name="add-screen">
+          <select name="screen" class="browser-default">
+            <option value="" disabled>Select a screen</option>
+            {{#each screens}}
+              <option value={{_id}}>{{name}}</option>
+            {{else}}
+              <option value="" disabled>No screens created</option>
+            {{/each}}
+          </select>
 
-  <div style="padding-top: 2em;">
-    <a name="delete" class="waves-effect waves-light btn red">
-      <i class="material-icons left">delete_forever</i>
-      delete this share from system
-    </a>
+          <button type="submit" class="btn waves-effect waves-light">Add screen</button>
+        </form>
+      {{/if}}
+
+      <div style="padding-top: 2em;">
+        <a name="delete" class="waves-effect waves-light btn red">
+          <i class="material-icons left">delete_forever</i>
+          delete this share from system
+        </a>
+      </div>
+    </div>
+
+    <div class="col s12 m6 l8">
+      {{> ManageSharingACLCard}}
+
+      <br>
+      <h4>Recent Viewers</h4>
+      <hr>
+      <table class="log-table striped responsive-table">
+        <thead>
+          <tr>
+            {{#if showViewers .}}
+              <th>Viewer</th>
+            {{/if}}
+            <th>Opened</th>
+            <th>Duration</th>
+            <th>Screens</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          {{#each logEntry}}
+            <tr>
+              {{#if showViewers ..}}
+                <td>{{viewerDesc}}</td>
+              {{/if}}
+              <td>{{fromNow startedAt}}</td>
+              <td>
+                {{duration}}
+                {{#unless endedAt}}
+                  <i class="material-icons"
+                      style="color: #ef5350; vertical-align: bottom;"
+                      title="session is still ongoing"
+                    >fiber_manual_record</i>
+                {{/unless}}
+              </td>
+              <td>
+                <ul class="browser-default">
+                  {{#each viewedScreens}}
+                    <li>{{name}}</li>
+                  {{/each}}
+                </ul>
+              </td>
+            </tr>
+          {{else}}
+            <tr>
+              {{#if showViewers .}}
+                <td></td>
+              {{/if}}
+              <td colspan="2">
+                <p style="text-align: center;">No link accesses in recent memory.</p>
+              </td>
+              <td></td>
+            </tr>
+          {{/each}}
+        </tbody>
+      </table>
+
+    </div>
   </div>
 
 </template>

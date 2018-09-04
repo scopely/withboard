@@ -1,3 +1,5 @@
+serverInstance = Random.id()
+
 Meteor.smartPublish '/sharing/access', (_id, token) ->
   check _id, String
   unless share = Shares.findOne {_id}
@@ -19,7 +21,7 @@ Meteor.smartPublish '/sharing/access', (_id, token) ->
       check token, String
       unless token is share.token
         throw new Meteor.Error 'invalid-token', 'The link you are using has expired.'
-    
+
     else
       throw new Meteor.Error 'invalid-sharing', 'The content you are trying to view is misconfigured.'
 
@@ -39,8 +41,43 @@ Meteor.smartPublish '/sharing/access', (_id, token) ->
     Data.find context: type: 'screen', id: screen._id
   ]
 
-  Shares.find {_id},
-    fields: 
-      owner: 1
-      title: 1
-      entries: 1
+  # Record this viewing session
+  logId = ShareLog.insert
+    share     : share._id
+    viewer    : @userId
+    server    : serverInstance
+    ipAddress : Meteor.call 'getClientIpAddress'
+    screenSet : []
+    startedAt : new Date
+  @onStop ->
+    ShareLog.update logId, $set:
+      endedAt: new Date
+
+  [
+    Shares.find {_id},
+      fields:
+        owner: 1
+        title: 1
+        entries: 1
+  ,
+    ShareLog.find
+      _id: logId
+  ]
+
+Meteor.startup ->
+  # let viewers add info to their session
+  ShareLog.allow
+    update: (userId, doc) ->
+      doc.viewer is userId
+
+  # finish out old sessions in case the previous server failed
+  ShareLog.update
+    server:
+      $ne: serverInstance
+    endedAt:
+      $exists: false
+  ,
+    $set:
+      endedAt: new Date
+  ,
+    multi: true

@@ -1,0 +1,51 @@
+<template name="ManageSharingACLCard">
+  <div class="card blue-grey darken-1 access-control-card">
+    <div class="card-content white-text">
+      <span class="card-title">Access Control</span>
+      <p>
+        {{#if sharingIs 'myself'}}
+          Only you can currently use this link to access the shared content.
+          Select a sharing option below when you're ready to share the URL to this content.
+        {{/if}}
+        {{#if sharingIs 'domain'}}
+          You may circulate the link to this content within your organization.
+          Users will be prompted to log in before they can see the content
+          if they have not done so already.
+        {{/if}}
+        {{#if sharingIs 'public'}}
+          <strong>The following link can be used by <em>anyone</em></strong>
+          to view the shared content. The user will not be prompted to log in.
+          Be careful who you share the link with.
+        {{/if}}
+      </p>
+      <p><code><a href={{url}}>{{url}}</a></code></p>
+
+      <p style="color: #f66; margin-top: 1em;">
+        Changing the sharing mode will irreversibly disable all existing links!
+        <br>Please use caution when changing security for established links.
+      </p>
+    </div>
+    <div class="card-action">
+      {{#unless sharingIs 'myself'}}
+        <a class="make-myself" href="#">
+          <i class="material-icons">person</i>
+          Restrict to just me
+        </a>
+      {{/unless}}
+
+      {{#unless sharingIs 'domain'}}
+        <a class="make-domain" href="#">
+          <i class="material-icons">domain</i>
+          Allow only domain access
+        </a>
+      {{/unless}}
+
+      {{#unless sharingIs 'public'}}
+        <a class="make-public" href="#">
+          <i class="material-icons">public</i>
+          Generate public link
+        </a>
+      {{/unless}}
+    </div>
+  </div>
+</template>

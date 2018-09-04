@@ -6,6 +6,16 @@ Template.Share.onCreated ->
     if hash.length
       @screenId.set hash.slice(1)
 
+  # record the current screen in the viewing session
+  @autorun =>
+    log = ShareLog.findOne()
+    return unless log
+    screen = @screenId.get()
+    return if log.screenSet.includes screen
+    ShareLog.update log._id,
+      $addToSet:
+        screenSet: screen
+
   $('html').attr 'id', 'display'
            .addClass 'shared'
 
