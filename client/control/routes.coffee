@@ -40,7 +40,7 @@ Router.map ->
     template: 'ModuleList'
     layoutTemplate: 'ControlLayout'
     waitOn: ->
-      Meteor.subscribe '/module/list'
+      Meteor.subscribe 'control'
     data: ->
       modules: Modules.find {}, sort: name: 1
 
@@ -49,7 +49,7 @@ Router.map ->
     template: 'EditModule'
     layoutTemplate: 'ControlLayout'
     waitOn: ->
-      Meteor.subscribe '/module/edit', @params.id
+      Meteor.subscribe 'control'
     data: ->
       module: Modules.findOne @params.id
       views: Views.find module: @params.id
@@ -59,7 +59,7 @@ Router.map ->
     template: 'EditView'
     layoutTemplate: 'ControlLayout'
     waitOn: ->
-      Meteor.subscribe '/view/edit', @params.id
+      Meteor.subscribe 'control'
     data: ->
       module: Modules.findOne @params.module
       view: Views.findOne _id: @params.id, module: @params.module
@@ -78,8 +78,10 @@ Router.map ->
   @route 'SharingList',
     path: '/sharing'
     layoutTemplate: 'ControlLayout'
-    waitOn: ->
+    waitOn: -> [
+      Meteor.subscribe 'control'
       Meteor.subscribe '/sharing/list'
+    ]
     data: ->
       myShares: Shares.find(owner: Meteor.userId())
       otherShares: Shares.find(owner: $ne: Meteor.userId())
@@ -87,8 +89,10 @@ Router.map ->
   @route 'ManageSharing',
     path: '/sharing/:id'
     layoutTemplate: 'ControlLayout'
-    waitOn: ->
+    waitOn: -> [
+      Meteor.subscribe 'control'
       Meteor.subscribe '/sharing/manage', @params.id
+    ]
     data: ->
       Shares.findOne @params.id
 
