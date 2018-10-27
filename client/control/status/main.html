@@ -96,7 +96,8 @@
             <th class="health">Health</th>
             <th>Code</th>
             <th>Display</th>
-            <th>Last seen</th>
+            <th>Temp</th>
+            <th>Memory</th>
           </tr>
         </thead>
 
@@ -106,7 +107,7 @@
               <td class="health">
                 <i class="material-icons" style="color: #ffc107;">timelapse</i>
               </td>
-              <td colspan="3">
+              <td colspan="4">
                 <em>{{this}} unpaired devices online</em>
               </td>
             </tr>
@@ -125,8 +126,12 @@
                 {{else}}
                   <em>(unpaired)</em>
                 {{/if}}
+                {{#if lastSeen}}
+                  <br>Last seen {{fromNow lastSeen}}
+                {{/if}}
               </td>
-              <td>{{fromNow lastSeen}}</td>
+              <td>{{#with status.cpu}}{{avgTempOf temperatures}}{{/with}}</td>
+              <td>{{#with status.memory}}{{memUsedRatio}}{{/with}}</td>
             </tr>
           {{/each}}
         </tbody>

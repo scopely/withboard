@@ -68,6 +68,14 @@ Template.StatusMain.helpers
   viewIsExpanded: ->
     currentView.get() is @_id
 
+  avgTempOf: (list) ->
+    avg = list.reduce(((a,b) -> a+b), 0) / list.length
+    return "#{Math.round(avg*10)/10}°C"
+
+  memUsedRatio: ->
+    ratio = (@capacity - @availableCapacity) / @capacity
+    "#{Math.round(ratio*1000)/10}%"
+
 Template.StatusMain.events
   'click a[href="#toggle"]': (evt) ->
     evt.preventDefault()
