@@ -51,6 +51,14 @@ Template.ManageDisplay.helpers
   ipChanged: ->
     @firstIp isnt @latestIp
 
+  memSize: (bytes) ->
+    gib = bytes / 1024 / 1024 / 1024
+    "#{Math.round(gib*100)/100} GiB"
+
+  memUsedRatio: ->
+    ratio = (@capacity - @availableCapacity) / @capacity
+    "#{Math.round(ratio*1000)/10}%"
+
 Template.ManageDisplay.events
 
   'change [type=checkbox]': (evt) ->

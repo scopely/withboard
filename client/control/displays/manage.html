@@ -194,6 +194,23 @@
               <p>Platform OS: {{status.platformInfo.os}}</p>
               <p>Restart required for: {{status.restartRequired}}</p>
               <p>Screen size: {{status.screenSize.width}}×{{status.screenSize.height}}</p>
+
+              {{#with status.cpu}}
+                <h6>CPU</h6>
+                <p>Model name: {{modelName}}</p>
+                <p>Temperatures: <strong>{{#each temperatures}} {{this}}&deg;C {{/each}}</strong></p>
+                <p>User time: {{usage.user}}</p>
+                <p>Kernel time: {{usage.kernel}}</p>
+                <p>Idle time: {{usage.idle}}</p>
+                <p>Total time: {{usage.total}}</p>
+              {{/with}}
+
+              {{#with status.memory}}
+                <h6>Memory</h6>
+                <p>Available: {{memSize availableCapacity}}</p>
+                <p>Total: {{memSize capacity}}</p>
+                <p>Percentage used: {{memUsedRatio}}</p>
+              {{/with}}
             </div>
           </div>
         </div>
