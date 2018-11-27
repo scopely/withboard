@@ -1,0 +1,27 @@
+.status-main {
+  code.stack {
+    white-space: pre-wrap;
+    word-break: break-word;
+    overflow-y: auto;
+  }
+
+  h3 {
+    border-bottom: 3px solid #ccc;
+    text-align: center;
+    padding: 0.3em 1em;
+    margin: 0;
+  }
+
+  tr:hover {
+    background-color: rgba(0, 0, 0, 0.04);
+  }
+  tr.expanded-true {
+    background-color: rgba(0, 0, 0, 0.03);
+    border-bottom: 0;
+  }
+
+  td.health, th.health {
+    text-align: center;
+    white-space: nowrap;
+  }
+}

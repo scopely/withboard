@@ -12,3 +12,7 @@
 .action-bar a:hover {
   color: #f57f17;
 }
+
+a.card-title:hover {
+  text-decoration: underline;
+}

@@ -1,12 +1,12 @@
 Template.ShareNav.onRendered ->
-  @$('.button-collapse').sideNav
-    closeOnClick: false # we do this ourselves
+  [@sidenav] = M.Sidenav.init @$('.sidenav')
 
 Template.ShareNav.events
-  'click .side-nav a': (evt) ->
-    if parseInt($('#canvas').css('padding-left')) < 200
+  'click .sidenav a': (evt) ->
+    {sidenav} = Template.instance()
+    if sidenav.lastWindowWidth <= 992
       # sidebar isn't fixed open, so close it
-      $('.button-collapse').sideNav 'hide'
+      sidenav.close()
 
 Template.ShareNav.helpers
   label: ->
@@ -15,3 +15,12 @@ Template.ShareNav.helpers
   isActiveScreen: ->
     {screenId} = Template.parentData()
     if @_id is screenId.get() then 'active'
+
+  userName: ->
+    Meteor.user()?.profile.name ? 'Guest User'
+  orgName: ->
+    Meteor.settings.public.organization_name
+  logoUrl: ->
+    Meteor.settings.public.assets_s3_bucket + 'logo.png'
+  shareName: ->
+    Shares.findOne().title

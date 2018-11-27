@@ -1,21 +1,44 @@
 <template name="SharingList">
-  <h5>Active sharing links</h5>
+  <div class="row">
+    <div class="col m6">
+      <h5>My Sharing Links</h5>
 
-  <div class="collection">
-    {{#each shares}}
-      <a class="collection-item avatar" href="/sharing/{{_id}}">
-        <i class="material-icons circle">{{icon}}</i>
-        <span class="title">{{title}}</span>
-        <p>{{shareInfo}}</p>
-        <a href="#!" class="secondary-content">
-          <i class="material-icons">close</i>
-        </a>
-      </a>
-    {{/each}}
+      <div class="collection">
+        {{#each myShares}}
+          {{> SharingListEntry}}
+        {{else}}
+          <div class="collection-item">
+            <span class="title">None yet</span>
+          </div>
+        {{/each}}
+      </div>
+
+      <button class="btn waves-effect waves-light new" type="button">
+        New share
+        <i class="material-icons right">share</i>
+      </button>
+    </div>
+
+    <div class="col m6">
+      <h5>Other {{orgName}} Shares</h5>
+
+      <div class="collection">
+        {{#each otherShares}}
+          {{> SharingListEntry}}
+        {{else}}
+          <div class="collection-item">
+            <span class="title">None yet</span>
+          </div>
+        {{/each}}
+      </div>
+    </div>
   </div>
+</template>
 
-  <button class="btn waves-effect waves-light new" type="button">
-    New share
-    <i class="material-icons right">share</i>
-  </button>
+<template name="SharingListEntry">
+  <a class="collection-item avatar" href="/sharing/{{_id}}">
+    <i class="material-icons circle">{{icon}}</i>
+    <span class="title">{{title}}</span>
+    <p>{{shareInfo}}</p>
+  </a>
 </template>

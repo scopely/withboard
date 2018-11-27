@@ -4,7 +4,7 @@
     {{#each modules}}
       <optgroup label={{name}}>
         {{#each views}}
-          <option value={{_id}} {{viewMaybeSelected}}>{{name}}</option>
+          <option value={{_id}} selected={{viewMaybeSelected}}>{{name}}</option>
         {{/each}}
       </optgroup>
     {{/each}}
@@ -15,7 +15,7 @@
       <select name="screen" class="browser-default">
         <option value="" disabled>Select a screen</option>
         {{#each screens}}
-          <option value={{_id}} {{screenMaybeSelected}}>{{name}}</option>
+          <option value={{_id}} selected={{screenMaybeSelected}}>{{name}}</option>
         {{/each}}
         <option value="new">New screen...</option>
       </select>

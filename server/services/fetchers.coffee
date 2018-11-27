@@ -23,6 +23,7 @@ updateOneModule = ->
     config: config
     context: context
     setData: (key, value) ->
+      throw new Error "Data Key and Value are required" unless key and value isnt null
       console.log 'Setting key', key#, 'to', value
       Data.upsert {context, key}, $set:
         value: value
@@ -31,7 +32,7 @@ updateOneModule = ->
 
   js = Meteor.call 'compileCoffee', outdated.fetcher, 'block'
   eval(js).apply self # TODO!!!
-  console.log 'All done updating module'
+  console.log 'Done updating module'
   true
 
 updateOneScreen = ->
@@ -74,6 +75,7 @@ updateOneScreen = ->
     config: config
     context: context
     setData: (key, value) ->
+      throw new Error "Data Key and Value are required" unless key and value isnt null
       console.log 'Setting key', key#, 'to', value
       Data.upsert {context, key}, $set:
         value: value
@@ -82,19 +84,32 @@ updateOneScreen = ->
 
   try
     js = Meteor.call 'compileCoffee', view.fetcher, 'block'
-    eval(js).apply self # TODO!!!
+    # blocking eval with a timeout
+    do Meteor.wrapAsync (cb) ->
+      setTimeout ->
+        cb? new Meteor.Error('timeout', "Fetcher ran too long")
+        cb = null
+      , 5 * 60 * 1000 # five minutes
+      Meteor.defer ->
+        try
+          out = eval(js).apply self
+          cb? null, out
+        catch err
+          cb? err
+        finally
+          cb = null
 
     Screens.update outdated._id,
       $unset: failure: true
 
-    console.log 'All done updating screen'
+    console.log 'Done updating screen'
   catch err
     console.log 'Encountered error reloading', outdated.name, err.stack
     Screens.update outdated._id, $set:
       # TODO: back off if failing for past hour
       # TODO: maybe after there's a manual refresh button
       failure:
-        message: 'Unexpected ' + err.name + ' in fetcher'
+        message: err.message or "Unexpected #{err.name} in fetcher"
         details: err.stack
         since: outdated.failure?.since ? new Date()
 

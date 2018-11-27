@@ -1,10 +1,6 @@
-root = global ? window
-root.root = root
-
 root.Displays = new Meteor.Collection 'displays'
 Displays.attachSchema new SimpleSchema
   name      : type: String, optional: true
-  title     : type: String, optional: true
 
   # ASSIGNMENTs
   view      : type: String, optional: true
@@ -23,7 +19,10 @@ Displays.attachSchema new SimpleSchema
   token     : type: String, optional: true
   firstSeen : type: Date
   lastSeen  : type: Date,   optional: true # When offline, the last time it was seen
+  firstIp   : type: String
+  latestIp  : type: String
   pairedAt  : type: Date,   optional: true
+  swappedBy : type: String, optional: true # TODO: clean up
 
 
 Setting = new SimpleSchema
@@ -121,3 +120,14 @@ Shares.attachSchema new SimpleSchema
 
   sharing   : type: String, allowedValues: ['myself', 'unlisted', 'domain', 'public']
   token     : type: String, optional: true
+
+root.ShareLog = new Meteor.Collection 'shareLog'
+ShareLog.attachSchema new SimpleSchema
+  share     : type: String
+  viewer    : type: String, optional: true
+  server    : type: String # instance of the server process
+  ipAddress : type: String
+  screenSet : type: [String], defaultValue: []
+
+  startedAt : type: Date
+  endedAt   : type: Date, optional: true

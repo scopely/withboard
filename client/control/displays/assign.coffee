@@ -4,9 +4,9 @@ Template.ControlAssignDisplay.events
     {viewId, screenId} = Template.instance()
 
     viewId.set selectedView
-    if Screens.findOne(view: selectedView)
+    if screen = Screens.findOne(view: selectedView)
       # There's already at least one screen, show the list
-      screenId.set null
+      screenId.set screen._id
     else
       # Otherwise user should make one now
       screenId.set 'new'
@@ -19,7 +19,7 @@ Template.ControlAssignDisplay.events
     if selectedView is 'new'
       screenId.set 'new'
     else
-      screenId.set null
+      screenId.set selectedView._id
 
   'submit form[name=new-screen]': (event) ->
     event.preventDefault()
@@ -56,7 +56,7 @@ Template.ControlAssignDisplay.events
       screenId.set screen
       Displays.update display, $set:
         screen: screen
-        view: screen.view
+        view: viewId.get()
 
   'submit form[name=assign-screen]': (event) ->
     event.preventDefault()
@@ -95,15 +95,11 @@ Template.ControlAssignDisplay.helpers
 
   viewMaybeSelected: ->
     {viewId} = Template.instance()
-    if viewId.get() is @_id
-      selected: true
-    else {}
+    return viewId.get() is @_id
 
   screenMaybeSelected: ->
     {screenId} = Template.instance()
-    if screenId.get() is @_id
-      selected: true
-    else {}
+    return screenId.get() is @_id
 
   newScreen: ->
     {screenId} = Template.instance()

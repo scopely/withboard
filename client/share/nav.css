@@ -1,7 +1,10 @@
-.side-nav li {
-  padding: 0;
+#share-wrap .header-item {
+  padding: 0 30px;
+  font-size: 1.2em;
+  color: #000;
+  display: flex;
+  align-items: center;
 }
-
-#display .container-fluid {
-  padding: 0 15px;
+#share-wrap .header-item span {
+  padding-left: 1em;
 }

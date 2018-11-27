@@ -1,0 +1,69 @@
+<template name="ManageSharingACLCard">
+  <div class="card blue-grey darken-2 access-control-card">
+    <div class="card-content white-text">
+      <span class="card-title">
+        <i class="material-icons left">{{aclIcon}}</i>
+        Access Control
+      </span>
+      <p>
+        {{#if sharingIs 'myself'}}
+          Only you can currently use this link to access the shared content.
+          Select a sharing option below when you're ready to share the URL to this content.
+        {{/if}}
+        {{#if sharingIs 'domain'}}
+          You may circulate the link to this content within your organization.
+          Users will be prompted to log in before they can see the content
+          if they have not done so already.
+        {{/if}}
+        {{#if sharingIs 'public'}}
+          <strong>The following link can be used by <em>anyone</em></strong>
+          to view the shared content. The user will not be prompted to log in.
+          Be careful who you share the link with.
+        {{/if}}
+      </p>
+      <p><code><a href={{url}}>{{url}}</a></code></p>
+
+      {{#if isExpanded}}
+        <p style="color: #f66; margin-top: 1em;">
+          Changing the sharing mode will disable any existing public links!
+          <br>Please use caution when changing security for established links.
+        </p>
+
+        {{#unless sharingIs 'myself'}}
+          <a class="make-myself waves-effect waves-light btn" href="#">
+            <i class="material-icons left">person</i>
+            Restrict to just me
+          </a>
+        {{/unless}}
+
+        {{#unless sharingIs 'domain'}}
+          <a class="make-domain waves-effect waves-light btn" href="#">
+            <i class="material-icons left">domain</i>
+            Allow only domain access
+          </a>
+        {{/unless}}
+
+        {{#unless sharingIs 'public'}}
+          <a class="make-public waves-effect waves-light btn" href="#">
+            <i class="material-icons left">public</i>
+            Generate public link
+          </a>
+        {{/unless}}
+      {{/if}}
+    </div>
+    <div class="card-action">
+      {{#if isExpanded}}
+        <a class="toggle-expand" href="#">
+          <i class="material-icons">exit_to_app</i>
+          Close sharing settings
+        </a>
+
+      {{else}}
+        <a class="toggle-expand" href="#">
+          <i class="material-icons">lock_open</i>
+          Change sharing security
+        </a>
+      {{/if}}
+    </div>
+  </div>
+</template>

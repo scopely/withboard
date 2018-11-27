@@ -32,7 +32,6 @@
         {{#each view.settings}}
           <th><abbr title="{{key}}">{{label}}</abbr></th>
         {{/each}}
-        <th>Displays</th>
         <th></th>
       </tr>
 
@@ -44,10 +43,12 @@
             {{> Template.dynamic template=settingTmpl}}
           </td>
         {{/each}}
-        <td>TODO</td>
-        <td>
+        <td style="white-space: nowrap;">
           <a href={{screenLink}}>
             <i class="material-icons">link</i>
+          </a>
+          <a href="#refresh">
+            <i class="material-icons">refresh</i>
           </a>
           <a href="#delete">
             <i class="material-icons">delete</i>

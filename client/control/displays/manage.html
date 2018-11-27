@@ -1,0 +1,235 @@
+<template name="ManageDisplay">
+  {{#if .}}
+    <h4>
+      <i class="material-icons" style="font-size: 1.5em; vertical-align: text-bottom; padding-right: 10px;">tv</i>
+      {{#if token}}
+        {{name}}
+      {{else}}
+        <code>{{_id.toUpperCase}}</code>
+        <em style="font-weight: 100;">(unpaired display)</em>
+      {{/if}}
+
+      <a class="rename" href="#"><i class="material-icons">mode_edit</i></a>
+    </h4>
+    <hr>
+
+    <div class="row">
+      <div class="col s12 m8 l6">
+        {{> DisplayCard}}
+      </div>
+      <div class="col s12 m4 l6">
+        <div class="card grey lighten-3">
+          <div class="card-content black-text">
+            <span class="card-title black-text">
+              Identity Information
+            </span>
+
+            {{#if token}}
+
+              {{#if online}}
+                <p>Current session token: {{online}}</p>
+              {{else}}
+                {{#if lastSeen}}
+                  <p>Last seen {{fromNow lastSeen}}.</p>
+                {{else}}
+                  <p>The display isn't online and hasn't ever been offline. Odd.</p>
+                {{/if}}
+              {{/if}}
+              <p>Paired {{fromNow pairedAt}}.</p>
+
+            {{else}}
+              <p>Waiting to pair.</p>
+            {{/if}}
+            <p>First seen {{fromNow firstSeen}}.</p>
+            <p>IP address: {{latestIp}}</p>
+            {{#if ipChanged}}
+              <p>Original IP address: {{firstIp}}</p>
+            {{/if}}
+
+            {{#if swappedBy}}
+              <p>
+                Swapped out for
+                <a href="/control/display/{{swappedBy.toUpperCase}}">
+                  {{swappedBy.toUpperCase}}
+                </a>.
+              </p>
+            {{/if}}
+
+            <br>
+            <button class="btn waves-effect waves-light amber darken-3" type="button" name="delete">
+              <i class="material-icons left">delete</i>
+              Delete Display from system
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {{#if isChromeApp}}
+      <div class="row">
+        <div class="col s12 l6">
+          <div class="hardwareConfig card">
+            <form action="hardwareConfig" class="card-content black-text">
+              <span class="card-title black-text">
+                Hardware Configuration
+              </span>
+              <hr>
+
+              <p class="form-field">
+                <label>
+                  <input name="fourUp" type="checkbox" checked={{config.hardware.fourUp}} />
+                  <span>Split into 4-UP display</span>
+                </label>
+              </p>
+              <hr>
+
+              <p class="form-field">
+                <label>
+                  <input name="dailyScheduling" type="checkbox" checked={{dailyScheduling}} />
+                  <span>Sleep the display overnight</span>
+                </label>
+              </p>
+              {{#if dailyScheduling}}
+                <blockquote>
+                  <div class="row">
+                    <div class="input-field col s6">
+                      <input name="offAfter" type="time" required value={{offAfter}}>
+                      <label for="offAfter">Sleep output after</label>
+                    </div>
+                      <div class="input-field col s6">
+                        <input name="onAfter" type="time" required value={{onAfter}}>
+                        <label for="onAfter">Wake output up after</label>
+                      </div>
+                  </div>
+                  <!--p>The sleep span must include midnight. Sorry.</p-->
+                </blockquote>
+              {{/if}}
+              <hr>
+
+              <p class="form-field">
+                <label>
+                  <input name="weeklyScheduling" type="checkbox" checked={{weeklyScheduling}} />
+                  <span>Sleep the display on off-days</span>
+                </label>
+              </p>
+              {{#if weeklyScheduling}}
+                <blockquote class="form-field many-checks">
+                  <label>Disable output entirely on these 'off days' every week:</label>
+                  <label class="weekday">
+                    <input type="checkbox" name="offDay6" checked={{daysOffInclude 6}} />
+                    <span>Saturday</span>
+                  </label>
+                  <label class="weekday">
+                    <input type="checkbox" name="offDay0" checked={{daysOffInclude 0}} />
+                    <span>Sunday</span>
+                  </label>
+                  <label class="weekday">
+                    <input type="checkbox" name="offDay1" checked={{daysOffInclude 1}} />
+                    <span>Monday</span>
+                  </label>
+                  <label class="weekday">
+                    <input type="checkbox" name="offDay2" checked={{daysOffInclude 2}} />
+                    <span>Tuesday</span>
+                  </label>
+                  <label class="weekday">
+                    <input type="checkbox" name="offDay3" checked={{daysOffInclude 3}} />
+                    <span>Wednesday</span>
+                  </label>
+                  <label class="weekday">
+                    <input type="checkbox" name="offDay4" checked={{daysOffInclude 4}} />
+                    <span>Thursday</span>
+                  </label>
+                  <label class="weekday">
+                    <input type="checkbox" name="offDay5" checked={{daysOffInclude 5}} />
+                    <span>Friday</span>
+                  </label>
+                </blockquote>
+              {{/if}}
+              <hr>
+
+              <p class="form-field">
+                <label>
+                  <input name="overrideScaling" type="checkbox" checked={{overrideScaling}} />
+                  <span>Override the display's pixel-scaling ratio</span>
+                </label>
+              </p>
+              {{#if overrideScaling}}
+                <blockquote>
+                  <p class="range-field">
+                    <input type="range" name="scale" min="0.5" max="2" step="0.1" value={{scaleRatio}} />
+                  </p>
+                </blockquote>
+              {{else}}
+                <p style="margin-left: 2.4em;">Using default scale ratio: {{defaultScale}}</p>
+              {{/if}}
+              <hr>
+
+              <p class="form-field">
+                <button class="btn waves-effect waves-light" type="submit" name="save">
+                  <i class="material-icons left">save</i>
+                  Save Config
+                </button>
+                {{#if online}}
+                  <button class="btn waves-effect waves-light amber" type="button" name="reboot">
+                    <i class="material-icons left">power_settings_new</i>
+                    Power Cycle
+                  </button>
+                {{/if}}
+              </p>
+            </form>
+          </div>
+        </div>
+
+        <div class="col s12 l6">
+          <div class="hardwareStatus card">
+            <div class="card-content black-text">
+              <span class="card-title black-text">
+                Dynamic Display Status
+              </span>
+
+              <p>App version: {{status.app.version}}</p>
+              <p>Display on: {{status.displayOn}}</p>
+              <p>Launch date: {{fromNow status.launchDate}}</p>
+              <p>Platform arch: {{status.platformInfo.arch}}</p>
+              <p>Platform OS: {{status.platformInfo.os}}</p>
+              <p>Restart required for: {{status.restartRequired}}</p>
+              <p>Screen size: {{status.screenSize.width}}×{{status.screenSize.height}}</p>
+
+              {{#with status.cpu}}
+                <h6>CPU</h6>
+                <p>Model name: {{modelName}}</p>
+                <p>Temperatures: <strong>{{#each temperatures}} {{this}}&deg;C {{/each}}</strong></p>
+                <p>User time: {{usage.user}}</p>
+                <p>Kernel time: {{usage.kernel}}</p>
+                <p>Idle time: {{usage.idle}}</p>
+                <p>Total time: {{usage.total}}</p>
+              {{/with}}
+
+              {{#with status.memory}}
+                <h6>Memory</h6>
+                <p>Available: {{memSize availableCapacity}}</p>
+                <p>Total: {{memSize capacity}}</p>
+                <p>Percentage used: {{memUsedRatio}}</p>
+              {{/with}}
+            </div>
+          </div>
+        </div>
+      </div>
+    {{/if}}
+
+  {{else}}
+    <div class="card amber lighten-3">
+      <div class="card-content black-text">
+        <span class="card-title">
+          That device went away!
+        </span>
+        <p>
+          Oh well.
+          <a href="/assign" class="amber-text text-darken-4">
+            Go back to dashboard...
+          </a>
+        </p>
+      </div>
+    </div>
+  {{/if}}
+</template>

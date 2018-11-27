@@ -26,8 +26,11 @@ Template.RenderMessage.onCreated ->
   @hiding = false
 
   # TODO: be more centralized, also report this
-  Meteor.call 'ping', (err, {serverMillis}) =>
-    @offset.set(+new Date() - serverMillis)
+  Meteor.setInterval =>
+    Meteor.call 'ping', (err, {serverMillis}) =>
+      @offset.set(+new Date() - serverMillis)
+      console.log 'clock delta vs server:', @offset.get()
+  , 60 * 1000
 
 Template.RenderMessage.onRendered -> @autorun =>
   # Fetch the nearest message
@@ -68,16 +71,7 @@ Template.RenderMessage.onRendered -> @autorun =>
 
   if currentId = @renderedId.get()
     # Hide the rendered message
-    @$('.modal').modal 'close',
-      out_duration: 2000
-
-      # Stop rendering once it's gone
-      complete: Meteor.bindEnvironment =>
-        # only clear if still on the same message
-        @hiding = false
-        if @renderedId.get() is currentId
-          @renderedId.set()
-          @renderedSize.set('full')
+    @modal.close()
     @hiding = true
 
   else if msg
@@ -87,8 +81,18 @@ Template.RenderMessage.onRendered -> @autorun =>
 
     # Open the dialog after it renders
     setTimeout =>
-      @$('.modal').modal 'open',
+      [@modal] = M.Modal.init @$('.modal'),
         dismissible: false
         opacity: if size is 'full' then 0.5 else 0.15
         in_duration: 600
+        out_duration: 2000
+        # Stop rendering once it's gone
+        onCloseEnd: Meteor.bindEnvironment =>
+          # only clear if still on the same message
+          @hiding = false
+          @modal.destroy()
+          @modal = null
+          @renderedId.set()
+          @renderedSize.set('full')
+      @modal.open()
     , 0

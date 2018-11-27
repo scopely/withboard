@@ -9,7 +9,6 @@ loginHook = (route) ->
     # Probably a public share link. Don't worry about auth
     @next()
   else
-    console.log @
     @layout false
     @render 'Login'
 

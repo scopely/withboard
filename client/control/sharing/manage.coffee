@@ -1,40 +1,3 @@
-####################
-## Access control
-
-Template.ManageSharing.helpers
-  url: ->
-    path = "s/#{@_id}"
-    path += "?token=#{@token}" if @token
-    Meteor.absoluteUrl path
-
-  sharingIs: (other) ->
-    @sharing is other
-
-Template.ManageSharing.events
-  'click .make-public': (evt) ->
-    evt.preventDefault()
-    Shares.update @_id,
-      $set:
-        sharing: 'public'
-        token: Random.secret()
-
-  'click .make-domain': (evt) ->
-    evt.preventDefault()
-    Shares.update @_id,
-      $set:
-        sharing: 'domain'
-      $unset:
-        token: 1
-
-  'click .make-myself': (evt) ->
-    evt.preventDefault()
-    Shares.update @_id,
-      $set:
-        sharing: 'myself'
-      $unset:
-        token: 1
-
-
 #########################
 ## Content management
 
@@ -50,6 +13,9 @@ Template.ManageSharing.events
     event.preventDefault()
     {viewId} = Template.instance()
     screen = event.target.screen.value
+
+    if @entries.some (e) -> e.type is 'screen' and e.id is screen
+      return alert "That screen is already in this share"
 
     Shares.update @_id,
       $push: entries:
@@ -83,5 +49,63 @@ Template.ManageSharing.helpers
     Screens.find view: viewId.get()
 
   entryScreen: ->
-    @entries.map (e) ->
-      Screens.findOne e.id
+    @entries?.map (e) ->
+      Screens.findOne(e.id) ? {_id: e.id, name: '(deleted)'}
+
+
+#########################
+## Administrative
+
+Template.ManageSharing.events
+  'click a[name=delete]': (evt) ->
+    evt.preventDefault()
+    if confirm "Really delete?"
+      Shares.remove @_id, (err) ->
+        if err then alert err
+        else Router.go '/sharing'
+
+
+#########################
+## View log
+
+Template.ManageSharing.helpers
+  logEntry: ->
+    ShareLog.find {share: @_id},
+      sort: startedAt: -1
+      limit: 25
+
+  viewedScreens: ->
+    Screens.find
+      _id: $in: @screenSet
+
+  fromNow: (time) -> if time
+    Chronos.liveMoment()
+    moment(time).fromNow()
+
+  duration: ->
+    isLive = !@endedAt
+    suffix = ''
+    if isLive
+      Chronos.liveMoment()
+      suffix = '+'
+    msDiff = moment(@endedAt or new Date) - moment(@startedAt)
+    duration = moment.duration(msDiff)
+    days = parseInt(duration.as('days'))
+    hours = duration.get('hours')
+    minutes = duration.get('minutes')
+    if days > 0
+      "#{days}d #{hours}hr" + suffix
+    else if hours > 0
+      "#{hours}hr" + suffix
+    else
+      "#{minutes}min" + suffix
+
+  showViewers: (share) ->
+    share.owner is Meteor.userId()
+
+  viewerDesc: ->
+    if @viewer
+      user = Meteor.users.findOne(@viewer)
+      emailName = user.services.google.email.split('@')[0]+'@'
+      user.profile.name or emailName
+    else @ipAddress or 'Guest'

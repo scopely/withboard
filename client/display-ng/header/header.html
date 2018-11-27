@@ -1,10 +1,13 @@
 <template name="LeanHeader">
   <header id="lean-header" {{headerAttrs}}>
-    {{#if imageUrl}}
-      <img class="custom logo" src="{{imageUrl}}">
-    {{else}}
-      <img class="stock logo" src="{{logoUrl}}">
-    {{/if}}
+    <a href="#" data-target="slide-out" class="sidenav-trigger logo-trigger">
+      {{#if imageUrl}}
+        <img class="custom logo" src="{{imageUrl}}">
+      {{else}}
+        <img class="stock logo" src="{{logoUrl}}">
+      {{/if}}
+      <i class="material-icons" {{headerAttrs}}>menu</i>
+    </a>
     <h1 class="primary">{{label}}</h1>
 
     {{#if loading}}
@@ -20,14 +23,14 @@
         </div>
       </div>
     {{else}}
-      <h2 class="connection-indicator">
+      <h2 class="connection-indicator hide-on-small-only">
         <i class="material-icons">{{connectionIcon}}</i>
       </h2>
     {{/if}}
 
     {{#if primarySurface}}
-      <h2>{{clock 'h:mm a'}}</h2>
-      <h3>{{clock 'ddd MMMM D'}}</h3>
+      <h2 class="hide-on-med-and-down">{{clock 'h:mm a'}}</h2>
+      <h3 class="hide-on-med-and-down">{{clock 'ddd MMMM D'}}</h3>
     {{/if}}
   </header>
 </template>

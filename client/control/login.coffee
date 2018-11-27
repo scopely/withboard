@@ -9,5 +9,5 @@ Template.Login.events
       requestOfflineToken: true
       #forceApprovalPrompt: true
     , (err) -> if err
-      console.log 'Signin problem:', err.stack
+      alert(err.message)
     false
