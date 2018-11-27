@@ -36,9 +36,17 @@ Meteor.smartPublish '/sharing/access', (_id, token) ->
   @addDependency 'screens', 'view', (screen) ->
     Views.find screen.view
 
+  @addDependency 'views', 'module', (view) ->
+    Modules.find _id: view.module
+
   @addDependency 'screens', '_id', (screen) -> [
     Settings.find context: type: 'screen', id: screen._id
     Data.find context: type: 'screen', id: screen._id
+  ]
+
+  @addDependency 'modules', '_id', (module) -> [
+    Settings.find context: type: 'module', id: module._id
+    Data.find context: type: 'module', id: module._id
   ]
 
   # Record this viewing session
