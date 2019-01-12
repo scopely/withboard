@@ -124,7 +124,7 @@ Template.EditView.helpers
 
   settingTmpl: -> [
     @type[0].toUpperCase()
-    @type.slice(1).toLowerCase()
+    @type.slice(1)
     'SettingValue'
   ].join ''
 
@@ -155,7 +155,8 @@ Template.EditView.events
       else
         console.log 'setting update ok to', value
     else
-      Settings.insert {@context, @key, value}, (err) -> if err
+      reference = if @type.endsWith 'Id' then @type.slice(0, -2)
+      Settings.insert {@context, @key, value, reference}, (err) -> if err
         alert "Problem saving setting\n\n#{err.name} #{err.message}"
       else
         console.log 'setting create ok to', value

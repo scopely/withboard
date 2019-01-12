@@ -34,7 +34,8 @@ Template.Settings.events
         {contextType, id} = Template.currentData()
         context = { type: contextType, id }
 
-        Settings.insert {context, @key, value}, (err) -> if err
+        reference = if @type.endsWith 'Id' then @type.slice(0, -2)
+        Settings.insert {context, @key, value, @reference}, (err) -> if err
           alert "Problem saving setting\n\n#{err.name} #{err.message}"
         else
           console.log 'setting create ok to', value
@@ -53,3 +54,34 @@ Template.UserIdSettingValue.onRendered ->
   @autorun =>
     if userId = Template.currentData().value
       @$('select').val userId
+
+#####################################################
+# Screen ID selector (to embed unrelated screens)
+
+Template.ScreenIdSettingValue.onCreated ->
+  @viewId = new ReactiveVar
+
+Template.ScreenIdSettingValue.onRendered ->
+  @autorun =>
+    if screen = Screens.findOne Template.currentData().value
+      @viewId.set screen.view
+
+Template.ScreenIdSettingValue.helpers
+  modules: -> Modules.find()
+  views: -> Views.find module: @_id
+  currentView: ->
+    {viewId} = Template.instance()
+    viewId.get()
+  view: ->
+    {viewId} = Template.instance()
+    Views.findOne viewId.get()
+  screens: ->
+    {viewId} = Template.instance()
+    Screens.find view: viewId.get()
+
+Template.ScreenIdSettingValue.events
+  'change select[name=view]': (event) ->
+    {viewId} = Template.instance()
+    viewId.set event.target.value
+  'blur select[name=view]': (event) ->
+    event.stopPropagation() # can't save view as screen

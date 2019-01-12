@@ -33,12 +33,15 @@ Meteor.smartPublish '/ng/display', (token, pane) ->
     Data.find context: type: 'screen', id: screen._id
   ]
 
-  # TODO: does the display even want the module?
   @addDependency 'views', 'module', (view) -> [
     Modules.find view.module
     Settings.find context: type: 'module', id: view.module
     Data.find context: type: 'module', id: view.module
   ]
+
+  @addDependency 'settings', 'value', (setting) ->
+    switch setting.reference
+      when 'screen' then Screens.find setting.value
 
   [
     Displays.find display._id

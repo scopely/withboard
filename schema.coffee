@@ -28,7 +28,7 @@ Displays.attachSchema new SimpleSchema
 Setting = new SimpleSchema
   key       : type: String
   label     : type: String
-  type      : type: String, allowedValues: ['choice', 'string', 'secret', 'url', 'number', 'userId']
+  type      : type: String, allowedValues: ['choice', 'string', 'secret', 'url', 'number', 'userId', 'screenId', 'list']
   #defVal    : type: String, optional: true
 
 Template = new SimpleSchema
@@ -87,6 +87,7 @@ Settings.attachSchema new SimpleSchema
   context   : type: Context
   key       : type: String
   value     : type: String
+  reference : type: String, optional: true
 
 root.Data = new Meteor.Collection 'data'
 ###

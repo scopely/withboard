@@ -44,3 +44,27 @@
 <template name="UrlSettingValue">
   <input type="text" value="{{value}}" {{extras}}>
 </template>
+
+<template name="ScreenIdSettingValue">
+  <select name="view" class="browser-default" {{extras}}>
+    <option value="" disabled selected>Select a view</option>
+    {{#each modules}}
+      <optgroup label={{name}}>
+        {{#each views}}
+          <option value={{_id}} selected={{eq _id currentView}}>{{name}}</option>
+        {{/each}}
+      </optgroup>
+    {{/each}}
+  </select>
+
+  {{#if currentView}}
+    <select name="screen" class="browser-default" {{extras}}>
+      <option value="" disabled selected>Select a screen</option>
+      {{#each screens}}
+        <option value={{_id}} selected={{eq _id ../value}}>{{name}}</option>
+      {{else}}
+        <option value="" disabled selected>No screens created yet</option>
+      {{/each}}
+    </select>
+  {{/if}}
+</template>
