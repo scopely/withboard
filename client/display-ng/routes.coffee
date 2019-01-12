@@ -44,25 +44,5 @@ Router.route '/screen-ng/:id',
   waitOn: ->
     Meteor.subscribe '/screens/get', @params.id, @params.token
   action: ->
-    if screen = Screens.findOne(@params.id, fields: {view: 1})
-      Session.set 'view id', screen.view # for reactive CSS
-      if template = compileView screen.view
-
-        # TODO: restrict context?
-        settings = {}
-        Settings.find().forEach ({key, value}) ->
-          settings[key] = value
-
-        data = (key) ->
-          Data.findOne({key})?.value
-        Template[template].onCreated ->
-          @getData = data
-
-        @render template,
-          data: {settings, data}
-      else
-        @render 'DisplayNgPairing',
-          data: code: '??'
-    else
-      @render 'DisplayNgPairing',
-        data: code: '...'
+    @render 'RenderScreen', data:
+      screenId: get: => @params.id
