@@ -8,8 +8,8 @@
     {{/with}}
   </style>
 
-  <div id="share-wrap">
-    {{> ShareNav screenId=screenId screens=screens}}
+  <div id="share-wrap" class={{wrapClasses}}>
+    {{> ShareNav screenId=screenId screens=screens forceOpen=multiScreen}}
 
     {{#if hasScreens}}
       <!-- The content canvas should not have control over nav parts of the page -->

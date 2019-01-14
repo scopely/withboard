@@ -1,10 +1,12 @@
 Template.ShareNav.onRendered ->
-  [@sidenav] = M.Sidenav.init @$('.sidenav')
+  @autorun =>
+    Template.currentData()
+    [@sidenav] = M.Sidenav.init @$('.sidenav')
 
 Template.ShareNav.events
   'click .sidenav a': (evt) ->
-    {sidenav} = Template.instance()
-    if sidenav.lastWindowWidth <= 992
+    {sidenav, data} = Template.instance()
+    if sidenav.lastWindowWidth <= 992 or not data.forceOpen
       # sidebar isn't fixed open, so close it
       sidenav.close()
 
@@ -15,6 +17,10 @@ Template.ShareNav.helpers
   isActiveScreen: ->
     {screenId} = Template.parentData()
     if @_id is screenId.get() then 'active'
+  ulClasses: -> [
+    'sidenav'
+    if @forceOpen then 'sidenav-fixed'
+  ].join ' '
 
   userName: ->
     Meteor.user()?.profile.name ? 'Guest User'
