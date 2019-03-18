@@ -40,3 +40,4 @@ dynamic-import@0.4.2
 underscore@1.0.10
 reactive-dict@1.2.0
 fourseven:scss
+peerlibrary:aws-sdk
