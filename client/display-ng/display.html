@@ -10,6 +10,8 @@
         background: {{this}};
       }
     {{/with}}
+
+    {{groupCss}}
   </style>
 
   <div id="canvas">
@@ -23,7 +25,7 @@
       {{> DisplayNgPairing}}
     {{/if}}
   </div>
-  
+
   {{#if showMessages}}
     {{> RenderMessage}}
   {{/if}}

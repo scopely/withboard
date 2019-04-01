@@ -1,4 +1,5 @@
 Meteor.publish 'control', -> if @userId then [
+  Groups.find()
   Displays.find()
   Meteor.users.find()
 
@@ -17,6 +18,7 @@ opts =
   remove: isAdmin
 
 Meteor.startup ->
+  Groups.allow opts
   Displays.allow opts
 
   # TODO: admin only this
@@ -25,6 +27,6 @@ Meteor.startup ->
 
   Screens.allow opts
   Settings.allow opts
-  
+
   Messages.allow opts
   Shares.allow opts

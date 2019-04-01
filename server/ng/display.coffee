@@ -3,8 +3,12 @@ Meteor.smartPublish '/ng/display', (token, pane) ->
   unless display = Displays.findOne {token}
     throw new Meteor.Error 404, 'No such display'
 
+  groupName = 'Default'
+  if match = display.name?.match /^\[([^\]]+)\]/
+    groupName = match[1]
+
   ipAddress = Meteor.call('getClientIpAddress')
-  console.log 'Starting pub for', display._id, pane, token, ipAddress
+  console.log 'Starting pub for', display._id, pane, token, ipAddress, groupName
 
   # Only primary subs should report status
   unless pane
@@ -41,6 +45,7 @@ Meteor.smartPublish '/ng/display', (token, pane) ->
   ]
 
   [
+    Groups.find name: groupName
     Displays.find display._id
     Messages.find {type: 'notification'},
       sort:

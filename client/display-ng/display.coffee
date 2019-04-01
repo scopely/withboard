@@ -12,6 +12,9 @@ Template.DisplayNg.helpers
     {color} = Session.get 'display-context'
     color or '#fff' # TODO: change for projectors
 
+  groupCss: ->
+    Groups.findOne().css
+
   showMessages: ->
     if d = Displays.findOne(Session.get 'display id')
       d.name?.indexOf('Gamewall') is -1 and d.name?[0] isnt '['
