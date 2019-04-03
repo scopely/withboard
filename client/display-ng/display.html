@@ -6,7 +6,7 @@
 <template name="DisplayNg">
   <style type="text/css">
     {{#with canvasBg}}
-      body {
+      #canvas {
         background: {{this}};
       }
     {{/with}}
@@ -29,4 +29,6 @@
   {{#if showMessages}}
     {{> RenderMessage}}
   {{/if}}
+  
+  <div id="filterDiv"></div>
 </template>
