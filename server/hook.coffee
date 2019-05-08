@@ -1,12 +1,10 @@
 Router.route '/hooks/:type/:id/:hook', ->
-  {type, id, hook} = @params
-
   # fetch screen hook service
   screen = Screens.findOne @params.id
   service = new HookService screen
 
   # run task thread for hook
-  thread = service.newThread hook, @params
+  thread = service.newThread @params.hook, @params
   thread.start()
   thread.log 'All good'
 

@@ -7,6 +7,9 @@ compile = (source) ->
 
 Meteor.methods
   compileCoffee: (coffee, type='block') ->
+    unless @userId
+      throw new Meteor.Error 'not-authorized', 'You must be logged in to do that'
+
     switch type
       when 'block'
         output = compile(coffee)

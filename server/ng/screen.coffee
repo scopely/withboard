@@ -1,4 +1,7 @@
 Meteor.smartPublish '/screens/get', (id, token) ->
+  unless @userId
+    throw new Meteor.Error 'not-authorized', 'You must be logged in to do that'
+
   check id, String
   unless screen = Screens.findOne id
     throw new Meteor.Error 404, 'No such screen'

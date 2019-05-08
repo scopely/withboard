@@ -1,3 +1,6 @@
+# called by TV appliances
+# THIS PUB IS REALLY SENSITIVE. If subscribing fails,
+# the appliances will wipe their identity and display a pairing code!
 Meteor.smartPublish '/ng/display', (token, pane) ->
   check token, String
   unless display = Displays.findOne {token}
