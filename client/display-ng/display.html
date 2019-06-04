@@ -10,8 +10,6 @@
         background: {{this}};
       }
     {{/with}}
-
-    {{groupCss}}
   </style>
 
   <div id="canvas">
@@ -29,6 +27,13 @@
   {{#if showMessages}}
     {{> RenderMessage}}
   {{/if}}
-  
+
+  {{#with myGroup}}
+    <style type="text/css">
+      {{css}}
+    </style>
+    {{{html}}}
+  {{/with}}
+
   <div id="filterDiv"></div>
 </template>

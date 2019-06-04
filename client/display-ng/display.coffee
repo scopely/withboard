@@ -12,8 +12,8 @@ Template.DisplayNg.helpers
     {color} = Session.get 'display-context'
     color or '#fff' # TODO: change for projectors
 
-  groupCss: ->
-    Groups.findOne().css
+  myGroup: ->
+    Groups.findOne()
 
   showMessages: ->
     if d = Displays.findOne(Session.get 'display id')

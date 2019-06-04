@@ -135,4 +135,5 @@ ShareLog.attachSchema new SimpleSchema
 root.Groups = new Meteor.Collection 'groups'
 Groups.attachSchema new SimpleSchema
   name      : type: String
+  html      : type: String, optional: true
   css       : type: String, optional: true
