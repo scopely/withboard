@@ -1,0 +1,87 @@
+<template name="StatusFetcherCol">
+  <table>
+    <thead>
+      <tr>
+        <th class="health">Health</th>
+        <th>Module / View</th>
+        <th>Warn since</th>
+        <th>Interval</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      {{#each views}}
+        <tr class="expanded-{{viewIsExpanded}}">
+          <td class="health">
+            <a href="#toggle">
+              {{#with viewIcon}}
+                <i class="material-icons" style="color: {{color}};" title={{title}}>{{icon}}</i>
+              {{/with}}
+              <i class="material-icons" style="color: #90a4ae;">{{viewCollapser}}</i>
+            </a>
+          </td>
+          <td>
+            {{#with viewModule}}
+              <a href="/modules/{{_id}}">{{name}}</a>
+            {{/with}}
+            /
+            <a href="/modules/{{module}}/views/{{_id}}#screens">{{name}}</a>
+          </td>
+          <td>
+            {{#with firstFailure}}
+              {{fromNow since}}
+            {{/with}}
+          </td>
+          <td>{{interval}}</td>
+        </tr>
+
+        {{#if viewIsExpanded}}
+
+          {{#each viewScreens}}
+            <tr>
+              <td class="health">
+                {{#with screenIcon}}
+                  <i class="material-icons" style="color: {{color}};">{{icon}}</i>
+                {{/with}}
+                <a href="#refresh-screen">
+                  <i class="material-icons">refresh</i>
+                </a>
+              </td>
+              <td>
+                <div>{{name}}</div>
+                {{#with failure}}
+                  <div>{{message}}</div>
+                {{/with}}
+              </td>
+              <td colspan="2">
+                <div>Expires {{fromNow expires}}</div>
+              </td>
+            </tr>
+          {{else}}
+            <tr class="noconfig">
+              <td colspan="4">
+                <em>no screens configured</em>
+              </td>
+            </tr>
+          {{/each}}
+
+          <!--
+          {{#with firstFailure}}
+            <tr>
+              <td colspan="4">
+                <p style="margin-top: 0;">
+                  First failure: {{message}}
+                </p>
+                <p>
+                  <code class="stack">{{details}}</code>
+                </p>
+              </td>
+            </tr>
+          {{/with}}
+          -->
+          <tr><td colspan="4"></td></tr>
+        {{/if}}
+      {{/each}}
+    </tbody>
+  </table>
+</template>

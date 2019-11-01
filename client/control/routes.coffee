@@ -105,7 +105,17 @@ Router.map ->
     data: ->
       views: Views.find {ttl: $ne: null}, sort: module: 1, name: 1
       displays: Displays.find {token: $ne: null}, sort: name: 1
-      unpaired: Displays.find {token:  null}
+      unpaired: Displays.find {token: null}
+
+  @route 'StatusDevices',
+    path: '/status/devices'
+    layoutTemplate: 'ControlLayout'
+    waitOn: ->
+      Meteor.subscribe 'control'
+    data: ->
+      deviceFocused: true
+      displays: Displays.find {token: $ne: null}, sort: name: 1
+      unpaired: Displays.find {token: null}
 
 
   @route 'index',

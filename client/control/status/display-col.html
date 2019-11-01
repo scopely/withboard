@@ -1,0 +1,75 @@
+<template name="StatusDisplayCol">
+  <table>
+    <thead>
+      <tr>
+        <th class="health">Health</th>
+        <th>Code</th>
+        <th>Display</th>
+        {{#if deviceFocused}}
+          <th class="health">Actions</th>
+          <th class="health">Platform</th>
+          <th class="health">Updates</th>
+        {{/if}}
+        <th>Temp</th>
+        <th>Memory</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      {{#with unpaired.count}}
+        <tr class="unpaired">
+          <td class="health">
+            <i class="material-icons" style="color: #ffc107;">timelapse</i>
+          </td>
+          <td colspan="4">
+            <em>{{this}} unpaired devices online</em>
+          </td>
+          {{#if ../deviceFocused}}
+            <td colspan="3"></td>
+          {{/if}}
+        </tr>
+      {{/with}}
+      {{#each displays}}
+        <tr>
+          <td class="health">
+            {{#with displayIcon}}
+              <i class="material-icons" style="color: {{color}};">{{icon}}</i>
+            {{/with}}
+          </td>
+          <td><a href="/control/display/{{_id.toUpperCase}}">{{_id.toUpperCase}}</a></td>
+          <td>
+            {{#if token}}
+              {{name}}
+            {{else}}
+              <em>(unpaired)</em>
+            {{/if}}
+            {{#if lastSeen}}
+              <br>Last seen {{fromNow lastSeen}}
+            {{/if}}
+          </td>
+          {{#if ../deviceFocused}}
+            <td class="health">
+              {{#if online}}
+                <a href="#reboot">
+                  <i class="material-icons">power_settings_new</i>
+                </a>
+              {{/if}}
+            </td>
+            <td class="health">{{status.app.version}}</td>
+            <td class="health">
+              {{#if status.app}}
+                {{#if status.restartRequired}}
+                  {{status.restartRequired}}
+                {{else}}
+                  <i class="material-icons" style="color: #8bc34a;">thumb_up</i>
+                {{/if}}
+              {{/if}}
+            </td>
+          {{/if}}
+          <td>{{#with status.cpu}}{{avgTempOf temperatures}}{{/with}}</td>
+          <td>{{#with status.memory}}{{memUsedRatio}}{{/with}}</td>
+        </tr>
+      {{/each}}
+    </tbody>
+  </table>
+</template>

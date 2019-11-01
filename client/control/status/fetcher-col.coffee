@@ -1,6 +1,6 @@
 currentView = new ReactiveVar
 
-Template.StatusMain.helpers
+Template.StatusFetcherCol.helpers
   firstFailure: ->
     Screens.findOne
       view: @_id
@@ -36,14 +36,6 @@ Template.StatusMain.helpers
     else
       icon: 'check', color: '#8bc34a'
 
-  displayIcon: ->
-    if not @token
-      icon: 'timelapse', color: '#ffc107'
-    else if @online
-      icon: 'cloud_done', color: '#8bc34a'
-    else
-      icon: 'signal_wifi_off', color: '#ff5722'
-
   fromNow: (time) -> if time
     Chronos.liveMoment()
     moment(time).fromNow()
@@ -68,15 +60,7 @@ Template.StatusMain.helpers
   viewIsExpanded: ->
     currentView.get() is @_id
 
-  avgTempOf: (list) ->
-    avg = list.reduce(((a,b) -> a+b), 0) / list.length
-    return "#{Math.round(avg*10)/10}°C"
-
-  memUsedRatio: ->
-    ratio = (@capacity - @availableCapacity) / @capacity
-    "#{Math.round(ratio*1000)/10}%"
-
-Template.StatusMain.events
+Template.StatusFetcherCol.events
   'click a[href="#toggle"]': (evt) ->
     evt.preventDefault()
     if currentView.get() is @_id
