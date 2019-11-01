@@ -65,7 +65,7 @@ startTimer = -> if chrome? and not initTimer
       initializeCastApi()
   , 150
 
-Template.Login.onRendered ->
-  startTimer()
-Template.ControlLayout.onRendered ->
-  startTimer()
+# Template.Login.onRendered ->
+#   startTimer()
+# Template.ControlLayout.onRendered ->
+#   startTimer()
