@@ -33,7 +33,7 @@
         <tr>
           <td class="health">
             {{#with displayIcon}}
-              <i class="material-icons" style="color: {{color}};">{{icon}}</i>
+              <i class="material-icons" style="color: {{color}};" title={{title}}>{{icon}}</i>
             {{/with}}
           </td>
           <td><a href="/control/display/{{_id.toUpperCase}}">{{_id.toUpperCase}}</a></td>
@@ -51,7 +51,7 @@
             <td class="health">
               {{#if online}}
                 <a href="#reboot">
-                  <i class="material-icons">power_settings_new</i>
+                  <i class="material-icons" title="Send Reboot Signal Now">power_settings_new</i>
                 </a>
               {{/if}}
             </td>
@@ -61,7 +61,7 @@
                 {{#if status.restartRequired}}
                   {{status.restartRequired}}
                 {{else}}
-                  <i class="material-icons" style="color: #8bc34a;">thumb_up</i>
+                  <i class="material-icons" style="color: #8bc34a;" title="No restart required">thumb_up</i>
                 {{/if}}
               {{/if}}
             </td>
