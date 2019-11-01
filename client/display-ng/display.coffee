@@ -105,6 +105,7 @@ Template.DisplayNg.onRendered ->
 
     switch event.data.command
       when 'startup'
+        console.log 'PLATFORM STARTUP'
         Session.set 'platform', 'chrome app'
 
         # ask for state, we are ready
@@ -127,10 +128,23 @@ Template.DisplayNg.onRendered ->
             sendParentMessage
               command: 'reboot'
 
+        # primary surfaces send heartbeats to the host
+        maybeBeatHeart = ->
+          if Meteor.status().connected and not Session.get('pane')
+            sendParentMessage command: 'heartbeat'
+        # heartbeat on a timer, absense implies tab crash
+        unless healthInterval
+          healthInterval = Meteor.setInterval maybeBeatHeart, 5 * 60 * 1000
+        # also reactively heartbeat ad-hoc if we just went online
+        Tracker.autorun maybeBeatHeart
+
       when 'state'
         if display = Displays.findOne()
           Meteor.call 'setStatus', display._id, event.data.fields
 
   sendParentMessage = (data) -> if owner
     owner.postMessage(data, '*')
-    console.log 'Sent parent event', data
+    if data.command is 'heartbeat'
+      console.log 'Sent heartbeat to parent'
+    else
+      console.log 'Sent parent event', data
