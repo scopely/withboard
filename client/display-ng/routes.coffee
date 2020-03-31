@@ -10,9 +10,18 @@ bootstrap = -> if Meteor.isClient and not bootstrapped
     Tracker.autorun ->
       if token = Session.get 'screen ng token'
         localStorage.setItem 'screen ng token', token
-      else
-        localStorage.removeItem 'screen ng token'
       console.log 'Set token to', token
+
+  # If we're in pairing but also have an old token, keep retrying it
+  # Trying to avoid a failure case where a misconfigured server
+  #   wipes hardware tokens and requires fleet reboots/reconfig
+  # TODO: run Pairing and prev token subscriptions in parallel,
+  #   instead of this hack which will create new pairing sessions repeatedly
+  Meteor.setInterval ->
+    if not Session.get 'screen ng token'
+      if token = localStorage.getItem 'screen ng token'
+        Session.set 'screen ng token', token
+  , 30 * 60 * 1000 # every 30 minutes
 
   # TODO: Maybe we want to unset this sometime
   $('html').attr 'id', 'display'
