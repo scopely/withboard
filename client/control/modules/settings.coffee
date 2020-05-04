@@ -44,9 +44,11 @@ Template.Settings.events
 # User ID selector (to inherit Google credentials)
 
 Template.UserIdSettingValue.helpers
-  # Provide user list
+  # Provide list of users which have Google Drive granted
   users: ->
-    Meteor.users.find()
+    Meteor.users.find({
+      'services.google.scope': 'https://www.googleapis.com/auth/drive.readonly'
+    })
 
 Template.UserIdSettingValue.onRendered ->
   # Force state to reflect data store
